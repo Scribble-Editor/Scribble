@@ -1,9 +1,19 @@
-form {
-  width: 300px;
-  height: 300px;
-  background-color: blue;
+body {
+  color: white;
+  background-color: #263238;
 }
 
-form.drag-over {
-  background-color: orange;
+.content {
+  width: 76vw;
+  margin: 50px auto;
+}
+
+#dropzone {
+  background-color: #37474F;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.file-drop .file-drop__dropzone::before {
+  border-radius: 10px;
 }

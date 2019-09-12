@@ -1,128 +1,91 @@
 class FileDrop {
-  files = [];
-  hostUri = null;
+  isUploading = false;
 
-  constructor(target, hostUri) {
-    // If target is passed as CSS selector, convert to DOM object
-    if (typeof target === "string") {
-      try {
-        target = document.querySelector(target);
-      } catch (e) {
-        throw e;
-      }
-    }
+  constructor(target, host) {
+    if (typeof target !== "string")
+      throw new Error("target must be of type string");
+    this.rootElem = document.querySelector(target);
+    if (!this.rootElem)
+      throw new Error("No DOM element found with the selector " + target);
 
-    // Validate that the DOM object is a form
-    if (typeof target !== "object" || target.tagName !== "FORM")
-      throw new Error("target is not a form element");
-    this.rootElem = target;
+    this.rootElem.addEventListener("dragover", e => e.preventDefault(), false);
+    this.rootElem.addEventListener("drop", this.dropHandler.bind(this), false);
+    this.rootElem.addEventListener("dragenter", () =>
+      this.rootElem.querySelector(".file-drop__dropzone").classList.add('dragover'),
+      false);
+    this.rootElem.addEventListener("dragleave", () =>
+      this.rootElem.querySelector(".file-drop__dropzone").classList.remove('dragover'),
+      false);
+    this.rootElem.addEventListener("dragend", () =>
+      this.rootElem.querySelector(".file-drop__dropzone").classList.remove('dragover'),
+      false);
+    this.rootElem.addEventListener("change", this.formHandler.bind(this), false);
 
-    // Validates that there is a child element called .file-drop__file-display
-    this.fileDisplayElem = target.querySelector('.file-drop__file-display');
-    if (!this.fileDisplayElem)
-      throw new Error("target does not contain child .file-drop__file-display");
+    this.host = host;
+    if (typeof this.host !== "string")
+      throw new Error("host must be of type string");
 
-    // Add drop event listener to FileDrop root
-    this.rootElem.addEventListener('drop', this.dropHandler.bind(this), false);
-    this.rootElem.addEventListener('dragover', this.dragOverHandler.bind(this), false);
-    this.rootElem.addEventListener('dragleave', this.dragLeaveHandler.bind(this), false);
-    this.rootElem.addEventListener('dragend', this.dragLeaveHandler.bind(this), false);
-
-    // Validate host uri
-    this.hostUri = hostUri;
-    if (!typeof this.hostUri === "string")
-      throw new Error("Host URI must be of type string");
+    this.getTemplate()
+      .then(template => { this.rootElem.innerHTML = template });
   }
 
-  pushFile(file) {
-    this.files.push(file);
-    this.updateFileDisplay();
-    file.upload(this.hostUri, e => {
-      if (e.lengthComputable) {
-        console.log(e.loaded + '/' + e.total);
-      }
-    }, e => {
-      console.log('done');
-    });
-  }
-
-  async updateFileDisplay() {
-    for (let file of this.files) {
-      file.toBase64()
-        .then(data => {
-          this.fileDisplayElem.innerHTML += `<img src="${data}">`;
-        });
-    }
-  }
-
-  // Event handlers
-  dropHandler = e => {
+  dropHandler(e) {
     e.preventDefault();
-    this.dragLeaveHandler();
-
-    if (e.dataTransfer.items) {
-      for (let item of e.dataTransfer.items) {
-        if (item.kind === "file") {
-          this.pushFile(new FileUpload(item.getAsFile()));
-        }
-      }
-    } else {
-      for (let item of e.dataTransfer.files) {
-        this.pushFile(new FileUpload(item.getAsFile()));
-      }
-    }
+    const file = e.dataTransfer.files[0];
+    this.uploadFile(file, this);
   }
 
-  dragOverHandler = e => {
-    e.preventDefault();
-    this.rootElem.classList.add("drag-over");
-  }
-
-  dragLeaveHandler = e => {
-    this.rootElem.classList.remove("drag-over");
+  formHandler() {
+    const file = this.rootElem.querySelector('input[type="file"]').files[0];
+    this.uploadFile(file, this);
   }
 }
 
-class FileUpload {
-  constructor(file) {
-    this.file = file;
-  }
+FileDrop.prototype.getTemplate = async () => {
+  return new Promise(resolve => {
+    fetch("filedrop.html")
+      .then(res => res.text())
+      .then(template => resolve(template));
+  });
+}
 
-  async toBase64() {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader;
-      fileReader.readAsDataURL(this.file);
-      fileReader.onload = () => resolve(fileReader.result);
-      fileReader.onerror = err => reject(err);
-    });
-  }
+FileDrop.prototype.uploadFile = async (file, self) => {
+  return new Promise((resolve, reject) => {
+    if (self.isUploading) {
+      resolve();
+    }
+    isUploading = true;
+    self.rootElem.querySelector('.file-drop__dropzone').classList.add('disabled');
+    let formData = new FormData;
+    formData.append('file', file);
+    let ajax = new XMLHttpRequest;
 
-  async toBinary() {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader;
-      fileReader.readAsBinaryString(this.file);
-      fileReader.onload = () => resolve(fileReader.result);
-      fileReader.onerror = err => resolve(err);
-    })
-  }
+    // Progress Handler
+    ajax.upload.addEventListener('progress', e => {
+      const percent = Math.round((e.loaded / e.total) * 100);
+      self.rootElem.querySelector('progress').value = percent;
+      self.rootElem.querySelector('.file-drop__status').innerHTML = percent + '%';
+    }, false);
 
-  async upload(host, prog, end) {
-    return new Promise((resolve, reject) => {
-      let xhr = new XMLHttpRequest;
-      xhr.open("POST", host);
-      xhr.upload.onprogress = e => {
-        if (prog) prog(e);
-      };
-      xhr.upload.onloadend = e => {
-        if (end) end(e);
-        resolve();
-      };
-      try {
-        this.toBinary()
-          .then(bin => { xhr.send(bin); });
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
+    // Done Handler
+    ajax.addEventListener("load", e => {
+      self.rootElem.querySelector('.file-drop__status').innerHTML = 'Done!';
+    }, false);
+
+    // Error Handler
+    ajax.addEventListener("error", e => {
+      console.error(e);
+      self.rootElem.querySelector('progress').value = 0;
+      self.rootElem.querySelector('.file-drop__status').innerHTML = 'Upload failed';
+    }, false);
+
+    // Abort Handler
+    ajax.addEventListener("abort", e => {
+      self.rootElem.querySelector('progress').value = 0;
+      self.rootElem.querySelector('.file-drop__status').innerHTML = 'Upload aborted';
+    }, false);
+
+    ajax.open("POST", self.host);
+    ajax.send(formData);
+  });
 }
