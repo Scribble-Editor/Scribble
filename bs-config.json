@@ -1,0 +1,13 @@
+{
+  "files": [
+    "src/**/*.css",
+    "src/**/*.html",
+    "src/**/*.js"
+  ],
+  "ignore": [
+    "node_modules"
+  ],
+  "notify": false,
+  "server": "src",
+  "ui": false
+}

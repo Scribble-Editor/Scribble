@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Drag-Drop File Upload</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="content">
+    <form id="dropzone" method="post" action="/fileUpload" enctype="multipart/form-data">
+      <input type="file" name="file" id="dropzone-file-input">
+      <input type="submit" value="Upload">
+      <div class="file-drop__file-display"></div>
+    </form>
+  </div>
+  <script src="fileDrop.js"></script>
+  <script>
+    new FileDrop("#dropzone", "https://putsreq.com/5B4av5nCxe6DHQmDazHG");
+  </script>
+</body>
+
+</html>
