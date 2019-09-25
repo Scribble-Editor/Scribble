@@ -3,6 +3,7 @@
 ## Requirements
 - git
 - docker-compose
+- docker
 
 ## Setup
 ```bash
