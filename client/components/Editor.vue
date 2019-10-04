@@ -1,8 +1,15 @@
 <template>
   <div class="editor">
+    <div class="editor-menu">
+      MENU
+    </div>
+    <div class="editor-tree">
+      TREE
+    </div>
     <m-ace-editor
       v-model="content"
-      height="calc(100vh - 27px)"
+      height="100%"
+      class="editor-textarea"
       :line-height="config.lineHeight"
       :font-size="config.fontSize"
       :line-number="config.lineNumber"
@@ -10,7 +17,7 @@
       :mode="config.language"
       :theme="config.theme"
     />
-    <EditorFooter />
+    <EditorFooter class="editor-footer" />
   </div>
 </template>
 
@@ -40,5 +47,32 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.editor {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-areas:
+    "menu menu"
+    "tree textarea"
+    "footer footer";
+  grid-template-rows: min-content auto min-content;
+  grid-template-columns: 250px auto;
+}
+
+.editor-menu {
+  grid-area: menu;
+}
+
+.editor-tree {
+  grid-area: tree;
+}
+
+.editor-textarea {
+  grid-area: textarea;
+}
+
+.editor-footer {
+  grid-area: footer;
+}
 </style>
