@@ -8,11 +8,10 @@
 import Editor from '~/components/Editor'
 
 export default {
-  layout: 'default',
+  layout: 'singlePage',
   components: { Editor }
 }
 </script>
 
 <style>
-
 </style>

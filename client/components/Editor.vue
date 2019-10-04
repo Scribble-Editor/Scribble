@@ -2,7 +2,7 @@
   <div class="editor">
     <m-ace-editor
       v-model="content"
-      height="100%"
+      height="calc(100vh - 27px)"
       :line-height="config.lineHeight"
       :font-size="config.fontSize"
       :line-number="config.lineNumber"
@@ -10,12 +10,16 @@
       :mode="config.language"
       :theme="config.theme"
     />
+    <EditorFooter />
   </div>
 </template>
 
 <script>
+import EditorFooter from '~/components/EditorFooter'
+
 export default {
   name: 'Editor',
+  components: { EditorFooter },
   data () {
     return {
       content: 'console.log("Hello World!");',
@@ -24,8 +28,8 @@ export default {
         'fontSize': 12, // in px
         'lineNumber': true,
         'highlightActiveLine': true,
-        'language': 'html',
-        'theme': null
+        'language': 'javascript',
+        'theme': 'tomorrow_night'
       }
     }
   }
@@ -33,7 +37,4 @@ export default {
 </script>
 
 <style lang="scss">
-.editor {
-  height: 600px;
-}
 </style>
