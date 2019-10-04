@@ -23,6 +23,7 @@
         icon="palette"
         value="cobalt"
         size="is-small"
+        @input="changeTheme"
       >
         <option
           v-for="theme in themes"
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-// import InputSelection from '~/components/InputSelection'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'EditorFooter',
@@ -53,8 +54,12 @@ export default {
       // echo \[$(for file in *; echo \'$(echo $file | cut -d '.' -f 1)\',)\]
       themes: ['ambiance', 'chaos', 'chrome', 'clouds', 'clouds_midnight', 'cobalt', 'crimson_editor', 'dawn', 'dracula', 'dreamweaver', 'eclipse', 'github', 'gob', 'gruvbox', 'idle_fingers', 'iplastic', 'katzenmilch', 'kr_theme', 'kuroir', 'merbivore', 'merbivore_soft', 'mono_industrial', 'monokai', 'pastel_on_dark', 'solarized_dark', 'solarized_light', 'sqlserver', 'terminal', 'textmate', 'tomorrow', 'tomorrow_night_blue', 'tomorrow_night_bright', 'tomorrow_night_eighties', 'tomorrow_night', 'twilight', 'vibrant_ink', 'xcode']
     }
+  },
+  methods: {
+    ...mapMutations({
+      changeTheme: 'userConfig/changeTheme'
+    })
   }
-  // components: { InputSelection }
 }
 </script>
 
@@ -90,6 +95,10 @@ export default {
 
   &:focus {
     outline: none !important;
+  }
+
+  option {
+    color: white;
   }
 }
 </style>

@@ -22,14 +22,18 @@ export default {
   components: { EditorFooter },
   data () {
     return {
-      content: 'console.log("Hello World!");',
-      config: {
+      content: 'console.log("Hello World!");'
+    }
+  },
+  computed: {
+    config () {
+      return {
         'lineHeight': 1.5,
         'fontSize': 12, // in px
         'lineNumber': true,
         'highlightActiveLine': true,
-        'language': 'javascript',
-        'theme': 'tomorrow_night'
+        'language': this.$store.state.userConfig.defaultLanguage,
+        'theme': this.$store.state.userConfig.theme
       }
     }
   }
