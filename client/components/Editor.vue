@@ -1,8 +1,6 @@
 <template>
   <div class="editor">
-    <div class="editor-menu">
-      MENU
-    </div>
+    <EditorMenu class="editor-menu" />
     <div class="editor-tree">
       TREE
     </div>
@@ -22,16 +20,12 @@
 </template>
 
 <script>
+import EditorMenu from '~/components/EditorMenu'
 import EditorFooter from '~/components/EditorFooter'
 
 export default {
   name: 'Editor',
-  components: { EditorFooter },
-  data () {
-    return {
-      content: 'console.log("Hello World!");'
-    }
-  },
+  components: { EditorMenu, EditorFooter },
   computed: {
     config () {
       return {
@@ -41,6 +35,14 @@ export default {
         'highlightActiveLine': true,
         'language': this.$store.state.userConfig.defaultLanguage,
         'theme': this.$store.state.userConfig.theme
+      }
+    },
+    content: {
+      get () {
+        return this.$store.state.files.file[0].content
+      },
+      set (value) {
+        this.$store.commit('files/updateFileContent', { file: 0, content: value })
       }
     }
   }
