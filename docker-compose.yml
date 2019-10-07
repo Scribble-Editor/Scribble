@@ -6,7 +6,7 @@ services:
         restart: on-failure
         volumes:
             - scribble-client-static:/app
-        environment:    
+        environment:
             - NODE_ENV=production
 
     scribble-server:
@@ -15,8 +15,6 @@ services:
         restart: always
         volumes:
             - ./server:/app
-        environment:
-            - DEBUG=1
 
     scribble-router:
         image: nginx:latest
