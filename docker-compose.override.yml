@@ -1,0 +1,25 @@
+version: "3"
+services:
+    scribble-client:
+        restart: unless-stopped
+        volumes:
+            - ./client:/app
+            - ./client/node_modules:/app/node_modules
+        environment:
+            - HOST=0.0.0.0
+            - NODE_ENV=development
+        command: yarn docker:dev
+
+    scribble-server:
+        restart: unless-stopped
+        environment:
+            - DEBUG=1
+
+    scribble-router:
+        restart: unless-stopped
+        volumes:
+            - ./nginx/dev.conf:/etc/nginx/conf.d/default.conf
+        command: "nginx-debug -g 'daemon off;'"
+
+    scribble-database:
+        restart: unless-stopped

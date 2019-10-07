@@ -3,17 +3,16 @@ services:
     scribble-client:
         build: ./client
         container_name: scribble-client
-        restart: unless-stopped
+        restart: on-failure
         volumes:
-            - ./client:/app
-            - ./client/node_modules:/app/node_modules
-        environment:
-            - HOST=0.0.0.0
-            - NODE_ENV=development
+            - scribble-client-static:/app
+        environment:    
+            - NODE_ENV=production
 
     scribble-server:
         build: ./server
         container_name: scribble-server
+        restart: always
         volumes:
             - ./server:/app
         environment:
@@ -22,18 +21,21 @@ services:
     scribble-router:
         image: nginx:latest
         container_name: scribble-router
+        restart: always
         volumes:
-            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf
+            - scribble-client-static:/var/www/scribble:ro
         ports:
-            - "80:80"
-            - "443:443"
+            - "${PORT:-80}:80"
+            - "${HTTPS_PORT:-443}:443"
         command: "nginx -g 'daemon off;'"
 
     scribble-database:
         image: mysql:latest
         container_name: scribble-database
+        restart: always
         command: --default-authentication-plugin=mysql_native_password
-        restart: unless-stopped
+        restart: always
         ports:
             - "3306:3306"
         volumes:
@@ -46,3 +48,4 @@ services:
 
 volumes:
     mysql-datavolume:
+    scribble-client-static:
