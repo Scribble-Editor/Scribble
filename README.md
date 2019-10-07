@@ -21,6 +21,12 @@ $ docker-compose up -d
 $ docker-compose down
 ```
 
+## Production
+```bash
+# Build for production and deploy
+$ docker-compose -f docker-compose.yml up --build
+```
+
 ## Endpoints
 After starting the container stack, the contains can be accessed at the following locations.
 
