@@ -12,7 +12,7 @@
       :font-size="config.fontSize"
       :line-number="config.lineNumber"
       :highlight-active-line="config.highlightActiveLine"
-      :mode="config.language"
+      :mode="language"
       :theme="config.theme"
     />
     <EditorFooter class="editor-footer" />
@@ -33,7 +33,6 @@ export default {
         'fontSize': 12, // in px
         'lineNumber': true,
         'highlightActiveLine': true,
-        'language': this.$store.state.userConfig.defaultLanguage,
         'theme': this.$store.state.userConfig.theme
       }
     },
@@ -44,6 +43,9 @@ export default {
       set (value) {
         this.$store.commit('files/updateFileContent', { file: 0, content: value })
       }
+    },
+    language () {
+      return this.$store.state.files.file[0].language
     }
   }
 }
