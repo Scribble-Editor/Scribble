@@ -1,0 +1,13 @@
+FROM node:10
+
+WORKDIR /app
+
+COPY . /app
+
+# Nuxt dev server
+EXPOSE 3000
+
+# Install yarn
+RUN npm i -g yarn
+
+CMD ["yarn", "docker:prod"]
