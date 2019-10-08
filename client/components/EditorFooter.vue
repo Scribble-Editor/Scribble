@@ -4,7 +4,7 @@
     <b-field class="editor-footer-input">
       <b-select
         icon="web"
-        value="text"
+        :value="selectedFile.language"
         size="is-small"
         @input="changeLanguage"
       >
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'EditorFooter',
@@ -57,11 +57,14 @@ export default {
   computed: {
     selectedTheme () {
       return this.$store.state.userConfig.theme
-    }
+    },
+    ...mapGetters({
+      selectedFile: 'openFiles/selectedFile'
+    })
   },
   methods: {
     changeLanguage (newLanguage) {
-      this.$store.commit('files/changeFileLanguage', { file: 0, language: newLanguage })
+      this.$store.commit('openFiles/changeFileLanguage', { file: this.selectedFile.name, language: newLanguage })
     },
     ...mapMutations({
       changeTheme: 'userConfig/changeTheme'

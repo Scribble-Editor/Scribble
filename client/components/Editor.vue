@@ -12,7 +12,7 @@
       :font-size="config.fontSize"
       :line-number="config.lineNumber"
       :highlight-active-line="config.highlightActiveLine"
-      :mode="language"
+      :mode="selectedFile.language"
       :theme="config.theme"
     />
     <EditorFooter class="editor-footer" />
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import EditorMenu from '~/components/EditorMenu'
 import EditorFooter from '~/components/EditorFooter'
 
@@ -38,15 +40,15 @@ export default {
     },
     content: {
       get () {
-        return this.$store.state.files.file[0].content
+        return this.selectedFile.content
       },
       set (value) {
-        this.$store.commit('files/updateFileContent', { file: 0, content: value })
+        this.$store.commit('openFiles/updateFileContent', { file: this.selectedFile.name, content: value })
       }
     },
-    language () {
-      return this.$store.state.files.file[0].language
-    }
+    ...mapGetters({
+      selectedFile: 'openFiles/selectedFile'
+    })
   }
 }
 </script>

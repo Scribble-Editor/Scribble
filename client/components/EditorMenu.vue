@@ -7,7 +7,7 @@
         arrowless
       >
         <b-navbar-item>
-          New File
+          <EditorMenuFileNewfile />
         </b-navbar-item>
         <b-navbar-item>Open File</b-navbar-item>
         <b-navbar-item>Export File</b-navbar-item>
@@ -61,8 +61,11 @@
 </template>
 
 <script>
+import EditorMenuFileNewfile from '~/components/EditorMenuFileNewfile'
+
 export default {
-  name: 'EditorMenu'
+  name: 'EditorMenu',
+  components: { EditorMenuFileNewfile }
 }
 </script>
 
@@ -86,6 +89,10 @@ export default {
       align-items: start !important;
       line-height: inherit !important;
       padding: 0.1rem 0.75rem !important;
+
+      span {
+        width: 100% !important;
+      }
     }
   }
 }
