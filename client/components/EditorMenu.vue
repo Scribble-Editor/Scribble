@@ -9,7 +9,9 @@
         <b-navbar-item>
           <EditorMenuFileNewfile />
         </b-navbar-item>
-        <b-navbar-item>Open File</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuFileOpenfile />
+        </b-navbar-item>
         <b-navbar-item>Export File</b-navbar-item>
         <hr>
         <b-navbar-item>Preferences</b-navbar-item>
@@ -62,10 +64,11 @@
 
 <script>
 import EditorMenuFileNewfile from '~/components/EditorMenuFileNewfile'
+import EditorMenuFileOpenfile from '~/components/EditorMenuFileOpenfile'
 
 export default {
   name: 'EditorMenu',
-  components: { EditorMenuFileNewfile }
+  components: { EditorMenuFileNewfile, EditorMenuFileOpenfile }
 }
 </script>
 
