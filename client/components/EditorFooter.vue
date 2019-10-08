@@ -1,5 +1,5 @@
 <template>
-  <section class="editor-footer">
+  <footer class="editor-footer">
     <!-- Language Selection -->
     <b-field class="editor-footer-input">
       <b-select
@@ -35,7 +35,7 @@
         </option>
       </b-select>
     </b-field>
-  </section>
+  </footer>
 </template>
 
 <script>
@@ -71,6 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .editor-footer {
   width: 100%;
   display: flex;
