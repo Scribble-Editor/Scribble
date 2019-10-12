@@ -78,6 +78,14 @@ export default {
 <style lang="scss">
 @import '~/assets/buefy.overrides';
 
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background-color: $white !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
+
 .EditorMenu {
   min-height: 0 !important;
   height: min-content !important;
