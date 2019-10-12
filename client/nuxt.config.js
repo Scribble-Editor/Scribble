@@ -23,7 +23,8 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/node_modules/@mdi/font/css/materialdesignicons.min.css'
+    '~/node_modules/@mdi/font/css/materialdesignicons.min.css',
+    '~/assets/buefy.overrides.scss'
   ],
   /*
   ** Plugins to load before mounting the App

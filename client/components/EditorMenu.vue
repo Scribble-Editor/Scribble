@@ -76,9 +76,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~/assets/buefy.overrides';
+
 .EditorMenu {
   min-height: 0 !important;
   height: min-content !important;
+  background-color: $white !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 
   .navbar-brand {
     display: none !important;
