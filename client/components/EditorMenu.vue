@@ -19,7 +19,9 @@
         <b-navbar-item>
           <EditorMenuFilePreferences />
         </b-navbar-item>
-        <b-navbar-item>Exit</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuFileExit />
+        </b-navbar-item>
       </b-navbar-dropdown>
 
       <!-- Edit -->
@@ -71,6 +73,7 @@ import EditorMenuFileNewfile from '~/components/EditorMenuFileNewfile'
 import EditorMenuFileOpenfile from '~/components/EditorMenuFileOpenfile'
 import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
 import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
+import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
 export default {
   name: 'EditorMenu',
@@ -78,7 +81,8 @@ export default {
     EditorMenuFileNewfile,
     EditorMenuFileOpenfile,
     EditorMenuFileExportfile,
-    EditorMenuFilePreferences
+    EditorMenuFilePreferences,
+    EditorMenuFileExit
   }
 }
 </script>
