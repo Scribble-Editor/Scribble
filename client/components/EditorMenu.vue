@@ -112,7 +112,6 @@ export default {
     a {
       align-items: start !important;
       line-height: inherit !important;
-      padding: 0.1rem 0.75rem !important;
 
       span {
         width: 100% !important;
