@@ -16,7 +16,9 @@
           <EditorMenuFileExportfile />
         </b-navbar-item>
         <hr>
-        <b-navbar-item>Preferences</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuFilePreferences />
+        </b-navbar-item>
         <b-navbar-item>Exit</b-navbar-item>
       </b-navbar-dropdown>
 
@@ -68,10 +70,16 @@
 import EditorMenuFileNewfile from '~/components/EditorMenuFileNewfile'
 import EditorMenuFileOpenfile from '~/components/EditorMenuFileOpenfile'
 import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
+import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
 
 export default {
   name: 'EditorMenu',
-  components: { EditorMenuFileNewfile, EditorMenuFileOpenfile, EditorMenuFileExportfile }
+  components: {
+    EditorMenuFileNewfile,
+    EditorMenuFileOpenfile,
+    EditorMenuFileExportfile,
+    EditorMenuFilePreferences
+  }
 }
 </script>
 
@@ -89,9 +97,6 @@ export default {
 .EditorMenu {
   min-height: 0 !important;
   height: min-content !important;
-  background-color: $white !important;
-  box-shadow: none !important;
-  padding: 0 !important;
 
   .navbar-brand {
     display: none !important;
