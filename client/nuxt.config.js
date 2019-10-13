@@ -23,11 +23,14 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/node_modules/@mdi/font/css/materialdesignicons.min.css',
+    '~/assets/buefy.overrides.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vue-m-ace-editor'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,8 +43,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma',
+    // Doc: https://buefy.org/documentation
+    'nuxt-buefy',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
