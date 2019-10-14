@@ -4,17 +4,7 @@
     <div class="editor-tree">
       TREE
     </div>
-    <m-ace-editor
-      v-model="content"
-      height="100%"
-      class="editor-textarea"
-      :line-height="config.lineHeight"
-      :font-size="config.fontSize"
-      :line-number="config.lineNumber"
-      :highlight-active-line="config.highlightActiveLine"
-      :mode="selectedFile.language"
-      :theme="config.theme"
-    />
+    <EditorTextarea :theme="config.theme" />
     <EditorFooter class="editor-footer" />
   </div>
 </template>
@@ -23,11 +13,12 @@
 import { mapGetters } from 'vuex'
 
 import EditorMenu from '~/components/EditorMenu'
+import EditorTextarea from '~/components/EditorTextarea'
 import EditorFooter from '~/components/EditorFooter'
 
 export default {
   name: 'Editor',
-  components: { EditorMenu, EditorFooter },
+  components: { EditorMenu, EditorTextarea, EditorFooter },
   computed: {
     config () {
       return {
