@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <Ace
-      :theme="theme"
-      language="markdown"
-      :session="sessions[0]"
-      height="50%"
-    />
-    <Ace
-      :theme="theme"
-      language="markdown"
-      :session="sessions[1]"
-      height="50%"
-    />
+  <div class="wrapper">
+    <EditorTextareaTabs :document-names="fileNames" @change="changeActiveSession" />
+    <div class="editors">
+      <Ace
+        :theme="theme"
+        language="markdown"
+        :session="sessions[activeSessionName]"
+      />
+    </div>
   </div>
 </template>
 
@@ -19,11 +15,12 @@
 import { mapMutations } from 'vuex'
 import { createEditSession as createSession } from 'brace'
 
+import EditorTextareaTabs from '~/components/EditorTextareaTabs'
 import Ace from '~/components/Ace'
 
 export default {
   name: 'EditorTextarea',
-  components: { Ace },
+  components: { EditorTextareaTabs, Ace },
   props: {
     theme: {
       type: String,
@@ -32,14 +29,22 @@ export default {
   },
   data () {
     return {
-      sessions: []
+      sessions: {},
+      fileNames: [],
+      activeSessionName: null
     }
   },
   mounted () {
     this.addSession('# Hello World!', 'hello.md')
-    this.duplicateSession(this.sessions[0])
+    this.addSession('# Something else', 'Something.md')
+    this.addSession('This is a third file', 'third.md')
+    this.changeActiveSession('hello.md')
+    this.removeSession('Something.md')
   },
   methods: {
+    changeActiveSession (name) {
+      this.activeSessionName = name
+    },
     addSession (content, name) {
       // Create vuex store document
       this.addDocument({ name, content, mode: 'text' })
@@ -50,7 +55,8 @@ export default {
       session.on('change', () => { vm.updateDocument({ name, content: session.getValue() }) })
 
       // Push active session into data
-      this.sessions.push(session)
+      this.sessions[name] = session
+      this.fileNames.push(name)
     },
     duplicateSession (source) {
       // create new session
@@ -62,8 +68,10 @@ export default {
       // Push active session into data
       this.sessions.push(session)
     },
-    removeSession (index) {
-      delete (this.sessions[index])
+    removeSession (name) {
+      delete (this.sessions[name])
+      this.fileNames.splice(this.fileNames.indexOf(name), 1)
+      if (name === this.activeFile) { this.changeActiveSession(this.fileNames[0]) }
     },
     ...mapMutations({
       addDocument: 'documents/add',
@@ -74,3 +82,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.wrapper {
+  display: grid;
+  grid-template-rows: min-content auto;
+}
+</style>

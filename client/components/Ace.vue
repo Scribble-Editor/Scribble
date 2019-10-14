@@ -1,15 +1,11 @@
 <template>
-  <div :id="id" :style="`height: ${height}; width: ${width}`" />
+  <div :style="`height: ${height}; width: ${width}`" />
 </template>
 
 <script>
 export default {
   name: 'Ace',
   props: {
-    id: {
-      type: String,
-      required: true
-    },
     height: {
       type: String,
       default: '100%'
@@ -32,7 +28,7 @@ export default {
     },
     value: {
       type: String,
-      required: true
+      default: ''
     }
   },
   data () {
@@ -84,7 +80,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
