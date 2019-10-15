@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 
 import EditorTextareaTabs from '~/components/EditorTextareaTabs'
 import Ace from '~/components/Ace'
