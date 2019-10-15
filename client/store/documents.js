@@ -1,4 +1,15 @@
-export const state = () => ({})
+export const state = () => ({
+  'Welcome.md': {
+    name: 'Welcome.md',
+    content: '# Hello World!!!',
+    mode: 'markdown'
+  },
+  'SecondDocument.md': {
+    name: 'SecondDocument.md',
+    content: '## Second Document',
+    mode: 'markdown'
+  }
+})
 
 export const mutations = {
   add (state, { name, content, mode }) {

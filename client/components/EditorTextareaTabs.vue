@@ -1,6 +1,6 @@
 <template>
   <section class="editor-textarea-tabs">
-    <b-tabs v-model="activeDocumentName" type="is-boxed" @change="emitTabChange">
+    <b-tabs v-model="activeDocument" type="is-boxed" @change="emitTabChange">
       <b-tab-item
         v-for="documentName in documentNames"
         :key="documentName"
@@ -9,9 +9,10 @@
           <span>{{ documentName }}</span>
 
           <!-- TODO: Implement close button -->
-          <b-icon icon="close" size="is-small" class="tab-exit" />
+          <b-icon icon="close" size="is-small" class="tab-exit" @click.native="$emit('tabClose', documentName)" />
         </template>
       </b-tab-item>
+      <b-tab-item />
     </b-tabs>
   </section>
 </template>
@@ -27,17 +28,13 @@ export default {
   },
   data () {
     return {
-      activeDocumentName: this.documentNames[this.documentNames.length - 1]
+      activeDocument: 0
     }
   },
-  mounted () {
-    this.activeDocumentName = this.documentNames
-      ? this.documentNames[0]
-      : null
-  },
   methods: {
-    emitTabChange ($event) {
-      this.$emit('change', this.documentNames[$event])
+    emitTabChange (tabIndex) {
+      this.$emit('change', tabIndex)
+      this.activeDocument = tabIndex
     }
   }
 }
@@ -47,12 +44,18 @@ export default {
 .editor-textarea-tabs {
   background-color: lightgray;
 
+  // Hide extra empty hack tab
+  nav.tabs > ul > li:last-child {
+    display: none
+  }
+
   .tab-content {
     display: none !important;
   }
 
   .tab-exit {
     transition: 200ms color;
+    margin: 0 !important;
 
     &:hover {
       color: red;

@@ -1,19 +1,23 @@
 <template>
   <div class="wrapper">
-    <EditorTextareaTabs :document-names="fileNames" @change="changeActiveSession" />
+    <EditorTextareaTabs
+      :document-names="openedDocuments"
+      @change="changeActiveDocument"
+      @tabClose="closeDocument"
+    />
     <div class="editors">
       <Ace
+        v-model="activeDocumentContent"
         :theme="theme"
+        :file-change-content="activeDocumentContentBackup"
         language="markdown"
-        :session="sessions[activeSessionName]"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { createEditSession as createSession } from 'brace'
+import { mapMutations, mapGetters } from 'vuex'
 
 import EditorTextareaTabs from '~/components/EditorTextareaTabs'
 import Ace from '~/components/Ace'
@@ -29,49 +33,53 @@ export default {
   },
   data () {
     return {
-      sessions: {},
-      fileNames: [],
-      activeSessionName: null
+      activeDocument: 0,
+      openedDocuments: ['Welcome.md', 'SecondDocument.md'],
+      activeDocumentContentBackup: null
+    }
+  },
+  computed: {
+    activeDocumentContent: {
+      get () {
+        try {
+          return this.$store.state.documents[this.activeDocumentName].content
+        } catch (e) {
+          return ''
+        }
+      },
+      set (value) {
+        this.updateDocument({ name: this.activeDocumentName, content: value })
+      }
+    },
+    activeDocumentName () {
+      return this.openedDocuments[this.activeDocument]
     }
   },
   mounted () {
-    this.addSession('# Hello World!', 'hello.md')
-    this.addSession('# Something else', 'Something.md')
-    this.addSession('This is a third file', 'third.md')
-    this.changeActiveSession('hello.md')
-    this.removeSession('Something.md')
+    // A very nasty hack to avoid crashing when closing the last tab.
+    // A hidden, empty tag is placed at the end and when it is active, the first
+    // tab is clicked
+    const vm = this
+    const tabsElem = document.querySelector('.editor-textarea-tabs nav.tabs ul')
+    setInterval(() => {
+      const tabs = tabsElem.children
+      const lastTab = tabs[tabs.length - 1]
+      if (lastTab.classList.length > 0 && lastTab.classList.contains('is-active')) {
+        vm.changeActiveDocument(0)
+        lastTab.classList.remove('is-active')
+        tabs[0].children[0].click()
+      }
+    }, 50)
   },
   methods: {
-    changeActiveSession (name) {
-      this.activeSessionName = name
+    changeActiveDocument (activeDocumentIndex) {
+      this.activeDocument = activeDocumentIndex
+      this.activeDocumentContentBackup = this.activeDocumentContent.slice()
     },
-    addSession (content, name) {
-      // Create vuex store document
-      this.addDocument({ name, content, mode: 'text' })
-
-      // Update vuex store on session document change
-      const vm = this
-      const session = createSession(content)
-      session.on('change', () => { vm.updateDocument({ name, content: session.getValue() }) })
-
-      // Push active session into data
-      this.sessions[name] = session
-      this.fileNames.push(name)
-    },
-    duplicateSession (source) {
-      // create new session
-      const session = createSession('')
-
-      // set session document to source sessions document
-      session.setDocument(source.getDocument())
-
-      // Push active session into data
-      this.sessions.push(session)
-    },
-    removeSession (name) {
-      delete (this.sessions[name])
-      this.fileNames.splice(this.fileNames.indexOf(name), 1)
-      if (name === this.activeFile) { this.changeActiveSession(this.fileNames[0]) }
+    closeDocument (documentName) {
+      const documentIndex = this.openedDocuments.indexOf(documentName)
+      this.openedDocuments.splice(documentIndex, 1)
+      this.changeActiveDocument(0)
     },
     ...mapMutations({
       addDocument: 'documents/add',

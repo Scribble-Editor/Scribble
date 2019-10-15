@@ -29,6 +29,14 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+
+    // This is a workaround to update the file content only on document change
+    // This is kind of a hack but is necessary since updating the value
+    // resets the cursor position
+    fileChangeContent: {
+      type: String,
+      default: null
     }
   },
   data () {
@@ -46,6 +54,9 @@ export default {
     session (newValue) {
       this.editor.setSession(newValue)
       this.editor.getSession().setMode('ace/mode/' + this.language)
+    },
+    fileChangeContent (newValue) {
+      this.editor.setValue(newValue, -1)
     }
   },
   mounted () {
