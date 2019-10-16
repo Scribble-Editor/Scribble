@@ -1,9 +1,7 @@
 <template>
   <div class="editor">
     <EditorMenu class="editor-menu" />
-    <div class="editor-tree">
-      TREE
-    </div>
+    <EditorTree class="editor-tree" />
     <EditorTextarea :theme="config.theme" />
     <EditorFooter class="editor-footer" />
   </div>
@@ -13,12 +11,13 @@
 import { mapGetters } from 'vuex'
 
 import EditorMenu from '~/components/EditorMenu'
+import EditorTree from '~/components/EditorTree'
 import EditorTextarea from '~/components/EditorTextarea'
 import EditorFooter from '~/components/EditorFooter'
 
 export default {
   name: 'Editor',
-  components: { EditorMenu, EditorTextarea, EditorFooter },
+  components: { EditorMenu, EditorTree, EditorTextarea, EditorFooter },
   computed: {
     config () {
       return {
@@ -40,6 +39,14 @@ export default {
     ...mapGetters({
       selectedFile: 'openFiles/selectedFile'
     })
+  },
+  mounted () {
+    // Calculates the height of the file tree at mount
+    const editorMenuElem = document.getElementsByClassName('editor-menu')[0]
+    const editorTreeElem = document.getElementsByClassName('editor-tree')[0]
+    const editorFooterElem = document.getElementsByClassName('editor-footer')[0]
+
+    editorTreeElem.style.height = `calc(100vh - ${editorMenuElem.clientHeight + editorFooterElem.clientHeight}px)`
   }
 }
 </script>
