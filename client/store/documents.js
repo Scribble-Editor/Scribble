@@ -8,6 +8,21 @@ export const state = () => ({
     name: 'SecondDocument.md',
     content: '## Second Document',
     mode: 'markdown'
+  },
+  'Directory1/test1.md': {
+    name: 'test1.md',
+    content: '',
+    mode: 'markdown'
+  },
+  'Directory1/test2.md': {
+    name: 'test1.md',
+    content: '',
+    mode: 'markdown'
+  },
+  'Z-dir/test.css': {
+    name: 'test.css',
+    content: '',
+    mode: 'markdown'
   }
 })
 
