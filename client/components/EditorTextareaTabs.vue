@@ -1,19 +1,15 @@
 <template>
   <section class="editor-textarea-tabs">
-    <b-tabs v-model="activeDocument" type="is-boxed" @change="emitTabChange">
-      <b-tab-item
-        v-for="documentName in documentNames"
-        :key="documentName"
-      >
-        <template slot="header">
-          <span>{{ documentName }}</span>
-
-          <!-- TODO: Implement close button -->
-          <b-icon icon="close" size="is-small" class="tab-exit" @click.native="$emit('tabClose', documentName)" />
-        </template>
-      </b-tab-item>
-      <b-tab-item />
-    </b-tabs>
+    <div
+      v-for="(documentName, index) in documentNames"
+      :key="documentName + index"
+      class="tab-item"
+      :class="{ 'is-active': index === activeDocument }"
+      @click="handleClick($event, documentName)"
+    >
+      <span class="label">{{ documentName }}</span>
+      <b-icon icon="close" size="is-small" class="tab-exit" />
+    </div>
   </section>
 </template>
 
@@ -24,33 +20,63 @@ export default {
     documentNames: {
       type: Array,
       required: true
+    },
+    value: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
-      activeDocument: 0
+      activeDocument: this.value
     }
   },
   methods: {
-    emitTabChange (tabIndex) {
-      this.$emit('change', tabIndex)
-      this.activeDocument = tabIndex
+    handleClick ($event, documentName) {
+      if ($event.target.tagName === 'I') {
+        this.$emit('tabClose', documentName)
+      } else {
+        this.$emit('change', documentName)
+        this.activeDocument = this.documentNames.indexOf(documentName)
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '~/assets/buefy.overrides';
+
 .editor-textarea-tabs {
   background-color: lightgray;
+  white-space: nowrap;
 
-  // Hide extra empty hack tab
-  nav.tabs > ul > li:last-child {
-    display: none
-  }
+  .tab-item {
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    border-top: 2px solid  transparent;
+    border-radius: 5px 5px 0 0;
+    border-collapse: collapse;
 
-  .tab-content {
-    display: none !important;
+    .label {
+      margin: 0 8px;
+    }
+
+    &:hover {
+      background-color: $white;
+    }
+
+    &.is-active {
+      background-color: $white;
+      border-color: $info;
+
+      .label {
+        color: $info;
+      }
+    }
   }
 
   .tab-exit {

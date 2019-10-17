@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      activeDocument: 0,
+      activeDocument: 'Welcome.md',
       openedDocuments: ['Welcome.md', 'SecondDocument.md'],
       activeDocumentContentBackup: null
     }
@@ -42,44 +42,25 @@ export default {
     activeDocumentContent: {
       get () {
         try {
-          return this.$store.state.documents[this.activeDocumentName].content
+          return this.$store.state.documents[this.activeDocument].content
         } catch (e) {
           return ''
         }
       },
       set (value) {
-        this.updateDocument({ name: this.activeDocumentName, content: value })
+        this.updateDocument({ name: this.activeDocument, content: value })
       }
-    },
-    activeDocumentName () {
-      return this.openedDocuments[this.activeDocument]
     }
   },
-  mounted () {
-    // A very nasty hack to avoid crashing when closing the last tab.
-    // A hidden, empty tag is placed at the end and when it is active, the first
-    // tab is clicked
-    const vm = this
-    const tabsElem = document.querySelector('.editor-textarea-tabs nav.tabs ul')
-    setInterval(() => {
-      const tabs = tabsElem.children
-      const lastTab = tabs[tabs.length - 1]
-      if (lastTab.classList.length > 0 && lastTab.classList.contains('is-active')) {
-        vm.changeActiveDocument(0)
-        lastTab.classList.remove('is-active')
-        tabs[0].children[0].click()
-      }
-    }, 50)
-  },
   methods: {
-    changeActiveDocument (activeDocumentIndex) {
-      this.activeDocument = activeDocumentIndex
+    changeActiveDocument (activeDocument) {
+      this.activeDocument = activeDocument
       this.activeDocumentContentBackup = this.activeDocumentContent.slice()
     },
     closeDocument (documentName) {
       const documentIndex = this.openedDocuments.indexOf(documentName)
       this.openedDocuments.splice(documentIndex, 1)
-      this.changeActiveDocument(0)
+      this.changeActiveDocument(this.openedDocuments[0])
     },
     ...mapMutations({
       addDocument: 'documents/add',
