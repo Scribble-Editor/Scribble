@@ -7,7 +7,7 @@
       :class="{ 'is-active': documentName === activeDocument }"
       @click="handleClick($event, documentName)"
     >
-      <span class="label">{{ documentName }}</span>
+      <span class="label">{{ documentName.substr(documentName.lastIndexOf('/') + 1) }}</span>
       <b-icon icon="close" size="is-small" class="tab-exit" />
     </div>
   </section>
