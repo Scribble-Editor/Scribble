@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     handleClick (item, index) {
+      // Expand or collapse directory in file tree
       if (this.isDirectory[index]) {
         const selectedItem = this.$el.querySelector('#' + item.label + index)
         const children = selectedItem.querySelector('.menu-item-wrapper')
@@ -63,6 +64,17 @@ export default {
           selectedItem.classList.add('open')
           children.classList.remove('hidden')
         }
+
+      // Open file in file tree
+      } else {
+        let qualifiedName = item.label
+
+        let currentElement = this.$el
+        while (currentElement.parentElement.parentElement.classList.contains('item')) {
+          currentElement = currentElement.parentElement.parentElement
+          qualifiedName = currentElement.querySelector('.menu-item-label').textContent + '/' + qualifiedName
+        }
+        this.$root.$emit('openDocument', qualifiedName)
       }
     }
   }

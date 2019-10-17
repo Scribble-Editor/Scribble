@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <EditorTextareaTabs
+      v-model="activeDocument"
       :document-names="openedDocuments"
       @change="changeActiveDocument"
       @tabClose="closeDocument"
@@ -59,6 +60,9 @@ export default {
       return this.activeDocument === undefined || this.openedDocuments.length === 0
     }
   },
+  mounted () {
+    this.$root.$on('openDocument', this.openDocument)
+  },
   methods: {
     changeActiveDocument (activeDocument) {
       this.activeDocument = activeDocument
@@ -68,6 +72,12 @@ export default {
       const documentIndex = this.openedDocuments.indexOf(documentName)
       this.openedDocuments.splice(documentIndex, 1)
       this.changeActiveDocument(this.openedDocuments[0])
+    },
+    openDocument (documentName) {
+      if (!this.openedDocuments.includes(documentName)) {
+        this.openedDocuments.push(documentName)
+      }
+      this.changeActiveDocument(documentName)
     },
     ...mapMutations({
       addDocument: 'documents/add',

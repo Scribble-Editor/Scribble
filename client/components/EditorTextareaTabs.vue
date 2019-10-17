@@ -4,7 +4,7 @@
       v-for="(documentName, index) in documentNames"
       :key="documentName + index"
       class="tab-item"
-      :class="{ 'is-active': index === activeDocument }"
+      :class="{ 'is-active': documentName === activeDocument }"
       @click="handleClick($event, documentName)"
     >
       <span class="label">{{ documentName }}</span>
@@ -22,13 +22,18 @@ export default {
       required: true
     },
     value: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
-      activeDocument: this.value
+      activeDocument: this.value || this.documentNames[0]
+    }
+  },
+  watch: {
+    value (newValue) {
+      this.activeDocument = newValue
     }
   },
   methods: {
@@ -37,7 +42,7 @@ export default {
         this.$emit('tabClose', documentName)
       } else {
         this.$emit('change', documentName)
-        this.activeDocument = this.documentNames.indexOf(documentName)
+        this.activeDocument = documentName
       }
     }
   }

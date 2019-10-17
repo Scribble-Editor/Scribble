@@ -11,17 +11,17 @@ export const state = () => ({
   },
   'Directory1/test1.md': {
     name: 'test1.md',
-    content: '',
+    content: 'test1',
     mode: 'markdown'
   },
   'Directory1/test2.md': {
-    name: 'test1.md',
-    content: '',
+    name: 'test2.md',
+    content: 'test2',
     mode: 'markdown'
   },
   'Z-dir/test.css': {
     name: 'test.css',
-    content: '',
+    content: 'test css',
     mode: 'markdown'
   }
 })
