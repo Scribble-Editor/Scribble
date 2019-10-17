@@ -2,8 +2,8 @@
   <div class="editor">
     <EditorMenu class="editor-menu" />
     <EditorTree class="editor-tree" />
-    <EditorTextarea :theme="config.theme" />
-    <EditorFooter class="editor-footer" />
+    <EditorTextarea v-model="activeDocument" :theme="config.theme" />
+    <EditorFooter class="editor-footer" :active-document="activeDocument" />
   </div>
 </template>
 
@@ -18,6 +18,11 @@ import EditorFooter from '~/components/EditorFooter'
 export default {
   name: 'Editor',
   components: { EditorMenu, EditorTree, EditorTextarea, EditorFooter },
+  data () {
+    return {
+      activeDocument: null
+    }
+  },
   computed: {
     config () {
       return {

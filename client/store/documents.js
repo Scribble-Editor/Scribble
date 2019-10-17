@@ -19,10 +19,10 @@ export const state = () => ({
     content: 'test2',
     mode: 'markdown'
   },
-  'Z-dir/test.css': {
-    name: 'test.css',
-    content: 'test css',
-    mode: 'markdown'
+  'Z-dir/test.js': {
+    name: 'test.js',
+    content: 'console.log("TESTING JAVASCRIPT")',
+    mode: 'javascript'
   }
 })
 

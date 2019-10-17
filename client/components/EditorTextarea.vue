@@ -11,7 +11,7 @@
         v-model="activeDocumentContent"
         :theme="theme"
         :file-change-content="activeDocumentContentBackup"
-        language="markdown"
+        :language="activeDocumentLanguage"
       />
     </div>
     <div v-else>
@@ -34,12 +34,16 @@ export default {
     theme: {
       type: String,
       default: null
+    },
+    value: {
+      type: String,
+      default: null
     }
   },
   data () {
     return {
-      activeDocument: 'Welcome.md',
-      openedDocuments: ['Welcome.md', 'SecondDocument.md'],
+      activeDocument: this.value,
+      openedDocuments: [],
       activeDocumentContentBackup: null
     }
   },
@@ -56,8 +60,16 @@ export default {
         this.updateDocument({ name: this.activeDocument, content: value })
       }
     },
+    activeDocumentLanguage () {
+      return this.$store.state.documents[this.activeDocument].mode
+    },
     noFilesAreOpen () {
       return this.activeDocument === undefined || this.openedDocuments.length === 0
+    }
+  },
+  watch: {
+    value (newValue) {
+      this.activeDocument = newValue
     }
   },
   mounted () {
@@ -67,6 +79,7 @@ export default {
     changeActiveDocument (activeDocument) {
       this.activeDocument = activeDocument
       this.activeDocumentContentBackup = this.activeDocumentContent.slice()
+      this.$emit('input', activeDocument)
     },
     closeDocument (documentName) {
       const documentIndex = this.openedDocuments.indexOf(documentName)
