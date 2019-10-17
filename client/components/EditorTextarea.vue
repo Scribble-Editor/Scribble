@@ -5,13 +5,17 @@
       @change="changeActiveDocument"
       @tabClose="closeDocument"
     />
-    <div class="editors">
+    <div v-if="!noFilesAreOpen" class="editors">
       <Ace
         v-model="activeDocumentContent"
         :theme="theme"
         :file-change-content="activeDocumentContentBackup"
         language="markdown"
       />
+    </div>
+    <div v-else>
+      <!-- TODO: Welcome page -->
+      this is the welcome page
     </div>
   </div>
 </template>
@@ -50,6 +54,9 @@ export default {
       set (value) {
         this.updateDocument({ name: this.activeDocument, content: value })
       }
+    },
+    noFilesAreOpen () {
+      return this.activeDocument === undefined || this.openedDocuments.length === 0
     }
   },
   methods: {
