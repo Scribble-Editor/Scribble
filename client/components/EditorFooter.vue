@@ -24,7 +24,6 @@
         icon="palette"
         :value="selectedTheme"
         size="is-small"
-        @input="changeTheme"
       >
         <option
           v-for="theme in themes"
