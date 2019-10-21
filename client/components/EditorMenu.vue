@@ -112,6 +112,7 @@ export default {
 .EditorMenu {
   min-height: 0 !important;
   height: min-content !important;
+  user-select: none !important;
 
   .disabled {
     background-color: transparent !important;
