@@ -12,8 +12,8 @@
         <b-navbar-item>
           <EditorMenuFileOpenfile />
         </b-navbar-item>
-        <b-navbar-item>
-          <EditorMenuFileExportfile />
+        <b-navbar-item :class="{ disabled: !isDocumentSelected }">
+          <EditorMenuFileExportfile :active-document="activeDocument" />
         </b-navbar-item>
         <hr>
         <b-navbar-item>
@@ -83,6 +83,17 @@ export default {
     EditorMenuFileExportfile,
     EditorMenuFilePreferences,
     EditorMenuFileExit
+  },
+  props: {
+    activeDocument: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    isDocumentSelected () {
+      return !!this.activeDocument
+    }
   }
 }
 </script>
@@ -101,6 +112,19 @@ export default {
 .EditorMenu {
   min-height: 0 !important;
   height: min-content !important;
+  user-select: none !important;
+
+  .disabled {
+    background-color: transparent !important;
+    cursor: not-allowed;
+    color: $text-light;
+    pointer-events: none;
+
+    &:hover {
+      background-color: transparent !important;
+      color: $text-light !important;
+    }
+  }
 
   .navbar-brand {
     display: none !important;

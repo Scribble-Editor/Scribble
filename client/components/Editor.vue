@@ -1,33 +1,26 @@
 <template>
   <div class="editor">
-    <EditorMenu class="editor-menu" />
-    <div class="editor-tree">
-      TREE
-    </div>
-    <m-ace-editor
-      v-model="content"
-      height="100%"
-      class="editor-textarea"
-      :line-height="config.lineHeight"
-      :font-size="config.fontSize"
-      :line-number="config.lineNumber"
-      :highlight-active-line="config.highlightActiveLine"
-      :mode="selectedFile.language"
-      :theme="config.theme"
-    />
-    <EditorFooter class="editor-footer" />
+    <EditorMenu class="editor-menu" :active-document="activeDocument || ''" />
+    <EditorTree class="editor-tree" />
+    <EditorTextarea v-model="activeDocument" :theme="config.theme" />
+    <EditorFooter class="editor-footer" :active-document="activeDocument" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 import EditorMenu from '~/components/EditorMenu'
+import EditorTree from '~/components/EditorTree'
+import EditorTextarea from '~/components/EditorTextarea'
 import EditorFooter from '~/components/EditorFooter'
 
 export default {
   name: 'Editor',
-  components: { EditorMenu, EditorFooter },
+  components: { EditorMenu, EditorTree, EditorTextarea, EditorFooter },
+  data () {
+    return {
+      activeDocument: null
+    }
+  },
   computed: {
     config () {
       return {
@@ -37,18 +30,15 @@ export default {
         'highlightActiveLine': true,
         'theme': this.$store.state.userConfig.theme
       }
-    },
-    content: {
-      get () {
-        return this.selectedFile.content
-      },
-      set (value) {
-        this.$store.commit('openFiles/updateFileContent', { file: this.selectedFile.name, content: value })
-      }
-    },
-    ...mapGetters({
-      selectedFile: 'openFiles/selectedFile'
-    })
+    }
+  },
+  mounted () {
+    // Calculates the height of the file tree at mount
+    const editorMenuElem = document.getElementsByClassName('editor-menu')[0]
+    const editorTreeElem = document.getElementsByClassName('editor-tree')[0]
+    const editorFooterElem = document.getElementsByClassName('editor-footer')[0]
+
+    editorTreeElem.style.height = `calc(100vh - ${editorMenuElem.clientHeight + editorFooterElem.clientHeight}px)`
   }
 }
 </script>

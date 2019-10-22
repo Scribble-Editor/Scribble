@@ -30,7 +30,6 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/vue-m-ace-editor'
   ],
   /*
   ** Nuxt.js dev-modules

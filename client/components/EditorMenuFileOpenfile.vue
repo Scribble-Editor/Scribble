@@ -14,16 +14,24 @@ export default {
   name: 'EditorMenuFileOpenfile',
   methods: {
     openFile (fileData) {
-      this.createFile(fileData.name)
-      fileData.text().then((text) => {
-        this.updateFileContent({ file: fileData.name, content: text })
-        this.changeSelectedFile(fileData.name)
-      })
+      // TODO: Automatically detect mode during file creation
+
+      if (this.$store.state.documents[fileData.name]) {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: 'A file with that name already exists',
+          type: 'is-danger'
+        })
+      } else {
+        fileData.text().then((fileContent) => {
+          this.addDocument({ name: fileData.name, content: fileContent, mode: 'text' })
+          this.$root.$emit('openDocument', fileData.name)
+          this.$root.$emit('updateTree')
+        })
+      }
     },
     ...mapMutations({
-      createFile: 'openFiles/createFile',
-      updateFileContent: 'openFiles/updateFileContent',
-      changeSelectedFile: 'openFiles/changeSelectedFile'
+      addDocument: 'documents/add'
     })
   }
 }

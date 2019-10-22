@@ -5,19 +5,22 @@
 <script>
 export default {
   name: 'EditorMenuFileExportfile',
+  props: {
+    activeDocument: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
-    selectedFile () {
-      return {
-        name: this.$store.state.openFiles.selectedFileName,
-        ...this.$store.state.openFiles.files[this.$store.state.openFiles.selectedFileName]
-      }
+    activeFileContent () {
+      return this.$store.state.documents[this.activeDocument].content
     }
   },
   methods: {
     exportFile () {
       const fileDownload = document.createElement('a')
-      fileDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.selectedFile.content))
-      fileDownload.setAttribute('download', this.selectedFile.name)
+      fileDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.activeFileContent))
+      fileDownload.setAttribute('download', this.activeDocument)
 
       fileDownload.style.display = 'none'
       document.body.appendChild(fileDownload)
