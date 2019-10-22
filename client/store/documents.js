@@ -25,6 +25,10 @@ export const state = () => ({
     name: 'test.js',
     content: 'console.log("TESTING JAVASCRIPT")',
     mode: 'javascript'
+  },
+  'multiple/directory/test.txt': {
+    content: 'hello',
+    mode: 'text'
   }
 })
 
