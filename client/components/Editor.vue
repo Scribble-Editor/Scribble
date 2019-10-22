@@ -1,6 +1,6 @@
 <template>
   <div class="editor">
-    <EditorMenu class="editor-menu" :active-document="activeDocument" />
+    <EditorMenu class="editor-menu" :active-document="activeDocument || ''" />
     <EditorTree class="editor-tree" />
     <EditorTextarea v-model="activeDocument" :theme="config.theme" />
     <EditorFooter class="editor-footer" :active-document="activeDocument" />
