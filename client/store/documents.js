@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   'Welcome.md': {
     name: 'Welcome.md',
@@ -28,7 +30,7 @@ export const state = () => ({
 
 export const mutations = {
   add (state, { name, content, mode }) {
-    state[name] = { content, mode }
+    Vue.set(state, name, { content, mode })
   },
 
   remove (state, name) {
@@ -36,8 +38,8 @@ export const mutations = {
   },
 
   update (state, { name, content, mode }) {
-    if (content) { state[name].content = content }
-    if (mode) { state[name].mode = mode }
+    if (content) { Vue.set(state, name, { content, mode: state[name].mode }) }
+    if (mode) { Vue.set(state, name, { content: state[name].content, mode }) }
   },
 
   rename (state, { name, newName }) {

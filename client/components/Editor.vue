@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 import EditorMenu from '~/components/EditorMenu'
 import EditorTree from '~/components/EditorTree'
 import EditorTextarea from '~/components/EditorTextarea'
@@ -32,18 +30,7 @@ export default {
         'highlightActiveLine': true,
         'theme': this.$store.state.userConfig.theme
       }
-    },
-    content: {
-      get () {
-        return this.selectedFile.content
-      },
-      set (value) {
-        this.$store.commit('openFiles/updateFileContent', { file: this.selectedFile.name, content: value })
-      }
-    },
-    ...mapGetters({
-      selectedFile: 'openFiles/selectedFile'
-    })
+    }
   },
   mounted () {
     // Calculates the height of the file tree at mount

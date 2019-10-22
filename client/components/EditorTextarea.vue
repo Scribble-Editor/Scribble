@@ -9,8 +9,8 @@
     <div v-if="!noFilesAreOpen" class="editors">
       <Ace
         v-model="activeDocumentContent"
+        :session="openedSessions[activeDocument]"
         :theme="theme"
-        :file-change-content="activeDocumentContentBackup"
         :language="activeDocumentLanguage"
       />
     </div>
@@ -23,6 +23,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import { createEditSession as createSession } from 'brace'
 
 import EditorTextareaTabs from '~/components/EditorTextareaTabs'
 import Ace from '~/components/Ace'
@@ -44,7 +45,7 @@ export default {
     return {
       activeDocument: this.value,
       openedDocuments: [],
-      activeDocumentContentBackup: null
+      openedSessions: {}
     }
   },
   computed: {
@@ -77,20 +78,30 @@ export default {
   },
   methods: {
     changeActiveDocument (activeDocument) {
+      // Create new session if there isnt already one
+      if (!this.openedSessions[activeDocument] && activeDocument) {
+        this.addNewSession(
+          activeDocument,
+          this.$store.state.documents[activeDocument].content
+        )
+      }
       this.activeDocument = activeDocument
-      this.activeDocumentContentBackup = this.activeDocumentContent.slice()
       this.$emit('input', activeDocument)
     },
     closeDocument (documentName) {
       const documentIndex = this.openedDocuments.indexOf(documentName)
       this.openedDocuments.splice(documentIndex, 1)
       this.changeActiveDocument(this.openedDocuments[0])
+      delete (this.openedSessions[documentName])
     },
     openDocument (documentName) {
       if (!this.openedDocuments.includes(documentName)) {
         this.openedDocuments.push(documentName)
       }
       this.changeActiveDocument(documentName)
+    },
+    addNewSession (name, content) {
+      this.openedSessions[name] = createSession(content)
     },
     ...mapMutations({
       addDocument: 'documents/add',
