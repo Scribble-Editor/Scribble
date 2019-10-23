@@ -33,8 +33,6 @@ services:
         container_name: scribble-database
         restart: always
         restart: always
-        ports:
-            - "27017:27017"
         environment:
             MONGO_INITDB_DATABASE: strapi
 
@@ -46,8 +44,6 @@ services:
         restart: always
         depends_on:
             - scribble-database
-        ports:
-            - "1337:1337"
 
 volumes:
     scribble-client-static:
