@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   theme: 'tomorrow_night',
   defaultLanguage: 'javascript',
@@ -6,11 +8,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  changeTheme (state, newTheme) {
-    state.theme = newTheme
-  },
-
-  changeLanguage (state, newLanguage) {
-    state.defaultLanguage = newLanguage
+  update (state, { theme }) {
+    if (theme) { Vue.set(state, 'theme', theme) }
   }
 }
