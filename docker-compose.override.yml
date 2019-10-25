@@ -22,4 +22,9 @@ services:
         command: "nginx-debug -g 'daemon off;'"
 
     scribble-database:
+        ports:
+            - "27017:27017"
+        restart: unless-stopped
+
+    scribble-strapi:
         restart: unless-stopped

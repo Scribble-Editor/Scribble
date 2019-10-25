@@ -29,21 +29,21 @@ services:
         command: "nginx -g 'daemon off;'"
 
     scribble-database:
-        image: mysql:latest
+        image: mongo:latest
         container_name: scribble-database
         restart: always
-        command: --default-authentication-plugin=mysql_native_password
         restart: always
-        ports:
-            - "3306:3306"
-        volumes:
-            - mysql-datavolume:/var/lib/msql
         environment:
-            MYSQL_DATABASE: "db"
-            MYSQL_USER: "user"
-            MYSQL_ROOT_PASSWORD: "password"
-            MYSQL_ROOT_PASSWORD: "password"
+            MONGO_INITDB_DATABASE: strapi
+
+    scribble-strapi:
+        build: ./strapi
+        container_name: scribble-strapi
+        volumes:
+            - ./strapi:/usr/src/api
+        restart: always
+        depends_on:
+            - scribble-database
 
 volumes:
-    mysql-datavolume:
     scribble-client-static:
