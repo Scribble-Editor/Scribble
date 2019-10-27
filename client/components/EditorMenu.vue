@@ -55,7 +55,9 @@
         <b-navbar-item>
           <EditorMenuSelectionCopylineup />
         </b-navbar-item>
-        <b-navbar-item>Copy Line Down</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionCopylinedown />
+        </b-navbar-item>
         <b-navbar-item>Move Line Up</b-navbar-item>
         <b-navbar-item>Move Line Down</b-navbar-item>
       </b-navbar-dropdown>
@@ -87,6 +89,7 @@ import EditorMenuSelectionSelectall from '~/components/EditorMenuSelectionSelect
 import EditorMenuSelectionSelectword from '~/components/EditorMenuSelectionSelectword'
 import EditorMenuSelectionSelectline from '~/components/EditorMenuSelectionSelectline'
 import EditorMenuSelectionCopylineup from '~/components/EditorMenuSelectionCopylineup'
+import EditorMenuSelectionCopylinedown from '~/components/EditorMenuSelectionCopylinedown'
 
 export default {
   name: 'EditorMenu',
@@ -99,7 +102,8 @@ export default {
     EditorMenuSelectionSelectall,
     EditorMenuSelectionSelectword,
     EditorMenuSelectionSelectline,
-    EditorMenuSelectionCopylineup
+    EditorMenuSelectionCopylineup,
+    EditorMenuSelectionCopylinedown
   },
   props: {
     activeDocument: {
