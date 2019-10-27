@@ -9,13 +9,12 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import { getModeForPath } from '~/plugins/ace-modelist'
 
 export default {
   name: 'EditorMenuFileOpenfile',
   methods: {
     openFile (fileData) {
-      // TODO: Automatically detect mode during file creation
-
       if (this.$store.state.documents[fileData.name]) {
         this.$buefy.toast.open({
           duration: 5000,
@@ -24,7 +23,7 @@ export default {
         })
       } else {
         fileData.text().then((fileContent) => {
-          this.addDocument({ name: fileData.name, content: fileContent, mode: 'text' })
+          this.addDocument({ name: fileData.name, content: fileContent, mode: getModeForPath(fileData.name).name })
           this.$root.$emit('openDocument', fileData.name)
           this.$root.$emit('updateTree')
         })

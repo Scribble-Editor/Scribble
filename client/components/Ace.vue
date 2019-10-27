@@ -5,6 +5,9 @@
 <script>
 import 'brace/ext/searchbox'
 
+import { themesByName } from '~/plugins/ace-themelist'
+import { modesByName } from '~/plugins/ace-modelist'
+
 export default {
   name: 'Ace',
   props: {
@@ -40,29 +43,29 @@ export default {
   },
   watch: {
     theme (newValue) {
-      this.editor.setTheme('ace/theme/' + newValue)
+      this.editor.setTheme(themesByName[newValue].theme)
     },
     language (newValue) {
-      this.editor.getSession().setMode('ace/mode/' + newValue)
+      this.editor.getSession().setMode(modesByName[newValue].mode)
     },
     session (newValue) {
       this.editor.setSession(newValue)
-      this.editor.getSession().setMode('ace/mode/' + this.language)
+      this.editor.getSession().setMode(modesByName[this.language].mode)
     }
   },
   mounted () {
     const ace = require('brace')
-    require('~/plugins/ace-modes')
-    require('~/plugins/ace-themes')
+    require('~/plugins/ace-modes-includes')
+    require('~/plugins/ace-themes-includes')
 
     // Initialize Ace
     const vm = this
     const editor = vm.editor = ace.edit(this.$el)
-    editor.setTheme('ace/theme/' + this.theme)
+    editor.setTheme(themesByName[this.theme].theme)
 
     // Initialize Ace session
     if (this.session) { this.editor.setSession(this.session) }
-    editor.getSession().setMode('ace/mode/' + this.language)
+    editor.getSession().setMode(modesByName[this.language].mode)
 
     // Initialize Ace Value
     if (this.value) {
