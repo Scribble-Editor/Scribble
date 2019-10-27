@@ -82,6 +82,7 @@
       <b-navbar-dropdown
         label="Go To"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
         <b-navbar-item>
           <EditorMenuGotoLinenumber />
