@@ -87,7 +87,9 @@
           <EditorMenuGotoLinenumber />
         </b-navbar-item>
         <hr>
-        <b-navbar-item>Go to Beginning of Line</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoBeginningofline />
+        </b-navbar-item>
         <b-navbar-item>Go to End of Line</b-navbar-item>
         <b-navbar-item>Go to Beginning of File</b-navbar-item>
         <b-navbar-item>Go to End of File</b-navbar-item>
@@ -118,6 +120,7 @@ import EditorMenuSelectionMovelineup from '~/components/EditorMenuSelectionMovel
 import EditorMenuSelectionMovelinedown from '~/components/EditorMenuSelectionMovelinedown'
 
 import EditorMenuGotoLinenumber from '~/components/EditorMenuGotoLinenumber'
+import EditorMenuGotoBeginningofline from '~/components/EditorMenuGotoBeginningofline'
 
 export default {
   name: 'EditorMenu',
@@ -139,7 +142,8 @@ export default {
     EditorMenuSelectionCopylinedown,
     EditorMenuSelectionMovelineup,
     EditorMenuSelectionMovelinedown,
-    EditorMenuGotoLinenumber
+    EditorMenuGotoLinenumber,
+    EditorMenuGotoBeginningofline
   },
   props: {
     activeDocument: {
