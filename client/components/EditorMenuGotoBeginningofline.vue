@@ -8,7 +8,8 @@ export default {
   methods: {
     gotoBeginningOfLine () {
       this.$root.$emit('editor/command', (editor) => {
-        editor.gotoLine(editor.selection.getCursor().row + 1, 0, true)
+        editor.selection.moveCursorLineStart()
+        editor.selection.clearSelection()
       })
     }
   }
