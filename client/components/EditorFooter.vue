@@ -59,7 +59,7 @@ export default {
   computed: {
     themes () {
       return Object.keys(themesByName).map(key => themesByName[key].caption).sort()
-    }
+    },
     languages () {
       return Object.keys(modesByName).map(key => modesByName[key].caption).sort()
     },
