@@ -1,5 +1,5 @@
 <template>
-  <span @click="copyLineDown">Copy line down</span>
+  <span @click="copyLineDown">Copy Line Down</span>
 </template>
 
 <script>
