@@ -48,7 +48,9 @@
         <b-navbar-item>
           <EditorMenuSelectionSelectword />
         </b-navbar-item>
-        <b-navbar-item>Select Current Line</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionSelectline />
+        </b-navbar-item>
         <hr>
         <b-navbar-item>Copy Line Up</b-navbar-item>
         <b-navbar-item>Copy Line Down</b-navbar-item>
@@ -81,6 +83,7 @@ import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
 import EditorMenuSelectionSelectall from '~/components/EditorMenuSelectionSelectall'
 import EditorMenuSelectionSelectword from '~/components/EditorMenuSelectionSelectword'
+import EditorMenuSelectionSelectline from '~/components/EditorMenuSelectionSelectline'
 
 export default {
   name: 'EditorMenu',
@@ -91,7 +94,8 @@ export default {
     EditorMenuFilePreferences,
     EditorMenuFileExit,
     EditorMenuSelectionSelectall,
-    EditorMenuSelectionSelectword
+    EditorMenuSelectionSelectword,
+    EditorMenuSelectionSelectline
   },
   props: {
     activeDocument: {
