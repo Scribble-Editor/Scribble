@@ -28,13 +28,24 @@
       <b-navbar-dropdown
         label="Edit"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
-        <b-navbar-item>Undo</b-navbar-item>
-        <b-navbar-item>Redo</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditUndo />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditRedo />
+        </b-navbar-item>
         <hr>
-        <b-navbar-item>Find</b-navbar-item>
-        <b-navbar-item>Find All</b-navbar-item>
-        <b-navbar-item>Replace</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditFind />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditFindall />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditReplace />
+        </b-navbar-item>
       </b-navbar-dropdown>
 
       <!-- Selection -->
@@ -90,6 +101,12 @@ import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
 import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
 import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
+import EditorMenuEditUndo from '~/components/EditorMenuEditUndo'
+import EditorMenuEditRedo from '~/components/EditorMenuEditRedo'
+import EditorMenuEditFind from '~/components/EditorMenuEditFind'
+import EditorMenuEditFindall from '~/components/EditorMenuEditFindall'
+import EditorMenuEditReplace from '~/components/EditorMenuEditReplace'
+
 import EditorMenuSelectionSelectall from '~/components/EditorMenuSelectionSelectall'
 import EditorMenuSelectionSelectword from '~/components/EditorMenuSelectionSelectword'
 import EditorMenuSelectionSelectline from '~/components/EditorMenuSelectionSelectline'
@@ -106,6 +123,11 @@ export default {
     EditorMenuFileExportfile,
     EditorMenuFilePreferences,
     EditorMenuFileExit,
+    EditorMenuEditUndo,
+    EditorMenuEditRedo,
+    EditorMenuEditFind,
+    EditorMenuEditFindall,
+    EditorMenuEditReplace,
     EditorMenuSelectionSelectall,
     EditorMenuSelectionSelectword,
     EditorMenuSelectionSelectline,
@@ -146,7 +168,6 @@ export default {
 
   .disabled, .disabled > .navbar-link {
     background-color: transparent !important;
-    cursor: not-allowed;
     color: $text-light !important;
     pointer-events: none;
 
