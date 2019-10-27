@@ -28,13 +28,24 @@
       <b-navbar-dropdown
         label="Edit"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
-        <b-navbar-item>Undo</b-navbar-item>
-        <b-navbar-item>Redo</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditUndo />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditRedo />
+        </b-navbar-item>
         <hr>
-        <b-navbar-item>Find</b-navbar-item>
-        <b-navbar-item>Find All</b-navbar-item>
-        <b-navbar-item>Replace</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditFind />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditFindall />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditReplace />
+        </b-navbar-item>
       </b-navbar-dropdown>
 
       <!-- Selection -->
@@ -75,6 +86,12 @@ import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
 import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
 import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
+import EditorMenuEditUndo from '~/components/EditorMenuEditUndo'
+import EditorMenuEditRedo from '~/components/EditorMenuEditRedo'
+import EditorMenuEditFind from '~/components/EditorMenuEditFind'
+import EditorMenuEditFindall from '~/components/EditorMenuEditFindall'
+import EditorMenuEditReplace from '~/components/EditorMenuEditReplace'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -82,7 +99,12 @@ export default {
     EditorMenuFileOpenfile,
     EditorMenuFileExportfile,
     EditorMenuFilePreferences,
-    EditorMenuFileExit
+    EditorMenuFileExit,
+    EditorMenuEditUndo,
+    EditorMenuEditRedo,
+    EditorMenuEditFind,
+    EditorMenuEditFindall,
+    EditorMenuEditReplace
   },
   props: {
     activeDocument: {
@@ -114,10 +136,9 @@ export default {
   height: min-content !important;
   user-select: none !important;
 
-  .disabled {
+  .disabled, .disabled > .navbar-link {
     background-color: transparent !important;
-    cursor: not-allowed;
-    color: $text-light;
+    color: $text-light !important;
     pointer-events: none;
 
     &:hover {

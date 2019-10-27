@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import 'brace/ext/searchbox'
+
 import { themesByName } from '~/plugins/ace-themelist'
 import { modesByName } from '~/plugins/ace-modelist'
 
@@ -76,6 +78,8 @@ export default {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
     })
+
+    this.$root.$on('editor/command', cb => cb(editor))
   },
   beforeDestroy () {
     this.editor.destroy()

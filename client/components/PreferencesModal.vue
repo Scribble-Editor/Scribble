@@ -21,7 +21,3 @@ export default {
   name: 'PreferencesModal'
 }
 </script>
-
-<style>
-
-</style>
