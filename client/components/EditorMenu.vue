@@ -39,8 +39,9 @@
         <b-navbar-item>
           <EditorMenuEditFind />
         </b-navbar-item>
-        <b-navbar-item>Find All</b-navbar-item>
-        <b-navbar-item>Replace</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditFindall />
+        </b-navbar-item>
       </b-navbar-dropdown>
 
       <!-- Selection -->
