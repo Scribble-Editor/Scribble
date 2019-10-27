@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { modesByName } from '~/plugins/ace-modelist'
+
 export default {
   name: 'Ace',
   props: {
@@ -41,17 +43,17 @@ export default {
       this.editor.setTheme('ace/theme/' + newValue)
     },
     language (newValue) {
-      this.editor.getSession().setMode('ace/mode/' + newValue)
+      this.editor.getSession().setMode(modesByName[newValue].mode)
     },
     session (newValue) {
       this.editor.setSession(newValue)
-      this.editor.getSession().setMode('ace/mode/' + this.language)
+      this.editor.getSession().setMode(modesByName[this.language].mode)
     }
   },
   mounted () {
     const ace = require('brace')
-    require('~/plugins/ace-modes')
-    require('~/plugins/ace-themes')
+    require('~/plugins/ace-modes-includes')
+    require('~/plugins/ace-themes-includes')
 
     // Initialize Ace
     const vm = this
@@ -60,7 +62,7 @@ export default {
 
     // Initialize Ace session
     if (this.session) { this.editor.setSession(this.session) }
-    editor.getSession().setMode('ace/mode/' + this.language)
+    editor.getSession().setMode(modesByName[this.language].mode)
 
     // Initialize Ace Value
     if (this.value) {
