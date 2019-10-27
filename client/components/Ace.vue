@@ -74,15 +74,7 @@ export default {
       vm.$emit('input', content)
     })
 
-    // Editor Undo Event
-    this.$root.$on('editor/undo', () => {
-      editor.undo()
-    })
-
-    // Editor Redo Event
-    this.$root.$on('editor/redo', () => {
-      editor.redo()
-    })
+    this.$root.$on('editor/command', cb => cb(editor))
   },
   beforeDestroy () {
     this.editor.destroy()

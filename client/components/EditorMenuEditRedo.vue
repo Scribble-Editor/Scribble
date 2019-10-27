@@ -7,7 +7,9 @@ export default {
   name: 'EditorMenuEditRedo',
   methods: {
     redo () {
-      this.$root.$emit('editor/redo')
+      this.$root.$emit('editor/command', (editor) => {
+        editor.redo()
+      })
     }
   }
 }
