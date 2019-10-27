@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import 'brace/ext/searchbox'
+
 export default {
   name: 'Ace',
   props: {

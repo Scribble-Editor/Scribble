@@ -36,7 +36,9 @@
           <EditorMenuEditRedo />
         </b-navbar-item>
         <hr>
-        <b-navbar-item>Find</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditFind />
+        </b-navbar-item>
         <b-navbar-item>Find All</b-navbar-item>
         <b-navbar-item>Replace</b-navbar-item>
       </b-navbar-dropdown>
@@ -81,6 +83,7 @@ import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
 import EditorMenuEditUndo from '~/components/EditorMenuEditUndo'
 import EditorMenuEditRedo from '~/components/EditorMenuEditRedo'
+import EditorMenuEditFind from '~/components/EditorMenuEditFind'
 
 export default {
   name: 'EditorMenu',
@@ -91,7 +94,8 @@ export default {
     EditorMenuFilePreferences,
     EditorMenuFileExit,
     EditorMenuEditUndo,
-    EditorMenuEditRedo
+    EditorMenuEditRedo,
+    EditorMenuEditFind
   },
   props: {
     activeDocument: {
