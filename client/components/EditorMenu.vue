@@ -28,6 +28,7 @@
       <b-navbar-dropdown
         label="Edit"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
         <b-navbar-item>
           <EditorMenuEditUndo />
@@ -135,10 +136,9 @@ export default {
   height: min-content !important;
   user-select: none !important;
 
-  .disabled {
+  .disabled, .disabled > .navbar-link {
     background-color: transparent !important;
-    cursor: not-allowed;
-    color: $text-light;
+    color: $text-light !important;
     pointer-events: none;
 
     &:hover {
