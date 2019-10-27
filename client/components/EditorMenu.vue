@@ -41,6 +41,7 @@
       <b-navbar-dropdown
         label="Selection"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
         <b-navbar-item>
           <EditorMenuSelectionSelectall />
@@ -143,10 +144,10 @@ export default {
   height: min-content !important;
   user-select: none !important;
 
-  .disabled {
+  .disabled, .disabled > .navbar-link {
     background-color: transparent !important;
     cursor: not-allowed;
-    color: $text-light;
+    color: $text-light !important;
     pointer-events: none;
 
     &:hover {
