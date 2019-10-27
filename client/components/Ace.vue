@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { themesByName } from '~/plugins/ace-themelist'
+
 export default {
   name: 'Ace',
   props: {
@@ -38,7 +40,7 @@ export default {
   },
   watch: {
     theme (newValue) {
-      this.editor.setTheme('ace/theme/' + newValue)
+      this.editor.setTheme(themesByName[newValue].theme)
     },
     language (newValue) {
       this.editor.getSession().setMode('ace/mode/' + newValue)
@@ -56,7 +58,7 @@ export default {
     // Initialize Ace
     const vm = this
     const editor = vm.editor = ace.edit(this.$el)
-    editor.setTheme('ace/theme/' + this.theme)
+    editor.setTheme(themesByName[this.theme].theme)
 
     // Initialize Ace session
     if (this.session) { this.editor.setSession(this.session) }
