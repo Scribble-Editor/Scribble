@@ -96,7 +96,9 @@
         <b-navbar-item>
           <EditorMenuGotoBeginningoffile />
         </b-navbar-item>
-        <b-navbar-item>Go to End of File</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoEndoffile />
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
   </b-navbar>
@@ -127,6 +129,7 @@ import EditorMenuGotoLinenumber from '~/components/EditorMenuGotoLinenumber'
 import EditorMenuGotoBeginningofline from '~/components/EditorMenuGotoBeginningofline'
 import EditorMenuGotoEndofline from '~/components/EditorMenuGotoEndofline'
 import EditorMenuGotoBeginningoffile from '~/components/EditorMenuGotoBeginningoffile'
+import EditorMenuGotoEndoffile from '~/components/EditorMenuGotoEndoffile'
 
 export default {
   name: 'EditorMenu',
@@ -151,7 +154,8 @@ export default {
     EditorMenuGotoLinenumber,
     EditorMenuGotoBeginningofline,
     EditorMenuGotoEndofline,
-    EditorMenuGotoBeginningoffile
+    EditorMenuGotoBeginningoffile,
+    EditorMenuGotoEndoffile
   },
   props: {
     activeDocument: {
