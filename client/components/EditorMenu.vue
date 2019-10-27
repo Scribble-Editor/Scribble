@@ -42,7 +42,9 @@
         label="Selection"
         arrowless
       >
-        <b-navbar-item>Select All</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionSelectall />
+        </b-navbar-item>
         <b-navbar-item>Select Current Word</b-navbar-item>
         <b-navbar-item>Select Current Line</b-navbar-item>
         <hr>
@@ -75,6 +77,8 @@ import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
 import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
 import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
+import EditorMenuSelectionSelectall from '~/components/EditorMenuSelectionSelectall'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -82,7 +86,8 @@ export default {
     EditorMenuFileOpenfile,
     EditorMenuFileExportfile,
     EditorMenuFilePreferences,
-    EditorMenuFileExit
+    EditorMenuFileExit,
+    EditorMenuSelectionSelectall
   },
   props: {
     activeDocument: {

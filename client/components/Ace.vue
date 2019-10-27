@@ -73,6 +73,8 @@ export default {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
     })
+
+    this.$root.$on('editor/command', cb => cb(editor))
   },
   beforeDestroy () {
     this.editor.destroy()
