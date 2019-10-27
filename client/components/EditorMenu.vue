@@ -83,7 +83,9 @@
         label="Go To"
         arrowless
       >
-        <b-navbar-item>Go to Line Number</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoLinenumber />
+        </b-navbar-item>
         <hr>
         <b-navbar-item>Go to Beginning of Line</b-navbar-item>
         <b-navbar-item>Go to End of Line</b-navbar-item>
@@ -115,6 +117,8 @@ import EditorMenuSelectionCopylinedown from '~/components/EditorMenuSelectionCop
 import EditorMenuSelectionMovelineup from '~/components/EditorMenuSelectionMovelineup'
 import EditorMenuSelectionMovelinedown from '~/components/EditorMenuSelectionMovelinedown'
 
+import EditorMenuGotoLinenumber from '~/components/EditorMenuGotoLinenumber'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -134,7 +138,8 @@ export default {
     EditorMenuSelectionCopylineup,
     EditorMenuSelectionCopylinedown,
     EditorMenuSelectionMovelineup,
-    EditorMenuSelectionMovelinedown
+    EditorMenuSelectionMovelinedown,
+    EditorMenuGotoLinenumber
   },
   props: {
     activeDocument: {
