@@ -29,7 +29,9 @@
         label="Edit"
         arrowless
       >
-        <b-navbar-item>Undo</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuEditUndo />
+        </b-navbar-item>
         <b-navbar-item>Redo</b-navbar-item>
         <hr>
         <b-navbar-item>Find</b-navbar-item>
@@ -75,6 +77,8 @@ import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
 import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
 import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
+import EditorMenuEditUndo from '~/components/EditorMenuEditUndo'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -82,7 +86,8 @@ export default {
     EditorMenuFileOpenfile,
     EditorMenuFileExportfile,
     EditorMenuFilePreferences,
-    EditorMenuFileExit
+    EditorMenuFileExit,
+    EditorMenuEditUndo
   },
   props: {
     activeDocument: {

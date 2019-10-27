@@ -73,6 +73,10 @@ export default {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
     })
+
+    this.$root.$on('editor/undo', () => {
+      editor.undo()
+    })
   },
   beforeDestroy () {
     this.editor.destroy()
