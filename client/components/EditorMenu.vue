@@ -52,15 +52,30 @@
       <b-navbar-dropdown
         label="Selection"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
-        <b-navbar-item>Select All</b-navbar-item>
-        <b-navbar-item>Select Current Word</b-navbar-item>
-        <b-navbar-item>Select Current Line</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionSelectall />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionSelectword />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionSelectline />
+        </b-navbar-item>
         <hr>
-        <b-navbar-item>Copy Line Up</b-navbar-item>
-        <b-navbar-item>Copy Line Down</b-navbar-item>
-        <b-navbar-item>Move Line Up</b-navbar-item>
-        <b-navbar-item>Move Line Down</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionCopylineup />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionCopylinedown />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionMovelineup />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuSelectionMovelinedown />
+        </b-navbar-item>
       </b-navbar-dropdown>
 
       <!-- Go To -->
@@ -92,6 +107,14 @@ import EditorMenuEditFind from '~/components/EditorMenuEditFind'
 import EditorMenuEditFindall from '~/components/EditorMenuEditFindall'
 import EditorMenuEditReplace from '~/components/EditorMenuEditReplace'
 
+import EditorMenuSelectionSelectall from '~/components/EditorMenuSelectionSelectall'
+import EditorMenuSelectionSelectword from '~/components/EditorMenuSelectionSelectword'
+import EditorMenuSelectionSelectline from '~/components/EditorMenuSelectionSelectline'
+import EditorMenuSelectionCopylineup from '~/components/EditorMenuSelectionCopylineup'
+import EditorMenuSelectionCopylinedown from '~/components/EditorMenuSelectionCopylinedown'
+import EditorMenuSelectionMovelineup from '~/components/EditorMenuSelectionMovelineup'
+import EditorMenuSelectionMovelinedown from '~/components/EditorMenuSelectionMovelinedown'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -104,7 +127,14 @@ export default {
     EditorMenuEditRedo,
     EditorMenuEditFind,
     EditorMenuEditFindall,
-    EditorMenuEditReplace
+    EditorMenuEditReplace,
+    EditorMenuSelectionSelectall,
+    EditorMenuSelectionSelectword,
+    EditorMenuSelectionSelectline,
+    EditorMenuSelectionCopylineup,
+    EditorMenuSelectionCopylinedown,
+    EditorMenuSelectionMovelineup,
+    EditorMenuSelectionMovelinedown
   },
   props: {
     activeDocument: {
