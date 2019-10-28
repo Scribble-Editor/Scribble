@@ -82,13 +82,24 @@
       <b-navbar-dropdown
         label="Go To"
         arrowless
+        :class="{ disabled: !isDocumentSelected }"
       >
-        <b-navbar-item>Go to Line Number</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoLinenumber />
+        </b-navbar-item>
         <hr>
-        <b-navbar-item>Go to Beginning of Line</b-navbar-item>
-        <b-navbar-item>Go to End of Line</b-navbar-item>
-        <b-navbar-item>Go to Beginning of File</b-navbar-item>
-        <b-navbar-item>Go to End of File</b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoBeginningofline />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoEndofline />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoBeginningoffile />
+        </b-navbar-item>
+        <b-navbar-item>
+          <EditorMenuGotoEndoffile />
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
   </b-navbar>
@@ -115,6 +126,12 @@ import EditorMenuSelectionCopylinedown from '~/components/EditorMenuSelectionCop
 import EditorMenuSelectionMovelineup from '~/components/EditorMenuSelectionMovelineup'
 import EditorMenuSelectionMovelinedown from '~/components/EditorMenuSelectionMovelinedown'
 
+import EditorMenuGotoLinenumber from '~/components/EditorMenuGotoLinenumber'
+import EditorMenuGotoBeginningofline from '~/components/EditorMenuGotoBeginningofline'
+import EditorMenuGotoEndofline from '~/components/EditorMenuGotoEndofline'
+import EditorMenuGotoBeginningoffile from '~/components/EditorMenuGotoBeginningoffile'
+import EditorMenuGotoEndoffile from '~/components/EditorMenuGotoEndoffile'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -134,7 +151,12 @@ export default {
     EditorMenuSelectionCopylineup,
     EditorMenuSelectionCopylinedown,
     EditorMenuSelectionMovelineup,
-    EditorMenuSelectionMovelinedown
+    EditorMenuSelectionMovelinedown,
+    EditorMenuGotoLinenumber,
+    EditorMenuGotoBeginningofline,
+    EditorMenuGotoEndofline,
+    EditorMenuGotoBeginningoffile,
+    EditorMenuGotoEndoffile
   },
   props: {
     activeDocument: {
