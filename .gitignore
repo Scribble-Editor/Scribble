@@ -339,7 +339,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
@@ -489,3 +489,6 @@ yarn-error.log
 # Markdown Navigator plugin
 
 # End of https://www.gitignore.io/api/vue,node,vuejs,python,django,intellij,webstorm,jetbrains,visualstudiocode
+
+# MongoDB Data Volume
+database_volume

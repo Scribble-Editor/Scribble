@@ -31,7 +31,8 @@ services:
     scribble-database:
         image: mongo:latest
         container_name: scribble-database
-        restart: always
+        volumes:
+            - ./database_volume:/data/db
         restart: always
         environment:
             MONGO_INITDB_DATABASE: strapi
