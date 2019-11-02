@@ -14,7 +14,7 @@
           target="_blank"
           class="button--green"
         >
-          Documentation
+          Documentationisisisisis
         </a>
         <a
           href="https://github.com/nuxt/nuxt.js"
