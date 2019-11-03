@@ -24,7 +24,7 @@ $ docker-compose down
 ## Production
 ```bash
 # Build for production and deploy
-$ docker-compose -f docker-compose.yml up --build
+$ ./Production.sh
 ```
 
 ## Environmental Variables

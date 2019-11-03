@@ -5,7 +5,7 @@ services:
         container_name: scribble-client
         restart: on-failure
         volumes:
-            - scribble-client-static:/app
+            - ./client:/app
         environment:
             - NODE_ENV=production
 
@@ -22,29 +22,9 @@ services:
         restart: always
         volumes:
             - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf
-            - scribble-client-static:/var/www/scribble:ro
+            - ./client/dist:/var/www/scribble:ro
         ports:
             - "${PORT:-80}:80"
             - "${HTTPS_PORT:-443}:443"
         command: "nginx -g 'daemon off;'"
 
-    scribble-database:
-        image: mongo:latest
-        container_name: scribble-database
-        volumes:
-            - ./database_volume:/data/db
-        restart: always
-        environment:
-            MONGO_INITDB_DATABASE: strapi
-
-    scribble-strapi:
-        build: ./strapi
-        container_name: scribble-strapi
-        volumes:
-            - ./strapi:/usr/src/api
-        restart: always
-        depends_on:
-            - scribble-database
-
-volumes:
-    scribble-client-static:
