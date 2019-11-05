@@ -3,4 +3,3 @@ Dockerfile*
 yarn-error.log
 .git
 .gitignore
-dist/
