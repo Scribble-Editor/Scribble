@@ -24,7 +24,9 @@
           </b-select>
         </b-field>
 
-        <label class="label">Indentation Style</label>
+        <label class="label">Indentation Style & Size</label>
+        <b-field grouped>
+          <!-- Tab Style Selection -->
         <b-field>
           <b-radio-button
             v-model="indentStyle"
@@ -42,7 +44,7 @@
         </b-field>
 
         <!-- Tab Size Selection -->
-        <b-field label="Tab Size">
+          <b-field>
           <b-select
             v-model="tabSize"
           >
@@ -72,7 +74,9 @@
             </option>
           </b-select>
         </b-field>
+        </b-field>
 
+        <b-field grouped>
         <!-- Line Number Toggle -->
         <b-field>
           <b-switch
