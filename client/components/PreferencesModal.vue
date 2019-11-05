@@ -24,7 +24,7 @@
           </b-select>
         </b-field>
 
-        <!-- Tabs / Spaces Selection -->
+        <label class="label">Indentation Style</label>
         <b-field>
           <b-radio-button
             v-model="indentStyle"
@@ -39,6 +39,38 @@
           >
             <span>Tabs</span>
           </b-radio-button>
+        </b-field>
+
+        <!-- Tab Size Selection -->
+        <b-field label="Tab Size">
+          <b-select
+            v-model="tabSize"
+          >
+            <option value="1">
+              1
+            </option>
+            <option value="2">
+              2
+            </option>
+            <option value="3">
+              3
+            </option>
+            <option value="4">
+              4
+            </option>
+            <option value="5">
+              5
+            </option>
+            <option value="6">
+              6
+            </option>
+            <option value="7">
+              7
+            </option>
+            <option value="8">
+              8
+            </option>
+          </b-select>
         </b-field>
 
         <!-- Info Message -->
@@ -74,6 +106,14 @@ export default {
       },
       set (newValue) {
         this.updateUserConfig({ indentStyle: newValue })
+      }
+    },
+    tabSize: {
+      get () {
+        return this.$store.state.userConfig.tabSize
+      },
+      set (newValue) {
+        this.updateUserConfig({ tabSize: newValue })
       }
     }
   },

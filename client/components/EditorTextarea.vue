@@ -13,6 +13,7 @@
         :theme="theme"
         :language="activeDocumentLanguage"
         :use-soft-tabs="useSoftTabs"
+        :tab-size="tabSize"
       />
     </div>
     <div v-else>
@@ -70,6 +71,9 @@ export default {
     },
     useSoftTabs () {
       return this.$store.state.userConfig.indentStyle === 'spaces'
+    },
+    tabSize () {
+      return this.$store.state.userConfig.tabSize
     }
   },
   watch: {

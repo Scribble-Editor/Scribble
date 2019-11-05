@@ -38,6 +38,10 @@ export default {
     useSoftTabs: {
       type: Boolean,
       default: true
+    },
+    tabSize: {
+      type: Number,
+      default: 4
     }
   },
   data () {
@@ -58,6 +62,9 @@ export default {
     },
     useSoftTabs (newValue) {
       this.editor.getSession().setUseSoftTabs(newValue)
+    },
+    tabSize (newValue) {
+      this.editor.getSession().setTabSize(newValue)
     }
   },
   mounted () {
@@ -82,6 +89,7 @@ export default {
       vm.$emit('input', content)
     }
     editor.getSession().setUseSoftTabs(this.useSoftTabs)
+    editor.getSession().setTabSize(this.tabSize)
     editor.on('change', () => {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
