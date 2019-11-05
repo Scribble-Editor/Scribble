@@ -34,6 +34,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    useSoftTabs: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -51,6 +55,9 @@ export default {
     session (newValue) {
       this.editor.setSession(newValue)
       this.editor.getSession().setMode(modesByName[this.language].mode)
+    },
+    useSoftTabs (newValue) {
+      this.editor.getSession().setUseSoftTabs(newValue)
     }
   },
   mounted () {
@@ -74,6 +81,7 @@ export default {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
     }
+    editor.getSession().setUseSoftTabs(this.useSoftTabs)
     editor.on('change', () => {
       const content = vm.editor.getValue()
       vm.$emit('input', content)

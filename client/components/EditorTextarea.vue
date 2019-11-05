@@ -12,6 +12,7 @@
         :session="openedSessions[activeDocument]"
         :theme="theme"
         :language="activeDocumentLanguage"
+        :use-soft-tabs="useSoftTabs"
       />
     </div>
     <div v-else>
@@ -66,6 +67,9 @@ export default {
     },
     noFilesAreOpen () {
       return this.activeDocument === undefined || this.openedDocuments.length === 0
+    },
+    useSoftTabs () {
+      return this.$store.state.userConfig.indentStyle === 'spaces'
     }
   },
   watch: {

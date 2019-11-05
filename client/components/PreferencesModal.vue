@@ -8,7 +8,7 @@
       </header>
       <section class="modal-card-body">
         <!-- Theme Selection -->
-        <b-field label="Editor Theme" label-position="on-border">
+        <b-field label="Editor Theme">
           <b-select
             icon="palette"
             :value="selectedTheme"
@@ -23,6 +23,25 @@
             </option>
           </b-select>
         </b-field>
+
+        <!-- Tabs / Spaces Selection -->
+        <b-field>
+          <b-radio-button
+            v-model="indentStyle"
+            native-value="spaces"
+          >
+            <span>Spaces</span>
+          </b-radio-button>
+
+          <b-radio-button
+            v-model="indentStyle"
+            native-value="tabs"
+          >
+            <span>Tabs</span>
+          </b-radio-button>
+        </b-field>
+
+        <!-- Info Message -->
         <b-message type="is-info">
           Settings are automatically saved when changed.
         </b-message>
@@ -48,6 +67,14 @@ export default {
     },
     themes () {
       return Object.keys(themesByName).map(key => themesByName[key].caption).sort()
+    },
+    indentStyle: {
+      get () {
+        return this.$store.state.userConfig.indentStyle
+      },
+      set (newValue) {
+        this.updateUserConfig({ indentStyle: newValue })
+      }
     }
   },
   methods: {

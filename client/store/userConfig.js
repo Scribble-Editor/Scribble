@@ -2,13 +2,14 @@ import Vue from 'vue'
 
 export const state = () => ({
   theme: 'tomorrow_night',
-  defaultLanguage: 'javascript',
+  indentStyle: 'spaces',
   fontSize: '',
   fontFamily: ''
 })
 
 export const mutations = {
-  update (state, { theme }) {
+  update (state, { theme, indentStyle }) {
     if (theme) { Vue.set(state, 'theme', theme) }
+    if (indentStyle) { Vue.set(state, 'indentStyle', indentStyle) }
   }
 }
