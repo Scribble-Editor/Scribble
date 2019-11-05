@@ -50,6 +50,10 @@ export default {
     showInvisibles: {
       type: Boolean,
       default: false
+    },
+    fontSize: {
+      type: Number,
+      default: 14
     }
   },
   data () {
@@ -79,6 +83,9 @@ export default {
     },
     showInvisibles (newValue) {
       this.editor.renderer.setShowInvisibles(newValue)
+    },
+    fontSize (newValue) {
+      this.editor.setFontSize(newValue)
     }
   },
   mounted () {
@@ -105,6 +112,7 @@ export default {
 
     editor.getSession().setUseSoftTabs(this.useSoftTabs)
     editor.getSession().setTabSize(this.tabSize)
+    editor.setFontSize(this.fontSize)
     editor.renderer.setShowGutter(this.showLineNumbers)
     editor.renderer.setShowInvisibles(this.showInvisibles)
 

@@ -16,6 +16,7 @@
         :tab-size="tabSize"
         :show-line-numbers="showLineNumbers"
         :show-invisibles="showInvisibles"
+        :font-size="fontSize"
       />
     </div>
     <div v-else>
@@ -82,6 +83,9 @@ export default {
     },
     showInvisibles () {
       return this.$store.state.userConfig.showInvisibles
+    },
+    fontSize () {
+      return this.$store.state.userConfig.fontSize
     }
   },
   watch: {
