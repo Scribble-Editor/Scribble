@@ -82,6 +82,15 @@
           </b-switch>
         </b-field>
 
+        <!-- Show Invisibles Toggle -->
+        <b-field>
+          <b-switch
+            v-model="showInvisibles"
+          >
+            Show Invisible Characters
+          </b-switch>
+        </b-field>
+
         <!-- Info Message -->
         <b-message type="is-info">
           Settings are automatically saved when changed.
@@ -131,6 +140,14 @@ export default {
       },
       set (newValue) {
         this.updateUserConfig({ showLineNumbers: newValue })
+      }
+    },
+    showInvisibles: {
+      get () {
+        return this.$store.state.userConfig.showInvisibles
+      },
+      set (newValue) {
+        this.updateUserConfig({ showInvisibles: newValue })
       }
     }
   },

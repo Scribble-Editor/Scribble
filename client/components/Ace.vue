@@ -46,6 +46,10 @@ export default {
     showLineNumbers: {
       type: Boolean,
       default: true
+    },
+    showInvisibles: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -72,6 +76,9 @@ export default {
     },
     showLineNumbers (newValue) {
       this.editor.renderer.setShowGutter(newValue)
+    },
+    showInvisibles (newValue) {
+      this.editor.renderer.setShowInvisibles(newValue)
     }
   },
   mounted () {
@@ -99,6 +106,7 @@ export default {
     editor.getSession().setUseSoftTabs(this.useSoftTabs)
     editor.getSession().setTabSize(this.tabSize)
     editor.renderer.setShowGutter(this.showLineNumbers)
+    editor.renderer.setShowInvisibles(this.showInvisibles)
 
     editor.on('change', () => {
       const content = vm.editor.getValue()

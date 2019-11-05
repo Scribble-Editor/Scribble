@@ -15,6 +15,7 @@
         :use-soft-tabs="useSoftTabs"
         :tab-size="tabSize"
         :show-line-numbers="showLineNumbers"
+        :show-invisibles="showInvisibles"
       />
     </div>
     <div v-else>
@@ -78,6 +79,9 @@ export default {
     },
     showLineNumbers () {
       return this.$store.state.userConfig.showLineNumbers
+    },
+    showInvisibles () {
+      return this.$store.state.userConfig.showInvisibles
     }
   },
   watch: {
