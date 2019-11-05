@@ -7,11 +7,12 @@ export const state = () => ({
   showLineNumbers: true,
   showInvisibles: false,
   fontSize: 14,
-  fontFamily: ''
+  directoriesFirst: true
 })
 
 export const mutations = {
-  update (state, { theme, indentStyle, tabSize, showLineNumbers, showInvisibles, fontSize }) {
+  update (state, { theme, indentStyle, tabSize, showLineNumbers,
+    showInvisibles, fontSize, directoriesFirst }) {
     if (theme) { Vue.set(state, 'theme', theme) }
     if (indentStyle) { Vue.set(state, 'indentStyle', indentStyle) }
     if (tabSize) { Vue.set(state, 'tabSize', tabSize) }
