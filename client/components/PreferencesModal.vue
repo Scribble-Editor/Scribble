@@ -73,6 +73,15 @@
           </b-select>
         </b-field>
 
+        <!-- Line Number Toggle -->
+        <b-field>
+          <b-switch
+            v-model="showLineNumbers"
+          >
+            Show Line Numbers
+          </b-switch>
+        </b-field>
+
         <!-- Info Message -->
         <b-message type="is-info">
           Settings are automatically saved when changed.
@@ -114,6 +123,14 @@ export default {
       },
       set (newValue) {
         this.updateUserConfig({ tabSize: newValue })
+      }
+    },
+    showLineNumbers: {
+      get () {
+        return this.$store.state.userConfig.showLineNumbers
+      },
+      set (newValue) {
+        this.updateUserConfig({ showLineNumbers: newValue })
       }
     }
   },

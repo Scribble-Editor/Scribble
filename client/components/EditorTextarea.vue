@@ -14,6 +14,7 @@
         :language="activeDocumentLanguage"
         :use-soft-tabs="useSoftTabs"
         :tab-size="tabSize"
+        :show-line-numbers="showLineNumbers"
       />
     </div>
     <div v-else>
@@ -74,6 +75,9 @@ export default {
     },
     tabSize () {
       return this.$store.state.userConfig.tabSize
+    },
+    showLineNumbers () {
+      return this.$store.state.userConfig.showLineNumbers
     }
   },
   watch: {

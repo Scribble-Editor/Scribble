@@ -42,6 +42,10 @@ export default {
     tabSize: {
       type: Number,
       default: 4
+    },
+    showLineNumbers: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -65,6 +69,9 @@ export default {
     },
     tabSize (newValue) {
       this.editor.getSession().setTabSize(newValue)
+    },
+    showLineNumbers (newValue) {
+      this.editor.renderer.setShowGutter(newValue)
     }
   },
   mounted () {
@@ -88,8 +95,11 @@ export default {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
     }
+
     editor.getSession().setUseSoftTabs(this.useSoftTabs)
     editor.getSession().setTabSize(this.tabSize)
+    editor.renderer.setShowGutter(this.showLineNumbers)
+
     editor.on('change', () => {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
