@@ -1,4 +1,5 @@
 # Scribble
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cc995677-527a-4558-b787-2b3f6f56bb58/deploy-status)](https://app.netlify.com/sites/scribble-editor/deploys)
 
 ## Requirements
 - git
