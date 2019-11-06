@@ -81,19 +81,10 @@ export default {
         let qualifiedName = item.label
 
         let currentElement = this.$el
-        while (
-          currentElement.parentElement.parentElement.parentElement.classList.contains(
-            'menu-item-wrapper'
-          )
-        ) {
-          qualifiedName =
-            currentElement.parentElement.parentElement.querySelector(
-              '.menu-item-label'
-            ).textContent +
-            '/' +
-            qualifiedName
-          currentElement =
-            currentElement.parentElement.parentElement.parentElement
+        while (currentElement.parentElement.parentElement.parentElement.classList.contains('menu-item-wrapper')) {
+          qualifiedName = currentElement.parentElement.parentElement.querySelector('.menu-item-label').textContent +
+            '/' + qualifiedName
+          currentElement = currentElement.parentElement.parentElement.parentElement
         }
         this.$root.$emit('openDocument', qualifiedName)
       }

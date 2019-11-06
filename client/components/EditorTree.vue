@@ -1,7 +1,12 @@
 <template>
-  <div class="menu" @contextmenu="toggleContextMenu">
+  <div class="menu" @contextmenu="showContextMenu">
     <EditorTreeItem :sub-items="items" />
-    <EditorTreeContextmenu />
+    <EditorTreeContextmenu
+      v-model="contextMenuVisible"
+      :x="contextMenuX"
+      :y="contextMenuY"
+      :event="contextMenuEvent"
+    />
   </div>
 </template>
 
@@ -15,7 +20,10 @@ export default {
   data () {
     return {
       items: [],
-      showContextMenu: false
+      contextMenuVisible: false,
+      contextMenuX: 0,
+      contextMenuY: 0,
+      contextMenuEvent: new MouseEvent(null)
     }
   },
   mounted () {
@@ -69,11 +77,12 @@ export default {
 
       this.items = items
     },
-    toggleContextMenu ($event) {
+    showContextMenu ($event) {
       $event.preventDefault()
-      console.log(EditorTreeContextmenu)
-      console.log($event)
-      this.showContextMenu = !this.showContextMenu
+      this.contextMenuVisible = true
+      this.contextMenuX = $event.clientX
+      this.contextMenuY = $event.clientY
+      this.contextMenuEvent = $event
     }
   }
 }
