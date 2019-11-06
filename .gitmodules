@@ -1,0 +1,3 @@
+[submodule "scribble-server"]
+	path = scribble-server
+	url = git@github.com:Scribble-Editor/scribble-server
