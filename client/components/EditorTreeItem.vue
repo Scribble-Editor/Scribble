@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="menu-item-wrapper"
-  >
+  <div class="menu-item-wrapper">
     <div
       v-for="(subItem, index) in subItems"
       :id="subItem.label + index"
@@ -9,7 +7,11 @@
       class="item"
       :class="{ directory: isDirectory[index] }"
     >
-      <div class="item-content" :style="{ paddingLeft: `${ 16 * iteration }px` }" @click="handleClick(subItem, index)">
+      <div
+        class="item-content"
+        :style="{ paddingLeft: `${ 16 * iteration }px` }"
+        @click="handleClick(subItem, index)"
+      >
         <b-icon
           v-if="isDirectory[index]"
           icon="menu-right"
@@ -46,9 +48,18 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      showContextMenu: false,
+      contextMenuX: 0,
+      contextMenuY: 0
+    }
+  },
   computed: {
     isDirectory () {
-      return this.subItems.map(item => item.children && item.children.length > 0)
+      return this.subItems.map(
+        item => item.children && item.children.length > 0
+      )
     }
   },
   methods: {
@@ -65,13 +76,14 @@ export default {
           children.classList.remove('hidden')
         }
 
-      // Open file in file tree
+        // Open file in file tree
       } else {
         let qualifiedName = item.label
 
         let currentElement = this.$el
         while (currentElement.parentElement.parentElement.parentElement.classList.contains('menu-item-wrapper')) {
-          qualifiedName = currentElement.parentElement.parentElement.querySelector('.menu-item-label').textContent + '/' + qualifiedName
+          qualifiedName = currentElement.parentElement.parentElement.querySelector('.menu-item-label').textContent +
+            '/' + qualifiedName
           currentElement = currentElement.parentElement.parentElement.parentElement
         }
         this.$root.$emit('openDocument', qualifiedName)
@@ -89,7 +101,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(0, 0, 0, .05)
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -110,7 +122,7 @@ export default {
 }
 
 .open > .item-content .directory-arrow {
-  transform: rotate(45deg)
+  transform: rotate(45deg);
 }
 
 .hidden {

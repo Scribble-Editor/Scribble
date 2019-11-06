@@ -1,18 +1,29 @@
 <template>
-  <div class="menu">
+  <div class="menu" @contextmenu="showContextMenu">
     <EditorTreeItem :sub-items="items" />
+    <EditorTreeContextmenu
+      v-model="contextMenuVisible"
+      :x="contextMenuX"
+      :y="contextMenuY"
+      :event="contextMenuEvent"
+    />
   </div>
 </template>
 
 <script>
 import EditorTreeItem from '~/components/EditorTreeItem'
+import EditorTreeContextmenu from '~/components/EditorTreeContextmenu'
 
 export default {
   name: 'EditorTree',
-  components: { EditorTreeItem },
+  components: { EditorTreeItem, EditorTreeContextmenu },
   data () {
     return {
-      items: []
+      items: [],
+      contextMenuVisible: false,
+      contextMenuX: 0,
+      contextMenuY: 0,
+      contextMenuEvent: new MouseEvent(null)
     }
   },
   mounted () {
@@ -65,6 +76,13 @@ export default {
       }
 
       this.items = items
+    },
+    showContextMenu ($event) {
+      $event.preventDefault()
+      this.contextMenuVisible = true
+      this.contextMenuX = $event.clientX
+      this.contextMenuY = $event.clientY
+      this.contextMenuEvent = $event
     }
   }
 }
