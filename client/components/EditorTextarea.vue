@@ -12,6 +12,11 @@
         :session="openedSessions[activeDocument]"
         :theme="theme"
         :language="activeDocumentLanguage"
+        :use-soft-tabs="useSoftTabs"
+        :tab-size="tabSize"
+        :show-line-numbers="showLineNumbers"
+        :show-invisibles="showInvisibles"
+        :font-size="fontSize"
       />
     </div>
     <div v-else>
@@ -66,6 +71,21 @@ export default {
     },
     noFilesAreOpen () {
       return this.activeDocument === undefined || this.openedDocuments.length === 0
+    },
+    useSoftTabs () {
+      return this.$store.state.userConfig.indentStyle === 'spaces'
+    },
+    tabSize () {
+      return this.$store.state.userConfig.tabSize
+    },
+    showLineNumbers () {
+      return this.$store.state.userConfig.showLineNumbers
+    },
+    showInvisibles () {
+      return this.$store.state.userConfig.showInvisibles
+    },
+    fontSize () {
+      return this.$store.state.userConfig.fontSize
     }
   },
   watch: {

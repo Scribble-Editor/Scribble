@@ -34,6 +34,26 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    useSoftTabs: {
+      type: Boolean,
+      default: true
+    },
+    tabSize: {
+      type: Number,
+      default: 4
+    },
+    showLineNumbers: {
+      type: Boolean,
+      default: true
+    },
+    showInvisibles: {
+      type: Boolean,
+      default: false
+    },
+    fontSize: {
+      type: Number,
+      default: 14
     }
   },
   data () {
@@ -51,6 +71,21 @@ export default {
     session (newValue) {
       this.editor.setSession(newValue)
       this.editor.getSession().setMode(modesByName[this.language].mode)
+    },
+    useSoftTabs (newValue) {
+      this.editor.getSession().setUseSoftTabs(newValue)
+    },
+    tabSize (newValue) {
+      this.editor.getSession().setTabSize(newValue)
+    },
+    showLineNumbers (newValue) {
+      this.editor.renderer.setShowGutter(newValue)
+    },
+    showInvisibles (newValue) {
+      this.editor.renderer.setShowInvisibles(newValue)
+    },
+    fontSize (newValue) {
+      this.editor.setFontSize(newValue)
     }
   },
   mounted () {
@@ -74,6 +109,13 @@ export default {
       const content = vm.editor.getValue()
       vm.$emit('input', content)
     }
+
+    editor.getSession().setUseSoftTabs(this.useSoftTabs)
+    editor.getSession().setTabSize(this.tabSize)
+    editor.setFontSize(this.fontSize)
+    editor.renderer.setShowGutter(this.showLineNumbers)
+    editor.renderer.setShowInvisibles(this.showInvisibles)
+
     editor.on('change', () => {
       const content = vm.editor.getValue()
       vm.$emit('input', content)

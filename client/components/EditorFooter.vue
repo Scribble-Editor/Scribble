@@ -51,12 +51,10 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
-      selectedTheme: themesByName[this.$store.state.userConfig.theme.split()[0]].caption
-    }
-  },
   computed: {
+    selectedTheme () {
+      return themesByName[this.$store.state.userConfig.theme].caption
+    },
     themes () {
       return Object.keys(themesByName).map(key => themesByName[key].caption).sort()
     },
@@ -77,7 +75,6 @@ export default {
     },
     changeTheme (newTheme) {
       const theme = themes.find(theme => theme && theme.caption === newTheme)
-      this.selectedTheme = theme.caption
       this.updateUserConfig({ theme: theme.name })
     },
     ...mapMutations({
