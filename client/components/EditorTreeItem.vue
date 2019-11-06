@@ -6,7 +6,6 @@
       :key="subItem.label + index"
       class="item"
       :class="{ directory: isDirectory[index] }"
-      @contextmenu="toggleContextMenu"
     >
       <div
         class="item-content"
@@ -20,10 +19,6 @@
           class="directory-arrow"
         />
         <span class="menu-item-label">{{ subItem.label }}</span>
-        <EditorTreeItemContextmenu
-          v-if="showContextMenu"
-          :style="{ left: `${contextMenuX}px`, top: `${contextMenuY}px` }"
-        />
       </div>
       <div class="children">
         <EditorTreeItem
@@ -38,19 +33,11 @@
 </template>
 
 <script>
-import EditorTreeItem from "~/components/EditorTreeItem";
-import EditorTreeItemContextmenu from "~/components/EditorTreeItemContextmenu";
+import EditorTreeItem from '~/components/EditorTreeItem'
 
 export default {
-  name: "EditorTreeItem",
-  components: { EditorTreeItem, EditorTreeItemContextmenu },
-  data() {
-    return {
-      showContextMenu: false,
-      contextMenuX: 0,
-      contextMenuY: 0
-    };
-  },
+  name: 'EditorTreeItem',
+  components: { EditorTreeItem },
   props: {
     subItems: {
       type: Array,
@@ -61,54 +48,58 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      showContextMenu: false,
+      contextMenuX: 0,
+      contextMenuY: 0
+    }
+  },
   computed: {
-    isDirectory() {
+    isDirectory () {
       return this.subItems.map(
         item => item.children && item.children.length > 0
-      );
+      )
     }
   },
   methods: {
-    handleClick(item, index) {
+    handleClick (item, index) {
       // Expand or collapse directory in file tree
       if (this.isDirectory[index]) {
-        const selectedItem = this.$el.querySelector("#" + item.label + index);
-        const children = selectedItem.querySelector(".menu-item-wrapper");
-        if (selectedItem.classList.contains("open")) {
-          selectedItem.classList.remove("open");
-          children.classList.add("hidden");
+        const selectedItem = this.$el.querySelector('#' + item.label + index)
+        const children = selectedItem.querySelector('.menu-item-wrapper')
+        if (selectedItem.classList.contains('open')) {
+          selectedItem.classList.remove('open')
+          children.classList.add('hidden')
         } else {
-          selectedItem.classList.add("open");
-          children.classList.remove("hidden");
+          selectedItem.classList.add('open')
+          children.classList.remove('hidden')
         }
 
         // Open file in file tree
       } else {
-        let qualifiedName = item.label;
+        let qualifiedName = item.label
 
-        let currentElement = this.$el;
+        let currentElement = this.$el
         while (
           currentElement.parentElement.parentElement.parentElement.classList.contains(
-            "menu-item-wrapper"
+            'menu-item-wrapper'
           )
         ) {
           qualifiedName =
             currentElement.parentElement.parentElement.querySelector(
-              ".menu-item-label"
+              '.menu-item-label'
             ).textContent +
-            "/" +
-            qualifiedName;
+            '/' +
+            qualifiedName
           currentElement =
-            currentElement.parentElement.parentElement.parentElement;
+            currentElement.parentElement.parentElement.parentElement
         }
-        this.$root.$emit("openDocument", qualifiedName);
+        this.$root.$emit('openDocument', qualifiedName)
       }
-    },
-    toggleContextMenu($event) {
-      this.showContextMenu = !this.showContextMenu;
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

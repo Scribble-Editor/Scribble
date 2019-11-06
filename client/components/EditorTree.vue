@@ -1,18 +1,21 @@
 <template>
-  <div class="menu">
+  <div class="menu" @contextmenu="toggleContextMenu">
     <EditorTreeItem :sub-items="items" />
+    <EditorTreeContextmenu />
   </div>
 </template>
 
 <script>
 import EditorTreeItem from '~/components/EditorTreeItem'
+import EditorTreeContextmenu from '~/components/EditorTreeContextmenu'
 
 export default {
   name: 'EditorTree',
-  components: { EditorTreeItem },
+  components: { EditorTreeItem, EditorTreeContextmenu },
   data () {
     return {
-      items: []
+      items: [],
+      showContextMenu: false
     }
   },
   mounted () {
@@ -65,6 +68,12 @@ export default {
       }
 
       this.items = items
+    },
+    toggleContextMenu ($event) {
+      $event.preventDefault()
+      console.log(EditorTreeContextmenu)
+      console.log($event)
+      this.showContextMenu = !this.showContextMenu
     }
   }
 }
