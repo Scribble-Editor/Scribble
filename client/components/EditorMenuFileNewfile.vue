@@ -21,6 +21,17 @@ export default {
               message: 'A file with that name already exists',
               type: 'is-danger'
             })
+          } else if (
+            fileName.match(/^\//) || // File name begins with /
+            fileName.match(/\/$/) || // File name ends with /
+            fileName.match(/\/{2,}/) || // File name contains more than one consecutive /
+            fileName.match(/\\/) // File name contains \
+          ) {
+            this.$buefy.toast.open({
+              duration: 5000,
+              message: 'Invalid file name',
+              type: 'is-danger'
+            })
           } else {
             this.addDocument({ name: fileName, content: '', mode: getModeForPath(fileName).name })
             this.$root.$emit('openDocument', fileName)
