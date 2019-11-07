@@ -1,7 +1,11 @@
 <template>
   <div class="dropdown-menu" :style="{ display: displayType, left: `${x}px`, top: `${y}px` }">
     <div class="dropdown-content">
-      <a class="dropdown-item" @click="deleteItem">Delete</a>
+      <a
+        class="dropdown-item"
+        :class="{ disabled: !selectedFile }"
+        @click="deleteItem"
+      >Delete</a>
     </div>
   </div>
 </template>
@@ -38,7 +42,7 @@ export default {
       let qualifiedName = ''
 
       let currentElement = this.event.target
-      while (currentElement.parentElement.parentElement.parentElement.classList.contains('menu-item-wrapper')) {
+      while (currentElement && currentElement.parentElement.parentElement.parentElement.classList.contains('menu-item-wrapper')) {
         qualifiedName = currentElement.parentElement.parentElement.querySelector('.menu-item-label').textContent +
             '/' + qualifiedName
         currentElement = currentElement.parentElement.parentElement.parentElement
@@ -85,5 +89,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '~/assets/buefy.overrides';
+
+.disabled {
+  background-color: transparent !important;
+    color: $text-light !important;
+    pointer-events: none;
+
+    &:hover {
+      background-color: transparent !important;
+      color: $text-light !important;
+    }
+}
+
 </style>
