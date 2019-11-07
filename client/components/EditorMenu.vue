@@ -188,6 +188,10 @@ export default {
   height: min-content !important;
   user-select: none !important;
 
+  .navbar-menu {
+    background-color: #f0f0f0;
+  }
+
   .disabled, .disabled > .navbar-link {
     background-color: transparent !important;
     color: $text-light !important;

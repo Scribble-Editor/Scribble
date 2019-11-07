@@ -90,6 +90,8 @@ export default {
 
 <style lang="scss">
 .menu {
-  overflow: auto
+  overflow: auto;
+  background-color: #f6f6f6;
+  color: #526488;
 }
 </style>
