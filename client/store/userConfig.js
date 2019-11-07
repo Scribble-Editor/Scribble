@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export const state = () => ({
-  theme: 'tomorrow_night',
+  theme: 'tomorrow',
   indentStyle: 'spaces',
   tabSize: 4,
   showLineNumbers: true,
