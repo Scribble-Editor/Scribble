@@ -52,11 +52,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+.container {
+  min-height: 0 !important;
+}
+
 .section {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content min-content 1fr min-content;
   height: 100%;
+  margin: inherit inherit 0 inherit;
 }
 
 .image {
@@ -70,6 +77,21 @@ export default {
 
 h2, h4 {
   text-align: center !important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300 !important;
+}
+
+.title {
+  font-weight: 300;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
 }
 
 button {
