@@ -19,10 +19,7 @@
         :font-size="fontSize"
       />
     </div>
-    <div v-else>
-      <!-- TODO: Welcome page -->
-      this is the welcome page
-    </div>
+    <EditorTextareaWelcome v-else />
   </div>
 </template>
 
@@ -31,11 +28,12 @@ import { mapMutations } from 'vuex'
 import { createEditSession as createSession } from 'brace'
 
 import EditorTextareaTabs from '~/components/EditorTextareaTabs'
+import EditorTextareaWelcome from '~/components/EditorTextareaWelcome'
 import Ace from '~/components/Ace'
 
 export default {
   name: 'EditorTextarea',
-  components: { EditorTextareaTabs, Ace },
+  components: { EditorTextareaTabs, EditorTextareaWelcome, Ace },
   props: {
     theme: {
       type: String,
