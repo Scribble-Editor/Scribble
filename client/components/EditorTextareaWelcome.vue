@@ -71,7 +71,11 @@ export default {
   justify-content: center;
 
   img {
-    width: 50%
+    width: 50%;
+
+    @media only screen and (max-height: 710px), screen and (max-width: 710px) {
+      display: none;
+    }
   }
 }
 
