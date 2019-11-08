@@ -102,6 +102,11 @@
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
+    <template slot="end">
+      <nuxt-link to="/">
+        <img src="~/assets/ScribbleLogoFull.svg" alt="Scribble Logo">
+      </nuxt-link>
+    </template>
   </b-navbar>
 </template>
 
@@ -222,6 +227,25 @@ export default {
         width: 100% !important;
       }
     }
+  }
+
+  .navbar-end {
+    align-items: center;
+
+    .nuxt-link-active {
+      display: flex;
+      transition: 200ms all;
+
+      &:hover {
+        opacity: .8;
+      }
+
+      img {
+        height: 32px;
+        margin-right: 16px;
+      }
+    }
+
   }
 }
 </style>
