@@ -84,6 +84,7 @@ export default {
     deleteDocument (documentName) {
       this.$store.commit('documents/remove', documentName)
       this.$root.$emit('updateTree')
+      this.$root.$emit('closeDocument', documentName)
     }
   }
 }
