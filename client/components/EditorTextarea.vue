@@ -93,6 +93,7 @@ export default {
   },
   mounted () {
     this.$root.$on('openDocument', this.openDocument)
+    this.$root.$on('closeDocument', this.closeDocument)
   },
   methods: {
     changeActiveDocument (activeDocument) {
@@ -109,7 +110,9 @@ export default {
     closeDocument (documentName) {
       const documentIndex = this.openedDocuments.indexOf(documentName)
       this.openedDocuments.splice(documentIndex, 1)
-      this.changeActiveDocument(this.openedDocuments[0])
+      if (documentName === this.activeDocument) {
+        this.changeActiveDocument(this.openedDocuments[0])
+      }
       delete (this.openedSessions[documentName])
     },
     openDocument (documentName) {
