@@ -1,5 +1,5 @@
 <template>
-  <b-dropdown class="compile-button" :class="{ disabled: disabled || !isSupportedDocumentType }">
+  <b-dropdown class="compile-button" :disabled="disabled || !isSupportedDocumentType">
     <button slot="trigger" class="button is-primary">
       <span>Compile</span>
       <b-icon icon="menu-down" />
@@ -50,8 +50,6 @@ export default {
 .compile-button {
   align-self: center;
   margin-left: 0.75rem;
-
-  // TODO: Add disable class
 
   &.dropdown.is-mobile-modal .dropdown-menu {
     width: auto !important;
