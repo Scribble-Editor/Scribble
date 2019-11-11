@@ -7,7 +7,7 @@
     <b-dropdown-item @click="compileActiveDocument">
       Build
     </b-dropdown-item>
-    <b-dropdown-item @click="showActiveDocumentCompileOptions">
+    <b-dropdown-item @click="openCompileOptionsModal">
       Options
     </b-dropdown-item>
   </b-dropdown>
@@ -15,6 +15,8 @@
 
 <script>
 import COMPILE_TYPES from '~/plugins/compile-types'
+
+import CompileoptionsModal from '~/components/CompileoptionsModal'
 
 export default {
   name: 'EditorMenuCompile',
@@ -39,8 +41,15 @@ export default {
     compileActiveDocument () {
       alert('Compile')
     },
-    showActiveDocumentCompileOptions () {
-      alert('Options')
+    openCompileOptionsModal () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: CompileoptionsModal,
+        hasModalCard: true,
+        props: {
+          document: this.activeDocument
+        }
+      })
     }
   }
 }
