@@ -17,10 +17,6 @@ export const mutations = {
   },
 
   updateCompileOptions (state, { documentName, author }) {
-    console.log(state)
-    console.log(documentName)
-    console.log(state[documentName])
-
     if (author) { Vue.set(state[documentName].compileOptions, 'author', author) }
   },
 
