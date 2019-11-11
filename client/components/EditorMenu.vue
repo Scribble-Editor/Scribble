@@ -101,6 +101,7 @@
           <EditorMenuGotoEndoffile />
         </b-navbar-item>
       </b-navbar-dropdown>
+      <EditorMenuCompile />
     </template>
     <template slot="end">
       <nuxt-link to="/">
@@ -137,6 +138,8 @@ import EditorMenuGotoEndofline from '~/components/EditorMenuGotoEndofline'
 import EditorMenuGotoBeginningoffile from '~/components/EditorMenuGotoBeginningoffile'
 import EditorMenuGotoEndoffile from '~/components/EditorMenuGotoEndoffile'
 
+import EditorMenuCompile from '~/components/EditorMenuCompile'
+
 export default {
   name: 'EditorMenu',
   components: {
@@ -161,7 +164,8 @@ export default {
     EditorMenuGotoBeginningofline,
     EditorMenuGotoEndofline,
     EditorMenuGotoBeginningoffile,
-    EditorMenuGotoEndoffile
+    EditorMenuGotoEndoffile,
+    EditorMenuCompile
   },
   props: {
     activeDocument: {
