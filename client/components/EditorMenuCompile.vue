@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import COMPILE_TYPES from '~/plugins/compile-types'
+
 export default {
   name: 'EditorMenuCompile',
   props: {
@@ -28,8 +30,9 @@ export default {
   },
   computed: {
     isSupportedDocumentType () {
-      // TODO: Return true if document type is able to be compiled
-      return true
+      if (!this.activeDocument) { return false }
+      const activeDocumentMode = this.$store.state.documents[this.activeDocument].mode
+      return COMPILE_TYPES.includes(activeDocumentMode)
     }
   },
   methods: {
