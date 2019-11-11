@@ -101,7 +101,7 @@
           <EditorMenuGotoEndoffile />
         </b-navbar-item>
       </b-navbar-dropdown>
-      <EditorMenuCompile />
+      <EditorMenuCompile :active-document="activeDocument" />
     </template>
     <template slot="end">
       <nuxt-link to="/">

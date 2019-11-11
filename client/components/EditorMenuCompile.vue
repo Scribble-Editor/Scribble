@@ -1,20 +1,43 @@
 <template>
-  <b-dropdown class="compile-button">
+  <b-dropdown class="compile-button" :class="{ disabled: disabled || !isSupportedDocumentType }">
     <button slot="trigger" class="button is-primary">
       <span>Compile</span>
       <b-icon icon="menu-down" />
     </button>
-    <b-dropdown-item>Build</b-dropdown-item>
-    <b-dropdown-item>Options</b-dropdown-item>
+    <b-dropdown-item @click="compileActiveDocument">
+      Build
+    </b-dropdown-item>
+    <b-dropdown-item @click="showActiveDocumentCompileOptions">
+      Options
+    </b-dropdown-item>
   </b-dropdown>
 </template>
 
 <script>
 export default {
   name: 'EditorMenuCompile',
+  props: {
+    activeDocument: {
+      type: String,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    isSupportedDocumentType () {
+      // TODO: Return true if document type is able to be compiled
+      return true
+    }
+  },
   methods: {
-    compile () {
+    compileActiveDocument () {
       alert('Compile')
+    },
+    showActiveDocumentCompileOptions () {
+      alert('Options')
     }
   }
 }
@@ -24,6 +47,8 @@ export default {
 .compile-button {
   align-self: center;
   margin-left: 0.75rem;
+
+  // TODO: Add disable class
 
   &.dropdown.is-mobile-modal .dropdown-menu {
     width: auto !important;
