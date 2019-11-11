@@ -16,6 +16,7 @@
 <script>
 import COMPILE_TYPES from '~/plugins/compile-types'
 
+import CompileModal from '~/components/CompileModal'
 import CompileoptionsModal from '~/components/CompileoptionsModal'
 
 export default {
@@ -39,7 +40,14 @@ export default {
   },
   methods: {
     compileActiveDocument () {
-      alert('Compile')
+      this.$buefy.modal.open({
+        parent: this,
+        component: CompileModal,
+        hasModalCard: true,
+        props: {
+          document: this.activeDocument
+        }
+      })
     },
     openCompileOptionsModal () {
       this.$buefy.modal.open({
