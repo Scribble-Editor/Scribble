@@ -7,7 +7,7 @@
         </p>
       </header>
       <section class="modal-card-body">
-        <b-field label="author">
+        <b-field label="Author">
           <b-input v-model="author" />
         </b-field>
 
