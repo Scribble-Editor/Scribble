@@ -7,7 +7,11 @@
         </p>
       </header>
       <section class="modal-card-body">
-        <CompileModalShell :is-interactive="currentDocumentSupportsInteractive" :websocket-u-r-i="websocketURI" />
+        <CompileModalShell
+          v-if="readyForWebsocket"
+          :is-interactive="currentDocumentSupportsInteractive"
+          :websocket-u-r-i="websocketURI + websocketPath"
+        />
       </section>
       <footer class="modal-card-foot">
         <b-button
@@ -28,6 +32,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { LANGUAGE_INTERACTIVITY } from '~/plugins/compile-types'
 
 import CompileModalShell from '~/components/CompileModalShell'
@@ -43,7 +48,9 @@ export default {
   },
   data () {
     return {
-      isDownloadReady: false
+      isDownloadReady: false,
+      websocketPath: '',
+      readyForWebsocket: false
     }
   },
   computed: {
@@ -53,9 +60,43 @@ export default {
     },
     websocketURI () {
       return process.env.websocketURI
+    },
+    documentBaseName () {
+      return this.document.substr(this.document.lastIndexOf('/'))
     }
   },
+  mounted () {
+    this.uploadSource()
+  },
   methods: {
+    uploadSource () {
+      const self = this
+      this.$root.$emit('editor/command', (editor) => {
+        const packagedSource = {
+          name: this.documentBaseName,
+          author: this.$store.state.documents[this.document].compileOptions.author,
+          lang: this.$store.state.documents[this.document].mode,
+          content: editor.getSession().getDocument().getAllLines()
+        }
+        axios.post(process.env.apiURI + process.env.apiCompileEndpoint, packagedSource)
+          .then(({ data }) => {
+            this.websocketPath = data
+            this.readyForWebsocket = true
+          })
+          .catch((error) => {
+            this.$buefy.snackbar.open({
+              duration: 5000,
+              message: 'An error occurred while uploading your file: ' + error,
+              type: 'is-danger',
+              position: 'is-bottom-right',
+              actionText: 'Retry',
+              onAction () {
+                self.uploadSource()
+              }
+            })
+          })
+      })
+    },
     downloadExecutable () {
       // TODO: Download compiled binary
     }
