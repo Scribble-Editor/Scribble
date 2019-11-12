@@ -83,7 +83,7 @@ export default {
       if (wasClean) {
         this.print('Connection closed')
       } else {
-        this.print('Connection closed unexpectedly. Error Code: ' + code + ', ' + reason)
+        this.print('Connection closed unexpectedly. Error Code: ' + code + (reason ? ', ' + reason : ''))
       }
       this.connectionOpen = false
     },
