@@ -186,7 +186,6 @@ export default {
 
 @media screen and (max-width: 1023px) {
   .navbar-menu {
-    background-color: $white !important;
     box-shadow: none !important;
     padding: 0 !important;
   }
