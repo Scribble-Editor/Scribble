@@ -45,7 +45,8 @@ export default {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/pwa'
   ],
   /*
   ** Nuxt.js modules
@@ -78,6 +79,17 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    }
+  },
+  /*
+  ** PWA Settings
+  */
+  pwa: {
+    manifest: {
+      name: 'Scribble Editor',
+      lang: 'en',
+      display: "standalone",
+      orientation: 'landscape'
     }
   }
 }

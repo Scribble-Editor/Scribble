@@ -18,7 +18,7 @@
     "@mdi/font": "^4.4.95",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/eslint-module": "^1.0.0",
-    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/pwa": "^3.0.0-beta.19",
     "brace": "^0.11.1",
     "node-sass": "^4.12.0",
     "nuxt": "^2.0.0",
