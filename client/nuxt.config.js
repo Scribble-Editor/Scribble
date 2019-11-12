@@ -16,6 +16,12 @@ export default {
     ]
   },
   /*
+  ** Set environmental variables
+  */
+  env: {
+    websocketURI: process.env.WEBSOCKET_URI || 'ws://localhost:1234'
+  },
+  /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },

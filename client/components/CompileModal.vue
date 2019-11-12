@@ -7,7 +7,7 @@
         </p>
       </header>
       <section class="modal-card-body">
-        <CompileModalShell :is-interactive="currentDocumentSupportsInteractive" />
+        <CompileModalShell :is-interactive="currentDocumentSupportsInteractive" :websocket-u-r-i="websocketURI" />
       </section>
       <footer class="modal-card-foot">
         <b-button
@@ -50,6 +50,9 @@ export default {
     currentDocumentSupportsInteractive () {
       const currentDocumentMode = this.$store.state.documents[this.document].mode
       return LANGUAGE_INTERACTIVITY[currentDocumentMode]
+    },
+    websocketURI () {
+      return process.env.websocketURI
     }
   },
   methods: {

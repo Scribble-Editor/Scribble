@@ -4,9 +4,17 @@
       <span class="dollar" :class="{ 'is-command': line.isCommand }">&dollar;</span>
       <span>{{ line.content }}</span>
     </div>
-    <div v-if="isInteractive" class="input-wrapper">
+    <div v-if="isInteractive && connectionOpen" class="input-wrapper">
       <span class="dollar is-command">&dollar;</span>
-      <input v-model="command" type="text" name="shell-command">
+      <input
+        v-model="command"
+        type="text"
+        name="shell-command"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+      >
     </div>
   </form>
 </template>
@@ -18,21 +26,69 @@ export default {
     isInteractive: {
       type: Boolean,
       default: false
+    },
+    websocketURI: {
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
       command: '',
-      out: [{ content: 'Establishing connection...', isCommand: false }]
+      out: [{ content: 'Establishing connection...', isCommand: false }],
+      socket: null,
+      connectionOpen: false
+    }
+  },
+  watch: {
+    websocketURI (newValue) {
+      this.socket.close()
+      this.createWebsocket(newValue)
+    }
+  },
+  mounted () {
+    // Open websocket connection if a URI is passed during mount
+    if (this.websocketURI.length > 0) {
+      this.createWebsocket(this.websocketURI)
     }
   },
   beforeDestroy () {
-    // TODO: Close any open websockets and terminate compile / build jobs
+    // Close any open websockets and terminate compile / build jobs
+    this.socket.close()
   },
   methods: {
     executeCommand ($event) {
-      this.out.push({ content: this.command, isCommand: true })
+      this.print(this.command, true)
+      this.socket.send(this.command)
       this.command = ''
+    },
+    print (message, isCommand) {
+      this.out.push({ content: message, isCommand: isCommand || false })
+    },
+    createWebsocket (URI) {
+      this.socket = new WebSocket(URI)
+      this.socket.onopen = this.onWebsocketOpen
+      this.socket.onmessage = this.onWebsocketMessage
+      this.socket.onclose = this.onWebsocketClose
+      this.socket.onerror = this.onWebsocketError
+    },
+    onWebsocketOpen (event) {
+      this.print('Connected!')
+      this.connectionOpen = true
+    },
+    onWebsocketMessage ({ data }) {
+      this.print(data)
+    },
+    onWebsocketClose ({ wasClean, code, reason }) {
+      if (wasClean) {
+        this.print('Connection closed')
+      } else {
+        this.print('Connection closed unexpectedly. Error Code: ' + code + ', ' + reason)
+      }
+      this.connectionOpen = false
+    },
+    onWebsocketError ({ message }) {
+      this.print('ERROR: ' + message)
     }
   }
 }
