@@ -4,7 +4,7 @@ export const state = () => ({})
 
 export const mutations = {
   add (state, { name, content, mode }) {
-    Vue.set(state, name, { content, mode })
+    Vue.set(state, name, { content, mode, compileOptions: { author: 'Anonymous' } })
   },
 
   remove (state, name) {
@@ -12,8 +12,12 @@ export const mutations = {
   },
 
   update (state, { name, content, mode }) {
-    if (content) { Vue.set(state, name, { content, mode: state[name].mode }) }
-    if (mode) { Vue.set(state, name, { content: state[name].content, mode }) }
+    if (content) { Vue.set(state[name], 'content', content) }
+    if (mode) { Vue.set(state[name], 'mode', mode) }
+  },
+
+  updateCompileOptions (state, { documentName, author }) {
+    if (author) { Vue.set(state[documentName].compileOptions, 'author', author) }
   },
 
   rename (state, { name, newName }) {
