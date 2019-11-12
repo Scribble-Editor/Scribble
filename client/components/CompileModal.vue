@@ -11,6 +11,7 @@
           v-if="readyForWebsocket"
           :is-interactive="currentDocumentSupportsInteractive"
           :websocket-u-r-i="websocketURI + websocketPath"
+          @downloadReady="enableExecutableDownload"
         />
       </section>
       <footer class="modal-card-foot">
@@ -99,6 +100,9 @@ export default {
     },
     downloadExecutable () {
       // TODO: Download compiled binary
+    },
+    enableExecutableDownload () {
+      this.isDownloadReady = true
     }
   }
 }
