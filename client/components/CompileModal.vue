@@ -11,6 +11,7 @@
           v-if="readyForWebsocket"
           :is-interactive="currentDocumentSupportsInteractive"
           :websocket-u-r-i="websocketURI + websocketPath"
+          @updateDownloadURL="updateExecutableDownloadURL"
           @downloadReady="enableExecutableDownload"
         />
       </section>
@@ -50,6 +51,7 @@ export default {
   data () {
     return {
       isDownloadReady: false,
+      executableDownloadURL: '',
       websocketPath: '',
       readyForWebsocket: false
     }
@@ -63,6 +65,9 @@ export default {
       return process.env.websocketURI
     },
     documentBaseName () {
+      if (this.document.lastIndexOf('/') === -1) {
+        return this.document
+      }
       return this.document.substr(this.document.lastIndexOf('/'))
     }
   },
@@ -99,10 +104,22 @@ export default {
       })
     },
     downloadExecutable () {
-      // TODO: Download compiled binary
+      const fileDownload = document.createElement('a')
+      fileDownload.setAttribute('href', this.executableDownloadURL)
+      fileDownload.setAttribute('download', this.documentBaseName)
+
+      fileDownload.style.display = 'none'
+      document.body.appendChild(fileDownload)
+
+      fileDownload.click()
+
+      document.body.removeChild(fileDownload)
     },
     enableExecutableDownload () {
       this.isDownloadReady = true
+    },
+    updateExecutableDownloadURL (url) {
+      this.executableDownloadURL = url
     }
   }
 }

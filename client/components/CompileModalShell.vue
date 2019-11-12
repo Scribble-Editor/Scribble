@@ -37,8 +37,7 @@ export default {
       command: '',
       out: [{ content: 'Establishing connection...', isCommand: false }],
       socket: null,
-      connectionOpen: false,
-      downloadURL: ''
+      connectionOpen: false
     }
   },
   watch: {
@@ -84,7 +83,7 @@ export default {
       // This notifies the client that the download for the compiled executable is ready
       // at the url provided
       if (data.match(/^\[download ready\].+$/)) {
-        this.downloadUrl = data.substr('[download ready] '.length)
+        this.$emit('updateDownloadURL', data.substr('[download ready] '.length))
       } else {
         this.print(data)
       }
@@ -92,7 +91,7 @@ export default {
     onWebsocketClose ({ wasClean, code, reason }) {
       if (wasClean) {
         this.print('Connection closed')
-        this.$emit('downloadReady', this.downloadURL)
+        this.$emit('downloadReady')
       } else {
         this.print('Connection closed unexpectedly. Error Code: ' + code + (reason ? ', ' + reason : ''))
       }
