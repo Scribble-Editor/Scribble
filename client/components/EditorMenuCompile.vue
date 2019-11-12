@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import COMPILE_TYPES from '~/plugins/compile-types'
+import { LANGUAGES as BUILD_SUPPORTED_LANGUAGES } from '~/plugins/compile-types'
 
 import CompileModal from '~/components/CompileModal'
 import CompileoptionsModal from '~/components/CompileoptionsModal'
@@ -35,7 +35,7 @@ export default {
     isSupportedDocumentType () {
       if (!this.activeDocument) { return false }
       const activeDocumentMode = this.$store.state.documents[this.activeDocument].mode
-      return COMPILE_TYPES.includes(activeDocumentMode)
+      return BUILD_SUPPORTED_LANGUAGES.includes(activeDocumentMode)
     }
   },
   methods: {

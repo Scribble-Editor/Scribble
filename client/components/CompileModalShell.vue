@@ -4,7 +4,7 @@
       <span class="dollar" :class="{ 'is-command': line.isCommand }">&dollar;</span>
       <span>{{ line.content }}</span>
     </div>
-    <div class="input-wrapper">
+    <div v-if="isInteractive" class="input-wrapper">
       <span class="dollar is-command">&dollar;</span>
       <input v-model="command" type="text" name="shell-command">
     </div>
@@ -14,6 +14,12 @@
 <script>
 export default {
   name: 'CompileModalShell',
+  props: {
+    isInteractive: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       command: '',
