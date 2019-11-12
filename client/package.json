@@ -24,7 +24,8 @@
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.15",
     "sass-loader": "^8.0.0",
-    "vue-m-ace-editor": "^1.0.0"
+    "vue-m-ace-editor": "^1.0.0",
+    "vuex-persist": "^2.1.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
