@@ -26,6 +26,9 @@ export default {
       out: [{ content: 'Establishing connection...', isCommand: false }]
     }
   },
+  beforeDestroy () {
+    // TODO: Close any open websockets and terminate compile / build jobs
+  },
   methods: {
     executeCommand ($event) {
       this.out.push({ content: this.command, isCommand: true })
