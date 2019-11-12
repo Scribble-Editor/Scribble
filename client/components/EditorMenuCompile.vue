@@ -1,7 +1,7 @@
 <template>
   <b-dropdown class="compile-button" :disabled="disabled || !isSupportedDocumentType">
     <button slot="trigger" class="button is-primary">
-      <span>Compile</span>
+      <span>Build / Run</span>
       <b-icon icon="menu-down" />
     </button>
     <b-dropdown-item @click="compileActiveDocument">
