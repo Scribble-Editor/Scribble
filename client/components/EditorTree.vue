@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import EditorTreeItem from '~/components/EditorTreeItem'
 import EditorTreeContextmenu from '~/components/EditorTreeContextmenu'
 
@@ -24,6 +26,14 @@ export default {
       contextMenuX: 0,
       contextMenuY: 0,
       contextMenuEvent: new MouseEvent(null)
+    }
+  },
+  computed: {
+    ...mapState(['documents'])
+  },
+  watch: {
+    documents () {
+      this.updateItems()
     }
   },
   mounted () {
@@ -71,7 +81,7 @@ export default {
 
       const items = []
 
-      for (const document in this.$store.state.documents) {
+      for (const document in this.documents) {
         insertDocument(items, document)
       }
 
