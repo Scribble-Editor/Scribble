@@ -41,6 +41,7 @@ export default {
     }
   },
   watch: {
+    // If websocket URI changes, close previous connection and open new one
     websocketURI (newValue) {
       this.socket.close()
       this.createWebsocket(newValue)
