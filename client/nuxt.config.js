@@ -87,9 +87,27 @@ export default {
   pwa: {
     manifest: {
       name: 'Scribble Editor',
+      short_name: 'Scribble',
       lang: 'en',
-      display: "standalone",
-      orientation: 'landscape'
+      display: 'standalone',
+      orientation: 'landscape',
+      start_url: '/edit'
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: 'https://fonts.googleapis.com/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        },
+        {
+          urlPattern: 'https://fonts.gstatic.com/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        }
+      ]
     }
   }
 }
