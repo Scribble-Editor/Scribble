@@ -27,8 +27,12 @@ $ docker-compose down
 
 ## Production
 ```bash
-# Build for production and deploy
-$ ./Production.sh
+# Build images for production
+$ docker-compose -f ./docker-compose.yml build
+
+# Generate static files and deploy
+docker-compose -f ./docker-compose.yml run scribble-client \
+  && docker-compose -f ./docker-compose.yml scribble-server scribble-router
 ```
 
 ## Environmental Variables
