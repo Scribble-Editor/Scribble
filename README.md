@@ -12,6 +12,9 @@
 $ git clone git@github.com:PatrickHoward/ISPTermProject.git Scribble
 $ cd Scribble
 
+# Update Git submodules
+$ git submodule update
+
 # Build Docker images
 $ docker-compose build
 
@@ -42,4 +45,3 @@ After starting the container stack, the contains can be accessed at the followin
 
 - Client - [http://localhost](http://localhost)
 - Server - [http://api.localhost](http://api.localhost)
-- Database - [http://localhost:3306](http://localhost:3306)
