@@ -91,7 +91,9 @@ export default {
       lang: 'en',
       display: 'standalone',
       orientation: 'landscape',
-      start_url: '/edit'
+      start_url: '/edit',
+      background_color: '#FFFFFF',
+      theme_color: '#FF6347'
     },
     workbox: {
       runtimeCaching: [
