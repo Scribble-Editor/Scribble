@@ -7,8 +7,6 @@ function getModeForPath(path) {
   var detectedMode = modesByName.text;
   var fileName = path.split(/[\/\\]/).pop();
   for (mode of modes) {
-    console.log(mode)
-    
     if (mode.supportsFile(fileName)) {
       detectedMode = mode;
       break;
@@ -224,7 +222,5 @@ modesByName.cpp = cppModeObject
 modes.splice(modes.findIndex(mode => mode.name === 'c_cpp'), 1)
 modes.push(cModeObject)
 modes.push(cppModeObject)
-
-console.log(modesByName)
 
 export { modes, modesByName, getModeForPath }
