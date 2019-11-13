@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 import { themesByName, themes } from '~/plugins/ace-themelist'
 import { modesByName, modes } from '~/plugins/ace-modelist'
 
@@ -63,10 +63,7 @@ export default {
     },
     activeDocumentMode () {
       return this.activeDocument ? modesByName[this.$store.state.documents[this.activeDocument].mode] : null
-    },
-    ...mapGetters({
-      selectedFile: 'openFiles/selectedFile'
-    })
+    }
   },
   methods: {
     changeLanguage (newLanguage) {
