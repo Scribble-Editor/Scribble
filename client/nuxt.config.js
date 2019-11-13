@@ -45,7 +45,8 @@ export default {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/pwa'
   ],
   /*
   ** Nuxt.js modules
@@ -78,6 +79,49 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    }
+  },
+  /*
+  ** PWA Settings
+  */
+  pwa: {
+    manifest: {
+      name: 'Scribble Editor',
+      short_name: 'Scribble',
+      lang: 'en',
+      display: 'standalone',
+      orientation: 'landscape',
+      start_url: '/edit',
+      background_color: '#FFFFFF',
+      theme_color: '#FF6347',
+      icons: [
+        {
+          src: '/icons-192.png',
+          type: 'image/png',
+          sizes: '192x192'
+        },
+        {
+          src: '/icons-512.png',
+          type: 'image/png',
+          sizes: '512x512'
+        }
+      ]
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: 'https://fonts.googleapis.com/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        },
+        {
+          urlPattern: 'https://fonts.gstatic.com/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: { cacheableResponse: { statuses: [0, 200] } }
+        }
+      ]
     }
   }
 }
