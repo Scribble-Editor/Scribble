@@ -2,7 +2,7 @@
   <div class="hero next-big-thing">
     <div class="hero-body container">
       <div class="columns">
-        <div class="column is-8 text-column">
+        <div class="column is-8 is-12-mobile text-column">
           <p class="title is-4">
             So, ready to dive into your next big project?
           </p>
@@ -10,7 +10,7 @@
             Scribble it down
           </button>
         </div>
-        <div class="column is-4">
+        <div class="column is-4 is-0-mobile">
           <img src="~/assets/NextBigThing.svg" alt="Start using scribble">
         </div>
       </div>
