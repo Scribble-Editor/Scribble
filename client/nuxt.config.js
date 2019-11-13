@@ -93,7 +93,19 @@ export default {
       orientation: 'landscape',
       start_url: '/edit',
       background_color: '#FFFFFF',
-      theme_color: '#FF6347'
+      theme_color: '#FF6347',
+      icons: [
+        {
+          src: '/icons-192.png',
+          type: 'image/png',
+          sizes: '192x192'
+        },
+        {
+          src: '/icons-512.png',
+          type: 'image/png',
+          sizes: '512x512'
+        }
+      ]
     },
     workbox: {
       runtimeCaching: [
