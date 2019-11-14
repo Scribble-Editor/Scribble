@@ -8,17 +8,17 @@
           </b-navbar-item>
         </template>
         <template slot="end">
-          <b-navbar-item :to="{ path: '/edit' }">
+          <b-navbar-item tag="router-link" :to="{ path: '/edit' }">
             Editor
           </b-navbar-item>
           <b-navbar-item tag="div">
             <div class="buttons">
-              <a href="" class="button is-primary">
+              <nuxt-link to="/signup" class="button is-primary">
                 <strong>Sign up</strong>
-              </a>
-              <a href="" class="button is-secondary">
+              </nuxt-link>
+              <nuxt-link to="/login" class="button is-secondary">
                 Log in
-              </a>
+              </nuxt-link>
             </div>
           </b-navbar-item>
         </template>

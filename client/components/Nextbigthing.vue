@@ -6,9 +6,11 @@
           <p class="title is-4">
             So, ready to dive into your next big project?
           </p>
-          <button class="button is-primary">
-            Scribble it down
-          </button>
+          <nuxt-link to="/signup">
+            <button class="button is-primary">
+              Scribble it down
+            </button>
+          </nuxt-link>
         </div>
         <div class="column is-4 is-0-mobile">
           <img src="~/assets/NextBigThing.svg" alt="Start using scribble">

@@ -11,12 +11,12 @@
               Write it down. Scribble is an online text editor where you can write and compile applications all in your browser.
             </p>
             <div class="buttons">
-              <a href="" class="button is-primary">
+              <nuxt-link to="/signup" class="button is-primary">
                 <strong>Sign Up for a Free Account</strong>
-              </a>
-              <a href="" class="button is-secondary">
+              </nuxt-link>
+              <nuxt-link to="/edit" class="button is-secondary">
                 Start Scribbling Without One
-              </a>
+              </nuxt-link>
             </div>
           </div>
         </div>
