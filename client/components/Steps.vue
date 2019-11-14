@@ -26,7 +26,7 @@
       <b-step-item label="Build" icon="wrench-outline" clickable>
         <img src="~/assets/StepsBuild.svg" alt="Build your project online">
         <p class="subtitle is-4">
-          Build in run your creation right inside your browser.
+          Build and run your creation right inside your browser.
         </p>
       </b-step-item>
     </b-steps>
