@@ -1,28 +1,30 @@
 <template>
-  <div class="container">
-    <b-navbar class="navigation">
-      <template slot="brand">
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img class="logo-image" src="~/assets/ScribbleLogoFull.svg" alt="A text editor in the browser">
-        </b-navbar-item>
-      </template>
-      <template slot="end">
-        <b-navbar-item :to="{ path: '/edit' }">
-          Editor
-        </b-navbar-item>
-        <b-navbar-item tag="div">
-          <div class="buttons">
-            <a href="" class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a href="" class="button is-secondary">
-              Log in
-            </a>
-          </div>
-        </b-navbar-item>
-      </template>
-    </b-navbar>
-  </div>
+  <section>
+    <div class="container">
+      <b-navbar class="navigation">
+        <template slot="brand">
+          <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <img class="logo-image" src="~/assets/ScribbleLogoFull.svg" alt="A text editor in the browser">
+          </b-navbar-item>
+        </template>
+        <template slot="end">
+          <b-navbar-item :to="{ path: '/edit' }">
+            Editor
+          </b-navbar-item>
+          <b-navbar-item tag="div">
+            <div class="buttons">
+              <a href="" class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a href="" class="button is-secondary">
+                Log in
+              </a>
+            </div>
+          </b-navbar-item>
+        </template>
+      </b-navbar>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -32,10 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  padding: 1.5rem;
-}
-
 .navigation {
   height: 80px;
 }

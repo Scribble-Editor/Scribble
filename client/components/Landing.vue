@@ -33,7 +33,7 @@ export default {
 
 <style>
 .landing {
-  height: calc(100vh - 80px - (2 * 1.5rem));
+  height: calc(100vh - 68px);
   background-image: url('/abstract.png');
   background-size: 56%;
   background-repeat: no-repeat;
