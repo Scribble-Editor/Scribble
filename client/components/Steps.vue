@@ -72,6 +72,10 @@ export default {
     text-align: center;
   }
 
+  .title {
+    margin-top: 4rem;
+  }
+
   img {
     max-height: 380px;
     max-width: 100%;
