@@ -3,7 +3,7 @@
     <b-navbar class="navigation">
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img src="~/assets/ScribbleLogoFull.svg" alt="A text editor in the browser">
+          <img class="logo-image" src="~/assets/ScribbleLogoFull.svg" alt="A text editor in the browser">
         </b-navbar-item>
       </template>
       <template slot="end">
@@ -38,5 +38,9 @@ export default {
 
 .navigation {
   height: 80px;
+}
+
+.logo-image {
+  max-height: 2.5rem !important;
 }
 </style>
