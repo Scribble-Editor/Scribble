@@ -43,4 +43,10 @@ export default {
 .logo-image {
   max-height: 2.5rem !important;
 }
+
+a.navbar-item {
+  height: min-content;
+  border-radius: 4px;
+  align-self: center;
+}
 </style>
