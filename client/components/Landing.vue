@@ -31,13 +31,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .landing {
   height: calc(100vh - 68px);
   background-image: url('/abstract.png');
   background-size: 56%;
   background-repeat: no-repeat;
   background-position: bottom right;
+
+  .container {
+    @media only screen and (max-width: 1024px) {
+      max-width: 640px;
+    }
+
+    @media only screen and (max-width: 700px) {
+      padding: 0 2rem;
+    }
+  }
 }
 
 .hero {
