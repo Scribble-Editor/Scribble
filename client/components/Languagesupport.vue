@@ -56,6 +56,10 @@ export default {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 4rem;
     align-items: start;
+
+    @media only screen and (max-width: 680px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .description {
