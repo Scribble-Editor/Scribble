@@ -16,7 +16,8 @@ import Editor from '~/components/Editor'
 
 export default {
   layout: 'singlePage',
-  components: { Editor }
+  components: { Editor },
+  middleware: 'auth'
 }
 </script>
 

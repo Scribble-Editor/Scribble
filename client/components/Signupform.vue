@@ -69,6 +69,12 @@ export default {
       }).then(({ status, data }) => {
         // Success
         if (status !== 200) {
+          this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
           this.router.push('/edit')
         // Error
         } else {
