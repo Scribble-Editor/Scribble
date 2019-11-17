@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container">
+    <div class="container navbar-container">
       <b-navbar class="navigation">
         <template slot="brand">
           <b-navbar-item tag="router-link" :to="{ path: '/' }">
@@ -33,8 +33,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.container {
+<style lang="scss">
+.container.navbar-container {
   @media only screen and (max-width: 1024px) {
     max-width: 640px;
   }
@@ -42,19 +42,24 @@ export default {
   @media only screen and (max-width: 700px) {
     padding: 0 2rem;
   }
-}
 
-.navigation {
-  height: 80px;
-}
+  .navigation {
+    height: 80px;
 
-.logo-image {
-  max-height: 2.5rem !important;
-}
+    .navbar-menu {
+      box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+    }
+  }
 
-a.navbar-item {
-  height: min-content;
-  border-radius: 4px;
-  align-self: center;
+  .logo-image {
+    max-height: 2.5rem !important;
+  }
+
+  a.navbar-item {
+    height: min-content;
+    border-radius: 4px;
+    align-self: center;
+  }
 }
 </style>
