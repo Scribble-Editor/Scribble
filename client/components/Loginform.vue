@@ -7,11 +7,8 @@
       <b-field label="Password" :message="error.element === 'password' && error.message" :type="error.element === 'password' ? 'is-danger' : ''">
         <b-input v-model="password" placeholder="Password" type="password" icon="key" password-reveal />
       </b-field>
-      <b-field :type="error.element === 'password' ? 'is-danger' : ''">
-        <b-input v-model="confirmPassword" placeholder="Confirm Password" type="password" icon="key" password-reveal />
-      </b-field>
       <button class="button is-primary" type="submit">
-        Sign Up
+        Log in
       </button>
     </form>
   </Signuploginform>
@@ -23,13 +20,12 @@ import axios from 'axios'
 import Signuploginform from '~/components/Signuploginform'
 
 export default {
-  name: 'Signupform',
+  name: 'Loginform',
   components: { Signuploginform },
   data () {
     return {
       email: '',
       password: '',
-      confirmPassword: '',
       error: {
         element: '',
         message: ''
@@ -50,26 +46,18 @@ export default {
       if (this.password.length < 1) {
         this.error.element = 'password'
         this.error.message = 'Cannot be empty'
-        return
-      }
-
-      // Password and password confirmation do not match
-      if (this.password !== this.confirmPassword) {
-        this.error.element = 'password'
-        this.error.message = 'Passwords do not match'
-        return
       }
 
       // Reset any previous error messages
       this.error.element = ''
       this.error.message = ''
 
-      axios.post(process.env.apiURI + '/signup', {
+      axios.post(process.env.apiURI + '/login', {
         email: this.email, password: this.password
       }).then(({ status, data }) => {
         // Success
         if (status !== 200) {
-          this.router.push('/edit')
+          this.$router.push('/edit')
         // Error
         } else {
           this.responseError = data
@@ -81,3 +69,7 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>
