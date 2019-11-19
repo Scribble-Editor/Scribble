@@ -2,7 +2,7 @@
   <Signuploginform :error="responseError">
     <form action="" @submit.prevent="handleSubmit">
       <b-field label="Username" :message="error.element === 'username' && error.message" :type="error.element === 'username' ? 'is-danger' : ''">
-        <b-input v-model="username" placeholder="Username" type="text" icon="mail" />
+        <b-input v-model="username" placeholder="Username" type="text" icon="account" />
       </b-field>
       <b-field label="Password" :message="error.element === 'password' && error.message" :type="error.element === 'password' ? 'is-danger' : ''">
         <b-input v-model="password" placeholder="Password" type="password" icon="key" password-reveal />
