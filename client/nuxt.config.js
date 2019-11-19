@@ -64,9 +64,11 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { }
-        }
+          login: { url: `${process.env.API_URI || 'http://localhost:8080'}/account/login`, method: 'post', propertyName: 'data.token' },
+          logout: false,
+          user: false
+        },
+        tokenType: 'Token'
       }
     }
   },
