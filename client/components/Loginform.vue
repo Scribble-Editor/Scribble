@@ -1,8 +1,8 @@
 <template>
   <Signuploginform :error="responseError">
     <form action="" @submit.prevent="handleSubmit">
-      <b-field label="Email" :message="error.element === 'email' && error.message" :type="error.element === 'email' ? 'is-danger' : ''">
-        <b-input v-model="email" placeholder="Email" type="email" icon="mail" />
+      <b-field label="Username" :message="error.element === 'username' && error.message" :type="error.element === 'username' ? 'is-danger' : ''">
+        <b-input v-model="username" placeholder="Username" type="text" icon="mail" />
       </b-field>
       <b-field label="Password" :message="error.element === 'password' && error.message" :type="error.element === 'password' ? 'is-danger' : ''">
         <b-input v-model="password" placeholder="Password" type="password" icon="key" password-reveal />
@@ -24,7 +24,7 @@ export default {
   components: { Signuploginform },
   data () {
     return {
-      email: '',
+      username: '',
       password: '',
       error: {
         element: '',
@@ -35,9 +35,9 @@ export default {
   },
   methods: {
     handleSubmit () {
-      // No email provided
-      if (this.email.length < 1) {
-        this.error.element = 'email'
+      // No username provided
+      if (this.username.length < 1) {
+        this.error.element = 'username'
         this.error.message = 'Cannot be empty'
         return
       }
@@ -53,7 +53,7 @@ export default {
       this.error.message = ''
 
       axios.post(process.env.apiURI + '/login', {
-        email: this.email, password: this.password
+        username: this.username, password: this.password
       }).then(({ status, data }) => {
         // Success
         if (status !== 200) {
