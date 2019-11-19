@@ -1,6 +1,9 @@
 <template>
   <Signuploginform :error="responseError">
     <form action="" @submit.prevent="handleSubmit">
+      <b-field label="Username" :message="error.element === 'username' && error.message" :type="error.element === 'username' ? 'is-danger' : ''">
+        <b-input v-model="username" placeholder="Username" type="text" icon="account" />
+      </b-field>
       <b-field label="Email" :message="error.element === 'email' && error.message" :type="error.element === 'email' ? 'is-danger' : ''">
         <b-input v-model="email" placeholder="Email" type="email" icon="mail" />
       </b-field>
@@ -27,6 +30,7 @@ export default {
   components: { Signuploginform },
   data () {
     return {
+      username: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -39,6 +43,13 @@ export default {
   },
   methods: {
     handleSubmit () {
+      // No username provided
+      if (this.username.length < 1) {
+        this.error.element = 'username'
+        this.error.message = 'Cannot be empty'
+        return
+      }
+
       // No email provided
       if (this.email.length < 1) {
         this.error.element = 'email'
@@ -64,17 +75,12 @@ export default {
       this.error.element = ''
       this.error.message = ''
 
-      axios.post(process.env.apiURI + '/signup', {
+      axios.post(process.env.apiURI + 'account/signup', {
         email: this.email, password: this.password
       }).then(({ status, data }) => {
         // Success
         if (status !== 200) {
-          this.$auth.loginWith('local', {
-            data: {
-              email: this.email,
-              password: this.password
-            }
-          })
+          // TODO: Handle token storage
           this.router.push('/edit')
         // Error
         } else {

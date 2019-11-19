@@ -57,6 +57,7 @@ export default {
       }).then(({ status, data }) => {
         // Success
         if (status !== 200) {
+          // TODO: Handle token storage
           this.$router.push('/edit')
         // Error
         } else {
@@ -69,7 +70,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

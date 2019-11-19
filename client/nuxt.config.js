@@ -56,22 +56,8 @@ export default {
     'nuxt-buefy',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/auth'
+    '@nuxtjs/pwa'
   ],
-
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: `${process.env.API_URI || 'http://localhost:8080'}/account/login`, method: 'post', propertyName: 'data.token' },
-          logout: false,
-          user: false
-        },
-        tokenType: 'Token'
-      }
-    }
-  },
 
   /*
   ** Axios module configuration
