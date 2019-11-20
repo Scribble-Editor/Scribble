@@ -1,0 +1,15 @@
+{
+  "name": "nonblocking-websocket-subprocesses",
+  "version": "1.0.0",
+  "description": "Subprocess Websocket stream bindings",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.3.3",
+    "ws": "^7.2.0"
+  }
+}
