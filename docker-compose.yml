@@ -14,6 +14,7 @@ services:
         restart: always
         volumes:
             - ./server:/app
+            - build-volume:/app/build
 
     scribble-router:
         image: nginx:latest
@@ -27,3 +28,12 @@ services:
             - "${HTTPS_PORT:-443}:443"
         command: "nginx -g 'daemon off;'"
 
+    scribble-compiler:
+        build: ./compiler
+        container_name: scribble-compiler
+        restart: always
+        volumes:
+            - build-volume:/app/build
+
+volumes:
+    build-volume:
