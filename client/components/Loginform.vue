@@ -46,6 +46,7 @@ export default {
       if (this.password.length < 1) {
         this.error.element = 'password'
         this.error.message = 'Cannot be empty'
+        return
       }
 
       // Reset any previous error messages
