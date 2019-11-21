@@ -492,3 +492,4 @@ yarn-error.log
 
 # MongoDB Data Volume
 database_volume
+*.swp
