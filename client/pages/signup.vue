@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!isLoggedIn">
     <Signupform />
     <section class="login-section">
       <span>Already have an account? <nuxt-link to="/login">Log in</nuxt-link> instead.</span>
@@ -8,11 +8,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { forceNonAuthentication as nonAuthenticationMiddleware } from '~/middleware/authentication'
+
 import Signupform from '~/components/Signupform'
 
 export default {
   layout: 'form',
-  components: { Signupform }
+  components: { Signupform },
+  middleware: nonAuthenticationMiddleware,
+  computed: {
+    ...mapGetters({ isLoggedIn: 'authentication/isLoggedIn' })
+  }
 }
 </script>
 

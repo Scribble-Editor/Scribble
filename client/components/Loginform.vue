@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 import Signuploginform from '~/components/Signuploginform'
 
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit () {
+    async handleSubmit () {
       // No username provided
       if (this.username.length < 1) {
         this.error.element = 'username'
@@ -52,21 +52,17 @@ export default {
       this.error.element = ''
       this.error.message = ''
 
-      axios.post(process.env.apiURI + '/login', {
-        username: this.username, password: this.password
-      }).then(({ status, data }) => {
-        // Success
-        if (status !== 200) {
-          // TODO: Handle token storage
-          this.$router.push('/edit')
-        // Error
-        } else {
-          this.responseError = data
-        }
-      }).catch((error) => {
-        this.responseError = error
-      })
-    }
+      // Login to user account
+      const error = await this.login({ username: this.username, password: this.password })
+      if (error) {
+        this.responseError = error.response.data.error
+        return
+      }
+
+      // Redirect to editor
+      this.$router.push('/edit')
+    },
+    ...mapActions({ login: 'authentication/login' })
   }
 }
 </script>

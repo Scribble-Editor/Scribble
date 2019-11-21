@@ -20,7 +20,7 @@ export default {
   */
   env: {
     websocketURI: process.env.WEBSOCKET_URI || 'ws://localhost:1234',
-    apiURI: process.env.API_URI || 'http://localhost:8080',
+    apiURI: process.env.API_URI || 'http://api.localhost',
     apiCompileEndpoint: process.env.API_COMPILE_ENDPOINT || '/compile'
   },
   /*
