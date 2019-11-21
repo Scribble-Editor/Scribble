@@ -15,6 +15,11 @@ import Signupform from '~/components/Signupform'
 
 export default {
   layout: 'form',
+  head () {
+    return {
+      title: 'Scribble - Sign Up'
+    }
+  },
   components: { Signupform },
   middleware: nonAuthenticationMiddleware,
   computed: {

@@ -15,6 +15,11 @@ import Loginform from '~/components/Loginform'
 
 export default {
   layout: 'form',
+  head () {
+    return {
+      title: 'Scribble - Log In'
+    }
+  },
   components: { Loginform },
   middleware: nonAuthenticationMiddleware,
   computed: {

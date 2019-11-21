@@ -16,6 +16,11 @@ import Editor from '~/components/Editor'
 
 export default {
   layout: 'singlePage',
+  head () {
+    return {
+      title: 'Scribble - Editor'
+    }
+  },
   components: { Editor }
 }
 </script>
