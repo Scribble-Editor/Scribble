@@ -12,12 +12,17 @@
             Editor
           </b-navbar-item>
           <b-navbar-item tag="div">
-            <div class="buttons">
+            <div v-if="!isLoggedIn" class="buttons">
               <nuxt-link to="/signup" class="button is-primary">
                 <strong>Sign up</strong>
               </nuxt-link>
               <nuxt-link to="/login" class="button is-secondary">
                 Log in
+              </nuxt-link>
+            </div>
+            <div v-if="isLoggedIn" class="buttons">
+              <nuxt-link to="/logout" class="button is-secondary">
+                Log out
               </nuxt-link>
             </div>
           </b-navbar-item>
@@ -28,8 +33,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: {
+    ...mapGetters({ isLoggedIn: 'authentication/isLoggedIn' })
+  }
 }
 </script>
 

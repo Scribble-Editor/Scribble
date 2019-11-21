@@ -1,6 +1,9 @@
 <template>
   <Signuploginform :error="responseError">
     <form action="" @submit.prevent="handleSubmit">
+      <b-field label="Username" :message="error.element === 'username' && error.message" :type="error.element === 'username' ? 'is-danger' : ''">
+        <b-input v-model="username" placeholder="Username" type="text" icon="account" />
+      </b-field>
       <b-field label="Email" :message="error.element === 'email' && error.message" :type="error.element === 'email' ? 'is-danger' : ''">
         <b-input v-model="email" placeholder="Email" type="email" icon="mail" />
       </b-field>
@@ -18,7 +21,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 import Signuploginform from '~/components/Signuploginform'
 
@@ -27,6 +30,7 @@ export default {
   components: { Signuploginform },
   data () {
     return {
+      username: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -38,7 +42,14 @@ export default {
     }
   },
   methods: {
-    handleSubmit () {
+    async handleSubmit () {
+      // No username provided
+      if (this.username.length < 1) {
+        this.error.element = 'username'
+        this.error.message = 'Cannot be empty'
+        return
+      }
+
       // No email provided
       if (this.email.length < 1) {
         this.error.element = 'email'
@@ -64,20 +75,16 @@ export default {
       this.error.element = ''
       this.error.message = ''
 
-      axios.post(process.env.apiURI + '/signup', {
-        email: this.email, password: this.password
-      }).then(({ status, data }) => {
-        // Success
-        if (status !== 200) {
-          this.router.push('/edit')
-        // Error
-        } else {
-          this.responseError = data
-        }
-      }).catch((error) => {
-        this.responseError = error
-      })
-    }
+      const error = await this.register({ email: this.email, username: this.username, password: this.password })
+      if (error) {
+        this.responseError = error.response.data.error
+        return
+      }
+
+      // Redirect to editor
+      this.$router.push('/edit')
+    },
+    ...mapActions({ register: 'authentication/register' })
   }
 }
 </script>
