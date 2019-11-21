@@ -23,6 +23,11 @@ import Footer from '~/components/Footer'
 
 export default {
   layout: 'default',
+  head () {
+    return {
+      title: 'Scribble'
+    }
+  },
   components: { Navbar, Landing, Githubplug, Steps, Languagesupport, Nextbigthing, Footer }
 }
 </script>
