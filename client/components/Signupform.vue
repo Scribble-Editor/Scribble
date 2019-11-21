@@ -77,7 +77,7 @@ export default {
 
       const error = await this.register({ email: this.email, username: this.username, password: this.password })
       if (error) {
-        this.responseError = error.response.data.error
+        this.responseError = (error && error.repsonse && error.response.data.error) || error
         return
       }
 

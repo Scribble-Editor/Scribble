@@ -56,7 +56,7 @@ export default {
       // Login to user account
       const error = await this.login({ username: this.username, password: this.password })
       if (error) {
-        this.responseError = error.response.data.error
+        this.responseError = (error && error.repsonse && error.response.data.error) || error
         return
       }
 
