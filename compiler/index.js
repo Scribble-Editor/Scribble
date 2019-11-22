@@ -1,7 +1,5 @@
-// Arguments
-// npm start [PORT]
-let args = process.argv.splice(2)
-const PORT = args[0] || 8080
+const PORT = 8080
+const HTTP_SERVER_PORT = 80
 
 const WebSocket = require('ws')
 const UUID = require('uuid/v1')
@@ -66,7 +64,7 @@ class WSServer {
           console.log(' | ' + line)
         }
         ws.send(data)
-      });
+      })
 
       // Pipe close to websocket
       this.proc.on('close', (code) => {
@@ -74,7 +72,7 @@ class WSServer {
         console.log(exitMessage)
         ws.send(exitMessage)
         this.closeWSS()
-      });
+      })
 
       // Pipe websocket to subprocess stdin
       ws.on('message', (msg) => {
@@ -84,7 +82,7 @@ class WSServer {
         inStream.push(msg)
         inStream.push('\n')
         inStream.pipe(this.proc.stdin)
-      });
+      })
 
       // If connection to client is lost, clean up and exit gracefully
       ws.on('close', () => this.closeWSS(true))
@@ -93,7 +91,7 @@ class WSServer {
 
   // Clean up running process and websocket server
   closeWSS (dontCloseServer) {
-    if (this.proc.exitCode === null && !this.proc.killed) {
+    if (this.proc && this.proc.exitCode === null && !this.proc.killed) {
       console.log('Killing subprocess')
       this.proc.kill()
     }
@@ -128,13 +126,17 @@ class WSServer {
 const servers = []
 
 // Create WebSocket webserver to host WebSockets separately from HTTP
-const webSocketServer = createServer()
+const webSocketServer = createServer((req, res) => {
+  res.writeHead(200)
+  res.write('200: OK')
+  res.end()
+})
 webSocketServer.listen(PORT, () => { console.log('Starting WebSocket webserver server on port ' + PORT) })
 
 // If an upgrade connection is made, execute handleUpgrade on all websocket servers to find
 // the matching server. If none is found, destroy the socket
 webSocketServer.on('upgrade', (req, socket, head) => {
-  let requestedPathExists = false;
+  let requestedPathExists = false
   for(server of servers) {
     requestedPathExists = server.handleUpgrade(req, socket, head) || requestedPathExists
   }
@@ -155,7 +157,7 @@ const httpServer = createServer((req, res) => {
       res.writeHead(403)
       res.write('403: Bad Request')
       res.end()
-      return;
+      return
     }
   }
 
@@ -178,4 +180,4 @@ const httpServer = createServer((req, res) => {
 })
 
 // Start HTTP server
-httpServer.listen(8000, () => { console.log('Starting HTTP server on port ' + 8000) })
+httpServer.listen(HTTP_SERVER_PORT, () => { console.log('Starting HTTP server on port ' + HTTP_SERVER_PORT) })
