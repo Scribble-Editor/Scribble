@@ -127,8 +127,23 @@ class WSServer {
 // Hold all WSServer objects
 const servers = []
 
+// Create WebSocket webserver to host WebSockets separately from HTTP
+const webSocketServer = createServer()
+webSocketServer.listen(PORT, () => { console.log('Starting WebSocket webserver server on port ' + PORT) })
+
+// If an upgrade connection is made, execute handleUpgrade on all websocket servers to find
+// the matching server. If none is found, destroy the socket
+webSocketServer.on('upgrade', (req, socket, head) => {
+  let requestedPathExists = false;
+  for(server of servers) {
+    requestedPathExists = server.handleUpgrade(req, socket, head) || requestedPathExists
+  }
+  if(!requestedPathExists) {
+    socket.destroy()
+  }
+})
+
 // Create HTTP Server used to create websocket servers
-console.log('Starting HTTP server on port ' + PORT)
 const httpServer = createServer((req, res) => {
   const QUERY = url.parse(req.url, true).query
   let COMMAND = null
@@ -162,17 +177,5 @@ const httpServer = createServer((req, res) => {
   }
 })
 
-// If an upgrade connection is made, execute handleUpgrade on all websocket servers to find
-// the matching server. If none is found, destroy the socket
-httpServer.on('upgrade', (req, socket, head) => {
-  let requestedPathExists = false;
-  for(server of servers) {
-    requestedPathExists = server.handleUpgrade(req, socket, head) || requestedPathExists
-  }
-  if(!requestedPathExists) {
-    socket.destroy()
-  }
-})
-
 // Start HTTP server
-httpServer.listen(PORT)
+httpServer.listen(8000, () => { console.log('Starting HTTP server on port ' + 8000) })
