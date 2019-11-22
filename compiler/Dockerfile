@@ -2,8 +2,6 @@ FROM ubuntu:bionic
 
 WORKDIR /app
 
-EXPOSE 8000
-
 ENV LANG C.UTF-8
 
 RUN apt-get update
