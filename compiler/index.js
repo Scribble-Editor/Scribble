@@ -12,9 +12,10 @@ const url = require('url')
 class WSServer {
   isConnected = false
 
-  constructor(path, command, onDestroy) {
+  constructor(path, command, cleanup, onDestroy) {
     this.PATH = path
     this.COMMAND = command.split(' ')
+    this.CLEANUP = cleanup.split(' ')
     this.onDestroy = onDestroy
     
     // To overcome scope issues
@@ -109,6 +110,25 @@ class WSServer {
       this.proc.kill()
     }
 
+    // Run cleanup process
+    if(this.CLEANUP) {
+      try {
+        console.log('Running cleanup command: ', this.CLEANUP.join(' '))
+        this.cleanupProc = ChildProcess.spawn(this.CLEANUP[0], this.CLEANUP.splice(1))
+  
+        // Handle errors
+        this.cleanupProc.on('error', error => {
+          console.log('Error running command ' + this.CLEANUP.join(' '))
+          console.log(error)
+          this.closeWSS()
+        })
+        
+      } catch (error) {
+        console.log('Error running command ' + this.CLEANUP.join(' '))
+        console.log(error)
+      }
+    }
+
     if(!dontCloseServer) {
       this.wsServer.close(() => {
         console.log('Connection closed at ' + this.PATH)
@@ -162,6 +182,7 @@ webSocketServer.on('upgrade', (req, socket, head) => {
 const httpServer = createServer((req, res) => {
   const QUERY = url.parse(req.url, true).query
   let COMMAND = null
+  let CLEANUP = null
 
   if(QUERY.command) {
     try {
@@ -172,11 +193,22 @@ const httpServer = createServer((req, res) => {
       res.end()
       return
     }
+
+    if(QUERY.cleanup) {
+      try {
+        CLEANUP = decodeURIComponent(QUERY.cleanup)
+      } catch (e) {
+        res.writeHead(403)
+        res.write('403: Bad Request')
+        res.end()
+        return
+      }
+    }
   }
 
   if(COMMAND) {
     const PATH = '/' + UUID()
-    servers.push(new WSServer(PATH, COMMAND, (SERVER_UUID) => {
+    servers.push(new WSServer(PATH, COMMAND, CLEANUP, (SERVER_UUID) => {
       // When the onDestroy callback method is called, remove server from servers array
       const indexOfServerToDelete = servers.findIndex(server => server.UUID === SERVER_UUID)
       servers.splice(indexOfServerToDelete, 1)
