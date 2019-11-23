@@ -95,6 +95,7 @@ export default {
           type: 'is-success',
           queue: false
         })
+        this.$root.$emit('databases/updateList')
       } else {
         this.$parent.$buefy.snackbar.open({
           message: 'Error creating database: ' + response.statusText,

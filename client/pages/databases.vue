@@ -15,9 +15,7 @@
           </button>
         </div>
         <div class="control-section">
-          <b-message class="no-database-message">
-            You haven't created any databases yet. Click <strong>New Database</strong> above to make you first one!
-          </b-message>
+          <DatabasesList />
         </div>
       </div>
     </section>
@@ -30,17 +28,18 @@ import { forceAuthentication as forceAuthenticationMiddleware } from '~/middlewa
 
 import Navbar from '~/components/Navbar'
 import Footer from '~/components/Footer'
-import DatabaseCreatemodal from '~/components/DatabasesCreatemodal'
+import DatabasesCreatemodal from '~/components/DatabasesCreatemodal'
+import DatabasesList from '~/components/DatabasesList'
 
 export default {
   layout: 'default',
   middleware: forceAuthenticationMiddleware,
-  components: { Navbar, Footer },
+  components: { Navbar, Footer, DatabasesList },
   methods: {
     showDatabasesCreateModal () {
       this.$buefy.modal.open({
         parent: this,
-        component: DatabaseCreatemodal,
+        component: DatabasesCreatemodal,
         hasModalCard: true
       })
     }
