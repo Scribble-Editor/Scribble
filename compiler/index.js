@@ -40,7 +40,13 @@ class WSServer {
       this.isConnected = true
 
       // Begin subprocess
-      this.proc = ChildProcess.spawn(this.COMMAND[0], this.COMMAND.splice(1))
+      try {
+        this.proc = ChildProcess.spawn(this.COMMAND[0], this.COMMAND.splice(1))
+      } catch (error) {
+        console.log('Error running command ' + this.COMMAND.join(' '))
+        console.log(error)
+        this.closeWSS()
+      }
 
       // Pipe stdout to websocket
       this.proc.stdout.on('data', data => {
@@ -71,6 +77,13 @@ class WSServer {
         const exitMessage = `child process exited with code ${code}`
         console.log(exitMessage)
         ws.send(exitMessage)
+        this.closeWSS()
+      })
+
+      // Handle errors
+      this.proc.on('error', error => {
+        console.log('Error running command ' + this.COMMAND.join(' '))
+        console.log(error)
         this.closeWSS()
       })
 
