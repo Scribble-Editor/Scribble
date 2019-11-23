@@ -1,5 +1,5 @@
-# ScribbleBase Endpoints
-[ScribbleBase](../index.md) is a simple, single table, noSQL database that is easily integrated into anyone's Python Projects.
+# ScribbleBase API Reference
+This is a api reference on scribbleBase, for the getting started guide on ScribbleBase, see the scribbleDoc on [scribbleBase](../index.md).
 
 Accessing scribbleBase's api, first import the scribbleBase module.
 

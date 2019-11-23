@@ -1,4 +1,6 @@
 # User Databases
+This is a getting started guide on how to use scribbleBase. For API reference, see the scribbleDoc on the [scribbleBase API](./reference/index.md).
+
 ScribbleBase is a simple, single table, noSQL database that is easily integrated into anyone's Python Projects. It allows users to create their own databases to store data for their applications. These databases can hold any types of data. In this guide we will walk though how to create a simple application that makes use of user databases.
 
 ## Creating the database
