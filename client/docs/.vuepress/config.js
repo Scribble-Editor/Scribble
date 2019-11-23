@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         text: "API Reference", items: [
-          { text: "ScribbleBase", link: "/user-databases/reference" }
+          { text: "ScribbleBase", link: "/user-databases/reference/" }
         ]
       },
       { text: "GitHub", link: "https://github.com/Scribble-Editor/Scribble" }

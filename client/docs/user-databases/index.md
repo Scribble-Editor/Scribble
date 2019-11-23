@@ -1,5 +1,5 @@
 # User Databases
-Scribble allows users to create their own databases to store data for their applications. These databases can hold any types of data. In this guide we will walk though how to create a simple application that makes use of user databases.
+ScribbleBase is a simple, single table, noSQL database that is easily integrated into anyone's Python Projects. It allows users to create their own databases to store data for their applications. These databases can hold any types of data. In this guide we will walk though how to create a simple application that makes use of user databases.
 
 ## Creating the database
 The first thing we need to do before storing our data is to create a database. Simply login and navigate to `Manage Database` from the navigation bar on the homepage.
@@ -13,8 +13,8 @@ The next step is to insert our data into our newly created database. Head over t
 from ScribbleBase import addRow
 
 # Add row to database
-database_id = 1 # Replace with your database id
-secret = 'f310743107134f36a588d63f355cdb17' # Replace with your secret
+database_id = <DATABASE_ID_HERE> # Replace with your database id
+secret = '<YOUR_SECRET_HERE>' # Replace with your secret
 row = { firstname: 'John', lastname: 'Smith', salary: '$60000' }
 try:
   addRow(database_id, secret, row)
@@ -33,8 +33,8 @@ Finding a row in the database can also be done using a function called `findRow`
 from ScribbleBase import addRow
 
 # Add row to database
-database_id = 1 # Replace with your database id
-secret = 'f310743107134f36a588d63f355cdb17' # Replace with your secret
+database_id = <DATABASE_ID_HERE> # Replace with your database id
+secret = '<YOUR_SECRET_HERE>' # Replace with your secret
 row = { firstname: 'John', lastname: 'Smith', salary: '$60000' }
 try:
   addRow(database_id, secret, row)
@@ -65,8 +65,8 @@ If we no longer want a row in the database, using the function `delRow` from the
 from ScribbleBase import addRow
 
 # Add row to database
-database_id = 1 # Replace with your database id
-secret = 'f310743107134f36a588d63f355cdb17' # Replace with your secret
+database_id = <DATABASE_ID_HERE> # Replace with your database id
+secret = '<YOUR_SECRET_HERE>' # Replace with your secret
 row = { firstname: 'John', lastname: 'Smith', salary: '$60000' }
 try:
   addRow(database_id, secret, row)
