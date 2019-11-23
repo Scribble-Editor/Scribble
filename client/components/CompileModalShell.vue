@@ -89,7 +89,7 @@ export default {
       }
     },
     onWebsocketClose ({ wasClean, code, reason }) {
-      if (wasClean) {
+      if (wasClean || code === 1006) {
         this.print('Connection closed')
         this.$emit('downloadReady')
       } else {

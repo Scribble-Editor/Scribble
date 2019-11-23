@@ -19,7 +19,7 @@ export default {
   ** Set environmental variables
   */
   env: {
-    websocketURI: process.env.WEBSOCKET_URI || 'ws://localhost:1234',
+    websocketURI: process.env.WEBSOCKET_URI || 'ws://compiler.localhost',
     apiURI: process.env.API_URI || 'http://api.localhost',
     apiCompileEndpoint: process.env.API_COMPILE_ENDPOINT || '/compile'
   },
