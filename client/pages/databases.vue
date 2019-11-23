@@ -10,7 +10,7 @@
           Here you can create, delete, and manage your databases for your applications
         </h3>
         <div class="buttons">
-          <button class="button is-primary is-pulled-right">
+          <button class="button is-primary is-pulled-right" @click="showDatabasesCreateModal">
             New Database
           </button>
         </div>
@@ -30,11 +30,21 @@ import { forceAuthentication as forceAuthenticationMiddleware } from '~/middlewa
 
 import Navbar from '~/components/Navbar'
 import Footer from '~/components/Footer'
+import DatabaseCreatemodal from '~/components/DatabasesCreatemodal'
 
 export default {
   layout: 'default',
   middleware: forceAuthenticationMiddleware,
-  components: { Navbar, Footer }
+  components: { Navbar, Footer },
+  methods: {
+    showDatabasesCreateModal () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: DatabaseCreatemodal,
+        hasModalCard: true
+      })
+    }
+  }
 }
 </script>
 
