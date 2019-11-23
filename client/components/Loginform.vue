@@ -60,8 +60,8 @@ export default {
         return
       }
 
-      // Redirect to editor
-      this.$router.push('/edit')
+      // Redirect to homepage
+      this.$router.push('/')
     },
     ...mapActions({ login: 'authentication/login' })
   }
