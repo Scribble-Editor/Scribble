@@ -8,6 +8,9 @@
           </b-navbar-item>
         </template>
         <template slot="end">
+          <b-navbar-item v-if="isLoggedIn" tag="router-link" :to="{ path: '/databases' }">
+            Manage Databases
+          </b-navbar-item>
           <b-navbar-item tag="router-link" :to="{ path: '/edit' }">
             Editor
           </b-navbar-item>
