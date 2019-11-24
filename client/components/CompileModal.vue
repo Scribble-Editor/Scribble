@@ -80,7 +80,7 @@ export default {
       this.$root.$emit('editor/command', (editor) => {
         const packagedSource = {
           name: this.documentBaseName,
-          target: 'linux',
+          target: this.$store.state.documents[this.document].compileOptions.target,
           author: this.$store.state.documents[this.document].compileOptions.author,
           lang: this.$store.state.documents[this.document].mode,
           content: JSON.stringify(editor.getSession().getDocument().getAllLines())
