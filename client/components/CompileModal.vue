@@ -85,7 +85,10 @@ export default {
           lang: this.$store.state.documents[this.document].mode,
           content: JSON.stringify(editor.getSession().getDocument().getAllLines())
         }
-        axios.post(process.env.apiURI + '/compile_system/compile', packagedSource)
+
+        const ENDPOINT = '/compile_system/' + (this.currentDocumentSupportsInteractive ? 'interpret' : 'compile')
+
+        axios.post(process.env.apiURI + ENDPOINT, packagedSource)
           .then(({ data }) => {
             this.websocketPath = data
             this.readyForWebsocket = true
@@ -126,6 +129,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.modal-card {
+  width: 100% !important;
+}
 </style>
