@@ -85,7 +85,10 @@ export default {
       if (data.match(/^\[download ready\].+$/)) {
         this.$emit('updateDownloadURL', process.env.downloadsURI + data.substr('[download ready] '.length))
       } else {
-        this.print(data)
+        data = data.split('\n')
+        for (const line of data) {
+          this.print(line)
+        }
       }
     },
     onWebsocketClose ({ wasClean, code, reason }) {
@@ -144,5 +147,9 @@ export default {
       outline: none !important;
     }
   }
+}
+
+.out-line {
+  white-space: pre-wrap;
 }
 </style>
