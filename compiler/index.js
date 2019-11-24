@@ -12,15 +12,16 @@ const url = require('url')
 class WSServer {
   isConnected = false
 
-  constructor(path, command, cleanup, onDestroy) {
+  constructor(path, command, cleanup, downloadLink, onDestroy) {
     this.PATH = path
     this.COMMAND = command.split(' ')
     this.CLEANUP = cleanup.split(' ')
+    this.DOWNLOAD_LINK = downloadLink.split(' ')
     this.onDestroy = onDestroy
-    
+
     // To overcome scope issues
     const self = this
-    
+
     // Create websocket server
     this.wsServer = new WebSocket.Server({ noServer: true })
     console.log('Open connection at ' + this.PATH)
@@ -31,7 +32,7 @@ class WSServer {
         this.closeWSS()
       }
     }, 2 * 60 * 1000)
-    
+
     // Wait for connection to websocket server
     this.wsServer.on('connection', (ws) => {
       console.log('Connection established')
@@ -75,9 +76,12 @@ class WSServer {
 
       // Pipe close to websocket
       this.proc.on('close', (code) => {
-        const exitMessage = `child process exited with code ${code}`
+        const exitMessage = `Done. Exit code ${code}`
         console.log(exitMessage)
         ws.send(exitMessage)
+        if(this.DOWNLOAD_LINK) {
+          ws.send('[download ready] ' + this.DOWNLOAD_LINK)
+        }
         this.closeWSS()
       })
 
@@ -204,11 +208,22 @@ const httpServer = createServer((req, res) => {
         return
       }
     }
+
+    if(QUERY.download) {
+      try {
+        DOWNLOAD = decodeURIComponent(QUERY.download)
+      } catch (e) {
+        res.writeHead(403)
+        res.write('403: Bad Request')
+        res.end()
+        return
+      }
+    }
   }
 
   if(COMMAND) {
     const PATH = '/' + UUID()
-    servers.push(new WSServer(PATH, COMMAND, CLEANUP, (SERVER_UUID) => {
+    servers.push(new WSServer(PATH, COMMAND, CLEANUP, DOWNLOAD_LINK, (SERVER_UUID) => {
       // When the onDestroy callback method is called, remove server from servers array
       const indexOfServerToDelete = servers.findIndex(server => server.UUID === SERVER_UUID)
       servers.splice(indexOfServerToDelete, 1)
