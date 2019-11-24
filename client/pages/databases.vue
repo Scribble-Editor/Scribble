@@ -10,6 +10,9 @@
           Here you can create, delete, and manage your databases for your applications
         </h3>
         <div class="buttons">
+          <button class="button is-secondary is-pulled-right" @click="updateDatabasesList">
+            Refresh List
+          </button>
           <button class="button is-primary is-pulled-right" @click="showDatabasesCreateModal">
             New Database
           </button>
@@ -42,6 +45,9 @@ export default {
         component: DatabasesCreatemodal,
         hasModalCard: true
       })
+    },
+    updateDatabasesList () {
+      this.$root.$emit('databases/updateList')
     }
   }
 }

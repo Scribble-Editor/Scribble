@@ -12,6 +12,11 @@
             <strong>Created:</strong> {{ databaseCreatedOn[index] }}
             <br>
             <strong>Last Modified:</strong> {{ databaseLastModified[index] }}
+            <DatabaseListSecret :secret="databaseSecret[index]" />
+            <br>
+            <button class="button is-light is-small" @click="newSecret(databaseId[index])">
+              New Secret
+            </button>
           </h2>
           <b-collapse :open="false" position="is-bottom">
             <a slot="trigger" slot-scope="props">
@@ -40,12 +45,16 @@
 <script>
 import { mapActions } from 'vuex'
 
+import DatabaseListSecret from '~/components/DatabaseListSecret'
+
 export default {
   name: 'DatabasesList',
+  components: { DatabaseListSecret },
   data () {
     return {
       loaded: false,
-      databases: []
+      databases: [],
+      showSecret: []
     }
   },
   computed: {
@@ -73,6 +82,11 @@ export default {
     databaseLastModified () {
       return this.databases.map((database) => {
         return new Date(database.fields.last_modified)
+      })
+    },
+    databaseSecret () {
+      return this.databases.map((database) => {
+        return database.fields.secret
       })
     },
     databaseId () {
@@ -139,6 +153,25 @@ export default {
           type: 'is-danger'
         })
       }
+    },
+    async newSecret (databaseId) {
+      const response = await this.makeRequest({
+        method: 'post',
+        url: '/user-databases/change-secret',
+        baseURL: process.env.apiURI,
+        data: {
+          database_id: databaseId
+        }
+      })
+
+      if (response.status === 200) {
+      } else {
+        this.$buefy.snackbar.open({
+          message: response,
+          type: 'is-danger'
+        })
+      }
+      this.getDatabases()
     },
     ...mapActions({
       makeRequest: 'authentication/makeRequest'
