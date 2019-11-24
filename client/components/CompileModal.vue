@@ -26,7 +26,7 @@
           Download Executable
         </b-button>
         <b-button class="button is-danger" type="button" @click="$parent.close()">
-          Cancel
+          Close
         </b-button>
       </footer>
     </div>
@@ -80,11 +80,15 @@ export default {
       this.$root.$emit('editor/command', (editor) => {
         const packagedSource = {
           name: this.documentBaseName,
+          target: this.$store.state.documents[this.document].compileOptions.target,
           author: this.$store.state.documents[this.document].compileOptions.author,
           lang: this.$store.state.documents[this.document].mode,
-          content: editor.getSession().getDocument().getAllLines()
+          content: JSON.stringify(editor.getSession().getDocument().getAllLines())
         }
-        axios.post(process.env.apiURI + process.env.apiCompileEndpoint, packagedSource)
+
+        const ENDPOINT = '/compile_system/' + (this.currentDocumentSupportsInteractive ? 'interpret' : 'compile')
+
+        axios.post(process.env.apiURI + ENDPOINT, packagedSource)
           .then(({ data }) => {
             this.websocketPath = data
             this.readyForWebsocket = true
@@ -125,6 +129,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.modal-card {
+  width: 100% !important;
+}
 </style>

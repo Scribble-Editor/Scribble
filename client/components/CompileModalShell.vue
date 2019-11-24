@@ -83,13 +83,16 @@ export default {
       // This notifies the client that the download for the compiled executable is ready
       // at the url provided
       if (data.match(/^\[download ready\].+$/)) {
-        this.$emit('updateDownloadURL', data.substr('[download ready] '.length))
+        this.$emit('updateDownloadURL', process.env.downloadsURI + data.substr('[download ready] '.length))
       } else {
-        this.print(data)
+        data = data.split('\n')
+        for (const line of data) {
+          this.print(line)
+        }
       }
     },
     onWebsocketClose ({ wasClean, code, reason }) {
-      if (wasClean) {
+      if (wasClean || code === 1006) {
         this.print('Connection closed')
         this.$emit('downloadReady')
       } else {
@@ -115,6 +118,7 @@ export default {
   overflow-y: auto;
   max-height: 40vh;
   font-family: monospace;
+  min-height: 65vh;
 }
 
 .input-wrapper, .out-line {
@@ -138,6 +142,14 @@ export default {
     font-size: inherit;
     font-family: inherit;
     color: inherit;
+
+    &:focus {
+      outline: none !important;
+    }
   }
+}
+
+.out-line {
+  white-space: pre-wrap;
 }
 </style>
