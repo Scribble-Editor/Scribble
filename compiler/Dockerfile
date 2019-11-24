@@ -21,6 +21,8 @@ RUN apt-get install -y gcc-mingw-w64-x86-64
 RUN apt-get install -y g++-mingw-w64-i686
 RUN apt-get install -y gcc-mingw-w64-i686
 
+RUN apt-get install -y mingw-w64
+
 COPY ./package.json /app/package.json
 RUN npm install
 COPY . /app
