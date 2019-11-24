@@ -20,7 +20,8 @@ export default {
   */
   env: {
     websocketURI: process.env.WEBSOCKET_URI || 'ws://compiler.localhost',
-    apiURI: process.env.API_URI || 'http://api.localhost'
+    apiURI: process.env.API_URI || 'http://api.localhost',
+    downloadsURI: process.env.DOWNLOADS_URI || 'http://downloads.localhost'
   },
   /*
   ** Customize the progress-bar color

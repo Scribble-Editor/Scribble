@@ -83,7 +83,7 @@ export default {
       // This notifies the client that the download for the compiled executable is ready
       // at the url provided
       if (data.match(/^\[download ready\].+$/)) {
-        this.$emit('updateDownloadURL', data.substr('[download ready] '.length))
+        this.$emit('updateDownloadURL', process.env.downloadsURI + '/' + data.substr('[download ready] '.length))
       } else {
         this.print(data)
       }
