@@ -23,6 +23,10 @@ RUN apt-get install -y gcc-mingw-w64-i686
 
 RUN apt-get install -y mingw-w64
 
+RUN apt-get install -y ruby-full
+
+RUN apt-get install -y python3
+
 COPY ./package.json /app/package.json
 RUN npm install
 COPY . /app
