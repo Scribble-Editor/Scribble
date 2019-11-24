@@ -224,7 +224,7 @@ const httpServer = createServer((req, res) => {
 
   if(COMMAND) {
     const PATH = '/' + UUID()
-    servers.push(new WSServer(PATH, COMMAND, CLEANUP, DOWNLOAD, (SERVER_UUID) => {
+    servers.push(new WSServer(PATH, COMMAND, CLEANUP, DOWNLOAD || '', (SERVER_UUID) => {
       // When the onDestroy callback method is called, remove server from servers array
       const indexOfServerToDelete = servers.findIndex(server => server.UUID === SERVER_UUID)
       servers.splice(indexOfServerToDelete, 1)
