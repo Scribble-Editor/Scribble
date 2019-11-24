@@ -115,6 +115,7 @@ export default {
   overflow-y: auto;
   max-height: 40vh;
   font-family: monospace;
+  min-height: 65vh;
 }
 
 .input-wrapper, .out-line {
@@ -138,6 +139,10 @@ export default {
     font-size: inherit;
     font-family: inherit;
     color: inherit;
+
+    &:focus {
+      outline: none !important;
+    }
   }
 }
 </style>

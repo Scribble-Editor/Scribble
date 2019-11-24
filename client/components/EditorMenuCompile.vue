@@ -44,6 +44,7 @@ export default {
         parent: this,
         component: CompileModal,
         hasModalCard: true,
+        width: 1200,
         props: {
           document: this.activeDocument
         }
@@ -64,6 +65,10 @@ export default {
 </script>
 
 <style lang="scss">
+.animation-content {
+  width: 100% !important;
+}
+
 .compile-button {
   align-self: center;
   margin-left: 0.75rem;
