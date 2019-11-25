@@ -28,9 +28,9 @@ RUN apt-get install -y ruby-full
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 
-RUN pip install requests --user
+RUN python3 -m pip install requests
 
-COPY /compiler/scribbleBase.py /app/src/scribbleBase.py
+COPY ./ScribbleBase.py /usr/lib/python3.6/ScribbleBase.py
 
 COPY ./package.json /app/package.json
 RUN npm install
