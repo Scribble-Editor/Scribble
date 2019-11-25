@@ -17,6 +17,9 @@
         </b-navbar-item>
         <hr>
         <b-navbar-item>
+          <EditorMenuFileHelp />
+        </b-navbar-item>
+        <b-navbar-item>
           <EditorMenuFilePreferences />
         </b-navbar-item>
         <b-navbar-item>
@@ -115,6 +118,7 @@
 import EditorMenuFileNewfile from '~/components/EditorMenuFileNewfile'
 import EditorMenuFileOpenfile from '~/components/EditorMenuFileOpenfile'
 import EditorMenuFileExportfile from '~/components/EditorMenuFileExportfile'
+import EditorMenuFileHelp from '~/components/EditorMenuFileHelp'
 import EditorMenuFilePreferences from '~/components/EditorMenuFilePreferences'
 import EditorMenuFileExit from '~/components/EditorMenuFileExit'
 
@@ -146,6 +150,7 @@ export default {
     EditorMenuFileNewfile,
     EditorMenuFileOpenfile,
     EditorMenuFileExportfile,
+    EditorMenuFileHelp,
     EditorMenuFilePreferences,
     EditorMenuFileExit,
     EditorMenuEditUndo,
