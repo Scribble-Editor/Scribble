@@ -8,8 +8,13 @@ module.exports = {
     nav: [
       { text: "Home", link: "/" },
       {
-        text: "Reference", items: [
+        text: "Guides", items: [
           { text: "User Databases", link: "/user-databases/" },
+        ]
+      },
+      {
+        text: "API Reference", items: [
+          { text: "ScribbleBase", link: "/user-databases/reference" }
         ]
       },
       { text: "GitHub", link: "https://github.com/Scribble-Editor/Scribble" }
