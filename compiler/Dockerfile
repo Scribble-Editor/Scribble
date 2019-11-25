@@ -26,6 +26,11 @@ RUN apt-get install -y mingw-w64
 RUN apt-get install -y ruby-full
 
 RUN apt-get install -y python3
+RUN apt-get install -y python3-pip
+
+RUN pip install requests --user
+
+COPY /compiler/scribbleBase.py /app/src/scribbleBase.py
 
 COPY ./package.json /app/package.json
 RUN npm install
