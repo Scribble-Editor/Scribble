@@ -119,11 +119,13 @@ export default {
   max-height: 40vh;
   font-family: monospace;
   min-height: 65vh;
+  width: 100% !important;
 }
 
 .input-wrapper, .out-line {
   display: grid;
   grid-template-columns: min-content auto;
+  width: 100% !important;
 
   .dollar {
     padding: 0 .5rem 0 0;
