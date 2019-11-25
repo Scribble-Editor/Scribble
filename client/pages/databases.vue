@@ -10,6 +10,9 @@
           Here you can create, delete, and manage your databases for your applications
         </h3>
         <div class="buttons">
+          <b-button class="is-link" outlined icon-left="help" @click="gotoDocumentationURI">
+            Help
+          </b-button>
           <button class="button is-secondary is-pulled-right" @click="updateDatabasesList">
             Refresh List
           </button>
@@ -38,6 +41,11 @@ export default {
   layout: 'default',
   middleware: forceAuthenticationMiddleware,
   components: { Navbar, Footer, DatabasesList },
+  computed: {
+    documentationURI () {
+      return process.env.documentationURI + '/user-databases/'
+    }
+  },
   methods: {
     showDatabasesCreateModal () {
       this.$buefy.modal.open({
@@ -48,6 +56,9 @@ export default {
     },
     updateDatabasesList () {
       this.$root.$emit('databases/updateList')
+    },
+    gotoDocumentationURI () {
+      window.location = this.documentationURI
     }
   }
 }
