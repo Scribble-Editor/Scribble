@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: ./logo.png
+heroImage: /logo.png
 footer: Made with ♥ by the @Scribble-Editor team
 ---
 # Using Scribble
