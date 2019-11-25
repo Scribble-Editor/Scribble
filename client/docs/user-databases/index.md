@@ -6,7 +6,7 @@ ScribbleBase is a simple, single table, noSQL database that is easily integrated
 ## Creating the database
 The first thing we need to do before storing our data is to create a database. Simply login and navigate to `Manage Database` from the navigation bar on the homepage.
 Once here we can create the database by clicking on `New Database`. You will be greeting by an input window. In this window, name all of the database columns you wish to use and create the database by clicking `Create Database`. For this example, we will be creating  database with the columns 'firstname', 'lastname', and 'salary'. A listing of your newly created database will appear on the screen as shown below. Be sure to write down your database ID and secret. ***Do not share you database secret with anyone.***
-![](../../docs/.vuepress/public/user-databases/CreatingTheDatabase1.png)
+![](/user-databases/CreatingTheDatabase1.png)
 
 ## Inserting a row into the database
 The next step is to insert our data into our newly created database. Head over to editor and create a new file call `MyProject.py`. We are going to use this program to write data to a new row in the database. `MyProject.py` should contain the following code. Be sure to replace the ID and secret placeholders with your ID and secret.
@@ -26,7 +26,7 @@ except:
   exit(1)
 ```
 After executing the script, if we now go back to `Manage Databases`, we will notice that our database has been populated with the new row.
-![](../../docs/.vuepress/public/user-databases/InsertARowIntoTheDatabase1.png)
+![](/user-databases/InsertARowIntoTheDatabase1.png)
 
 ## Finding a row in the database
 Finding a row in the database can also be done using a function called `findRow` in the ScribbleBase library. Lets append that to our code to find the row that we just inserted to find anyone with the first name 'John'.
