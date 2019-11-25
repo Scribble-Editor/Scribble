@@ -1,8 +1,7 @@
 const BUILD_SUPPORTED_LANGUAGES = [
   { language: 'c', interactive: false },
   { language: 'cpp', interactive: false },
-  { language: 'python', interactive: true },
-  { language: 'ruby', interactive: true }
+  { language: 'python', interactive: true }
 ]
 
 const LANGUAGES_ONLY = BUILD_SUPPORTED_LANGUAGES.map(supportedLang => supportedLang.language)
