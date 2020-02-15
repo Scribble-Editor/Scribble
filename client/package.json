@@ -36,6 +36,6 @@
     "eslint": "^6.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-nuxt": ">=0.4.2",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   }
 }
