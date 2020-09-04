@@ -22,7 +22,7 @@
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/pwa": "^3.0.0-beta.19",
     "brace": "^0.11.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.15",
     "sass-loader": "^8.0.0",
